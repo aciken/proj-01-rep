@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url(./assets/Roboto-Regular.ttf);
+}
+
+.login{
+    font-family: 'Roboto-Regular';
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+}
+
+.login-form{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-form input{
+    font-size: 14px;
+    border-radius: 6px;
+    line-height: 1.5;
+    padding: 5px 10px;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    border: 2px solid #dee1e2;
+    color: rgb(14, 14, 16);
+    background: #dee1e2;
+    display: block;
+    height: 36px;
+  
+}
+
+.login-form input:hover {
+    border-color: #ccc;
+}
+.login-form input:focus{
+    border-color: #9147ff;
+    background: #fff;
+}
+
+.sign-btn{
+    cursor: pointer;
+    padding: 8px 75px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(37, 40, 196);
+    color: white;
+}
+
+.form-border{
+    /* border: 2px solid black; */
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+    .forgot{
+    color: black;
+    font-size: .8rem;
+    text-decoration: underline;
+}
+
+.sign-up{
+    cursor: default;
+    background-color: white;
+    color: black;  
+}
+.sign-up a{
+    text-decoration: underline;
+    color: black;
+}
+
+.sign-up:hover{
+    background-color: white;
+    color: black;  
+}
+

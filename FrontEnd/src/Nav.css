@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url(./assets/Roboto-Regular.ttf);
+}
+
+.body{
+    scroll-behavior: smooth;
+}
+
+.whole-nav{
+    display: flex;   
+    justify-content: space-between;
+    padding: 0 25%;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.left-nav-part img{
+ height: 120px;
+ width: auto;
+}
+
+.right-nav-part{
+    transform: translateY(-4px);
+    display: flex;
+    gap: 20%;
+    justify-content: space-between;
+
+}
+
+.right-nav-part a{
+    text-decoration: none;
+    color: rgb(17, 19, 104);
+    font-size: 1.2rem;
+    font-family: 'Roboto-Regular';
+}
+
+.right-nav-part a:hover{
+text-decoration: underline;
+}
+
+.mobile-nav-img{
+    display: none;
+}
+
+.drop-btn{
+margin-bottom: 20px;
+}
+
+.dropdown-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dropdown a {
+    background-color: rgb(36, 76, 185);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: .4s;
+}
+
+.dropdown a:hover {
+    text-decoration: none;
+    box-shadow: 0 0 3px 1px rgb(117, 172, 223);
+}
+
+
+@media screen and (max-width: 1380px){
+    .whole-nav{
+        padding: 0 15% 0 10%;
+    }
+
+    
+}
+
+@media screen and (max-width: 1000px){
+.whole-nav{
+    padding: 0 5%;
+}
+
+.right-nav-part{
+    gap: 20px;
+}
+
+
+
+} 
+
+
+@media screen and (max-width: 600px){
+
+    .demo-nav{
+        display: none;
+    }
+
+    .left-nav-part img{
+        height: 90px;
+        width: auto;
+    }
+}
+    
+
+
+
+

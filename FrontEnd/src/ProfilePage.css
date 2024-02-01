@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url(./assets/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url(./assets/Roboto-Bold.ttf);
+}
+
+
+.profile-page {
+    font-family: 'Roboto-Regular';
+    height: 85vh;
+    padding: 0 25%;
+font-size: 1.5rem;
+}
+
+.profile-part{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    height: 97%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    
+}
+
+.tier-part{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+
+}
+
+p span{
+    font-family: 'Roboto-Bold';
+}
+
+
+
+.upgrade-btn{
+
+    color: rgb(56, 56, 56);
+    padding: 6px 12px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    transition: .4s;
+}
+
+.upgrade-btn:hover{
+    box-shadow:rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset,rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    scale: 101%;
+}
+
+.usage-part{
+    display: flex;
+    gap: 30px;
+}
+
+.logOut-part{
+    display: flex;
+margin-top: 30px;
+justify-content: right;
+
+}
+
+.logOut-btn{
+    margin-top: 30px;
+    color: white;
+    background-color: #ef4444;
+    padding: 6px 12px;
+    border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    transition: .2s;
+}
+
+.logOut-btn:hover{
+    box-shadow:rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset,rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    scale: 101%;
+}

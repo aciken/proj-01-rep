@@ -1,0 +1,103 @@
+.tools{
+    display: flex;
+    height: 100vh;
+    background-color: rgb(37, 40, 196);
+    padding: 0 20%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.chose-tool{
+    border-radius: 10px;
+}
+
+a svg{
+    height: 20px;
+    width: auto;
+    fill:rgb(37, 40, 196)
+}
+
+
+
+
+.chose-tool ul li{
+    list-style: none;
+    padding: 6px;
+    margin: 10px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    transition: 0.5s;
+    
+}
+
+.one-tool.clicked{
+    padding: 7px;
+    color:rgb(37, 40, 196)
+}
+
+.one-tool{
+    display: flex;
+    align-items: center;
+    
+}
+
+.embedVideo{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+
+
+
+
+@media screen and (max-width: 1400px) {
+    
+    .tools{
+        padding: 0 10% 0 5%;
+    }
+
+    .embedVideo{
+        scale: 90%;
+    }
+}
+
+
+@media screen and (max-width: 1135px) {
+
+    .tools{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .embedVideo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media screen and (max-width: 900px) {
+
+    .embedVideo{
+        scale: 70%;
+    }
+
+    .chose-tool ul li{
+        font-size: 10px;   
+    }
+    
+}
+
+@media screen and (max-width: 450px) {
+
+    .embedVideo{
+        scale: 50%;
+    }
+
+}
