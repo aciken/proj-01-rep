@@ -12,10 +12,11 @@ export function YoutubeUpload() {
     const [form, setForm] = useState({
     title:"",
     description:"",
+    thumbnail:"",
     file:null,
-    thumbnail:null
-    })
 
+    })
+ 
     const [response, setResponse] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState("");
@@ -121,14 +122,14 @@ const handleSubmit = (e) => {
 
     const videoData = new FormData();
 
-    console.log(`Title: ${form.title} || Description: ${form.description} || File: ${form.file} || Thumbnail: ${form.thumbnail}`)
+    console.log(`Title: ${response} || Description: ${description} || File: ${form.file} || Thumbnail: ${url}`)
 
     videoData.append("videoFile", form.file);
     videoData.append("title", response);
     videoData.append("description", description);
-    videoData.append("thumbnail", form.thumbnail);
+    videoData.append("thumbnail", url);
 
-    console.log(`${description} || ${response}`)
+    console.log(`${videoData}`)
 
 
     axios.post("http://localhost:3000/upload", videoData)
@@ -171,7 +172,7 @@ axios.post("http://localhost:3000/send", videoData)
 
 main1(res.data);
 main2(40, res.data);
-// imageGen(res.data);
+imageGen(res.data);
 
 
 
@@ -210,9 +211,9 @@ main2(40, res.data);
                 <div>
                 <input onChange={handleChange} accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
                 </div>
-                <div>
+                {/* <div>
                     <input onChange={handleThumbnailChange} accept='image/jpeg' type="file" name="thumbnail" placeholder='Add Thumbnail File' />
-                </div>
+                </div> */}
                 <button type="submit">Upload Video</button>
                 <button onClick={handleSend}>Send Video</button>
             </form>

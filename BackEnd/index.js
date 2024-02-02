@@ -21,9 +21,23 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 const axios = require('axios'); 
+const sharp = require('sharp');
 
 
 const openai = new OpenAI({apiKey: process.env.OPEN_API_KEY});
+
+
+async function convertToJpg(imageUrl, key) {
+  const response = await axios({
+    url: imageUrl,
+    method: 'GET',
+    responseType: 'arraybuffer'
+  });
+
+  await sharp(response.data)
+    .jpeg()
+    .toFile(`./uploads/${key}.jpg`);
+}
 
 
 const storage = multer.diskStorage({
@@ -80,16 +94,30 @@ audioFun()
 })
 
 
+function generateRandomKey(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 
-app.post('/upload', upload, (req, res) => {
-  console.log(`${req.files.videoFile}, ${req.files.thumbnail}`)
+app.post('/upload', uploadVideoFile, (req,res) => {
+  if(req.file){
+    const filename = req.file.filename;
+    const {title, description, thumbnail} = req.body;
 
-  if(req.files.videoFile && req.files.thumbnail){
-    console.log(req.files.videoFile[0], req.files.thumbnail[0])
-    const filename = req.files.videoFile[0].filename;
-    const thumbnail = req.files.thumbnail[0].filename;
-    const {title, description} = req.body;
+    console.log(thumbnail, title, description, filename)
+
+const imageKey = generateRandomKey(7)
+
+    convertToJpg(thumbnail, imageKey)
+  .then(() => console.log('Image converted successfully'));
+    
+    
     
     open(oAuth.generateAuthUrl({
       acces_type: 'offline',
@@ -98,18 +126,43 @@ app.post('/upload', upload, (req, res) => {
         filename,
         title,
         description,
-        thumbnail
+      thumbnail,
+      imageKey
       })
     }))
-  } else{
-    return res.status(400).send('No files were uploaded.');
   }
 })
 
 
+// app.post('/upload', upload, (req, res) => {
+
+//   console.log(req.files.videoFile, req.files.thumbnail)
+
+//   if(req.files.videoFile && req.files.thumbnail){
+//     console.log(req.files.videoFile[0], req.files.thumbnail[0])
+//     const filename = req.files.videoFile[0].filename;
+//     const thumbnail = req.files.thumbnail[0].filename;
+//     const {title, description} = req.body;
+    
+//     open(oAuth.generateAuthUrl({
+//       acces_type: 'offline',
+//       scope: 'https://www.googleapis.com/auth/youtube.upload',
+//       state: JSON.stringify({
+//         filename,
+//         title,
+//         description,
+//         thumbnail
+//       })
+//     }))
+//   } else{
+//     return res.status(400).send('No files were uploaded.');
+//   }
+// })
+
+
 app.get('/oauth2callback', (req, res) => {
   res.redirect('http://localhost:5173/success');
-  const {filename, title, description, thumbnail} = JSON.parse(req.query.state);
+  const {filename, title, description, thumbnail,imageKey} = JSON.parse(req.query.state);
 
   oAuth.getToken(req.query.code, (err, tokens) => {
     if(err){
@@ -139,8 +192,8 @@ app.get('/oauth2callback', (req, res) => {
       youtube.thumbnails.set({
         videoId: videoId,
         media: {
-          mimeType: 'image/jpeg',
-          body: fs.createReadStream(`./uploads/${thumbnail}`)
+          mimeType: 'image/png',
+          body: fs.createReadStream(`./uploads/${imageKey}.jpg`)
         }
       }, (err, response) => {
         if (err) {
@@ -150,7 +203,7 @@ app.get('/oauth2callback', (req, res) => {
 
         console.log('Thumbnail uploaded.');
         console.log('Done');
-        process.exit();
+        // process.exit();
       });
     });
   });
