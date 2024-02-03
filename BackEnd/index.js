@@ -22,9 +22,38 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 const axios = require('axios'); 
 const sharp = require('sharp');
+const { exec } = require('child_process');
+const ffmpeg = require('fluent-ffmpeg');
+
+
 
 
 const openai = new OpenAI({apiKey: process.env.OPEN_API_KEY});
+
+
+function generateRandomKey(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+
+function splitAudio(inputFile, segmentTime, outputPattern) {
+  const command = `ffmpeg -i ${inputFile} -f segment -segment_time ${segmentTime} -c copy ${outputPattern}`;
+
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing command: ${error}`);
+      return;
+    }
+
+    console.log(stdout);
+  });
+}
 
 
 async function convertToJpg(imageUrl, key) {
@@ -38,6 +67,18 @@ async function convertToJpg(imageUrl, key) {
     .jpeg()
     .toFile(`./uploads/${key}.jpg`);
 }
+
+
+const convertToAudio = (inputPath, outputPath) => {
+  return new Promise((resolve, reject) => {
+      ffmpeg(inputPath)
+          .output(outputPath)
+          .on('end', resolve)
+          .on('error', reject)
+          .run();
+  });
+};
+
 
 
 const storage = multer.diskStorage({
@@ -59,34 +100,69 @@ const upload = multer({
 
 
 
+
+
+
+
+
 app.post('/send', uploadVideoFile, async (req, res) => {
 
   async function main1(transcriptionText) {
     const completion = await openai.chat.completions.create({
       messages: [
         {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "give me description in 6 to 12 words on what this youtube video is about acording to its text:  " + transcriptionText},
+        {"role": "user", "content": "give me description in 8 to 12 words on what this youtube video is about acording to its text:  " + transcriptionText},
       ],
       model: "gpt-3.5-turbo",
     });
+
+
+
+    // splitAudio('input.mp3', 300, 'output%03d.mp3');
   
     res.send(completion.choices[0].message.content);
     console.log(completion.choices[0].message.content);
   }
 
-  const audioFun=async()=>{
-    const transcription=await openai.audio.transcriptions.create({
-        file:fs.createReadStream(`./uploads/${req.file.filename}`),
-       model:"whisper-1"
-    })
+  
 
-    main1(transcription.text)
+ let audioKey = generateRandomKey(7);
 
 
-
-}
-
+  convertToAudio(`./uploads/${req.file.filename}`, `./uploads/${audioKey}.mp3`)
+    .then(() => console.log('Conversion completed'))
+    .then(() =>{
+      const audioFun=async()=>{
+        console.log(`${audioKey}.mp3`)
+        const transcription=await openai.audio.transcriptions.create({
+            file:fs.createReadStream(`./uploads/${audioKey}.mp3`),
+           model:"whisper-1"
+        })
+    
+        main1(transcription.text)
+    
+    
+    
+    }
 audioFun()
+    
+    })
+    .catch(console.error);
+
+
+console.log(req.file.filename)
+
+
+
+
+
+// fs.watch('./uploads', async (eventType, filename) => {
+//   if (eventType === 'rename' && filename.endsWith('.mp3')) {
+//     console.log(`New mp3 file added: ${filename}`);
+//     audioKey = filename.replace('.mp3', ''); // assuming audioKey is a global variable
+//     await audioFun();
+//   }
+// });
 
 
 
@@ -94,15 +170,6 @@ audioFun()
 })
 
 
-function generateRandomKey(length) {
-  var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
 
 
 app.post('/upload', uploadVideoFile, (req,res) => {
