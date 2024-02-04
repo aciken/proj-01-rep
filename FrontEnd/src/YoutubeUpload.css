@@ -14,3 +14,43 @@
     width: 300px;
     height: 170px;
 }
+
+.video-add-btn {
+    font-family: sans-serif;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: #337ef0;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.label-upload{
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+}
+
+.label-upload svg{
+    height: 30px;
+    width: 30px;
+    fill: #337ef0;
+}
+
+.send-video-btn{
+    margin: 10px;
+    border: none;
+background-color: #337ef0;
+color: white;
+padding: 10px 20px;
+border-radius: 3px;
+cursor: pointer;
+}
+
+
+

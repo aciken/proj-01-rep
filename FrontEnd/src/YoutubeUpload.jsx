@@ -254,21 +254,35 @@ main2(40, res.data);
     return(
         <div className="youtube-upload">
             <h1>Upload Your Video</h1>
+
+               
+
             <form onSubmit={handleSubmit} >
+
+            <label className='video-add-btn'>
+                <input  onChange={handleChange}  accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
+
+                    <div className="label-upload">
+                        Upload File
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
+                    </div>
+
+                </label>
+
+            <button onClick={handleSend} className='send-video-btn' disabled>Send Video</button>
                 <div>
                     <input onChange={handleResponseChange} type="text" name="title" placeholder="Title" value={response} />
                 </div>
                 <div>
                     <textarea onChange={handleDescriptionChange} name="description" id="" cols="30" rows="10" placeholder="Description" value={description}></textarea>
                 </div>
-                <div>
-                <input onChange={handleChange} accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
-                </div>
+
+        
                 {/* <div>
                     <input onChange={handleThumbnailChange} accept='image/jpeg' type="file" name="thumbnail" placeholder='Add Thumbnail File' />
                 </div> */}
                 <button type="submit">Upload Video</button>
-                <button onClick={handleSend} >Send Video</button>
+
             </form>
             <img className="imageGen" src={url} alt="" />
             {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>}
