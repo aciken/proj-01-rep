@@ -22,7 +22,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 const axios = require('axios'); 
 const sharp = require('sharp');
-const { exec } = require('child_process');
 const ffmpeg = require('fluent-ffmpeg');
 
 
@@ -42,18 +41,7 @@ function generateRandomKey(length) {
 }
 
 
-function splitAudio(inputFile, segmentTime, outputPattern) {
-  const command = `ffmpeg -i ${inputFile} -f segment -segment_time ${segmentTime} -c copy ${outputPattern}`;
 
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing command: ${error}`);
-      return;
-    }
-
-    console.log(stdout);
-  });
-}
 
 
 async function convertToJpg(imageUrl, key) {
@@ -436,7 +424,7 @@ wss.on('connection', (ws) => {
   });
 });
 
-cron.schedule('27 14 * * *', async () => {
+cron.schedule('33 14 * * *', async () => {
   try {
     // Assuming `collection` is your Mongoose model
     await collection.updateMany({}, { usage: 0 });
