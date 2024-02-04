@@ -97,10 +97,12 @@ export function MainLoged() {
         <div className="main-page">
             <LogedNav navRes={navRes} onChangeNavRes={changeNavRes}/>
             {navRes === "main-page" ? (
-                <LogedHero id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}  />
+            <YoutubeUpload id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}/>
+
             ) : (
-                // <ProfilePage tier={tier} usageLimit={usageLimit} />
-                <YoutubeUpload />
+          //  <LogedHero id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}  />
+            <ProfilePage tier={tier} usageLimit={usageLimit} />
+
             )}
         </div>
     );

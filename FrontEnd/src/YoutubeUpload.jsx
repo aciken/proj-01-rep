@@ -1,13 +1,18 @@
 import './YoutubeUpload.css';
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import OpenAI from "openai";
-
+import PropTypes from 'prop-types';
 
 
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
-export function YoutubeUpload() {
+export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageLimit, setUsageLimit}) {
+
+    const history = useNavigate()
+
+    console.log(usageLimit)
 
     const [form, setForm] = useState({
     title:"",
@@ -16,10 +21,48 @@ export function YoutubeUpload() {
     file:null,
 
     })
+
+
+
+    YoutubeUpload.propTypes = {
+        id: PropTypes.string.isRequired,
+        tier: PropTypes.string.isRequired,
+        usageLocal: PropTypes.number.isRequired,
+        setUsageLocal: PropTypes.func.isRequired,
+        uses: PropTypes.number.isRequired,
+        usageLimit: PropTypes.number.isRequired,
+        setUsageLimit: PropTypes.func.isRequired,
+
+    };
  
     const [response, setResponse] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState("");
+
+
+
+    async function updateUsage(id, usageLocal) {
+        const updatedUsage = ++usageLocal;
+        console.log(`Updated usage to ${updatedUsage}`)
+        try {
+          usageLocal = updatedUsage;
+          console.log(`Usage Local is now ${usageLocal}`)
+          const response = await axios.put("http://localhost:3000/updateUsage", { id, usage: updatedUsage });
+          console.log("Usage updated successfully!", response.data);
+          history("/logedPage",{state: {id: id, tier: tier, usage: updatedUsage}});
+      
+          if(usageLocal <= uses){
+            setUsageLimit(uses - usageLocal);
+            console.log(`${uses} ${usageLocal}`)
+            console.log(usageLimit)
+          } else{
+            setUsageLimit(0);
+          
+          }
+        } catch (error) {
+          console.error("Failed to update usage:", error);
+        }
+      }
 
 
     async function main1(chat) {
@@ -27,13 +70,14 @@ export function YoutubeUpload() {
         const completion = await openai.chat.completions.create({
             messages: [
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Make short and attention grabbing YouTube title for video with this description" + chat},
+                {"role": "user", "content": "Make one short 4 to 7 word and attention grabbing YouTube title for video with this description" + chat},
             ],
             model: "gpt-3.5-turbo",
         });
 
-
-        setResponse(completion.choices[0].message.content);
+        const title = completion.choices[0].message.content.split(`"`)
+        console.log(title);
+        setResponse(title[1]);
 
 
 
@@ -51,6 +95,14 @@ export function YoutubeUpload() {
             model: "gpt-3.5-turbo",
         });
 
+        if(completion.choices[0].message.content[1] === `"`){
+            console.log('true');
+        } else {
+            console.log('false');
+        }
+
+        // finalDesc = completion.choices[0].message.content.split(`"`);
+        
 
         setDescription(completion.choices[0].message.content);
 
@@ -167,12 +219,13 @@ videoData.append("videoFile", form.file);
 axios.post("http://localhost:3000/send", videoData)
     .then((res) => { 
         console.log(res.data);
+        updateUsage(id, usageLocal);
         
 
 
 main1(res.data);
 main2(40, res.data);
-imageGen(res.data);
+// imageGen(res.data);
 
 
 
@@ -215,9 +268,10 @@ imageGen(res.data);
                     <input onChange={handleThumbnailChange} accept='image/jpeg' type="file" name="thumbnail" placeholder='Add Thumbnail File' />
                 </div> */}
                 <button type="submit">Upload Video</button>
-                <button onClick={handleSend}>Send Video</button>
+                <button onClick={handleSend} >Send Video</button>
             </form>
             <img className="imageGen" src={url} alt="" />
+            {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>}
         </div>
     )
 }

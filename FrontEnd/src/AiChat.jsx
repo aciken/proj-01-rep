@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import './AiChat.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import PropTypes from 'prop-types';
 // import cron from "node-cron";
 
 
@@ -12,6 +13,19 @@ import axios from "axios";
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
 export function AiChat({id, tier, usageLocal, setUsageLocal, uses, usageLimit, setUsageLimit, usage}){
+
+
+  AiChat.propTypes = {
+    id: PropTypes.string.isRequired,
+    tier: PropTypes.string.isRequired,
+    usageLocal: PropTypes.number.isRequired,
+    setUsageLocal: PropTypes.func.isRequired,
+    uses: PropTypes.number.isRequired,
+    usageLimit: PropTypes.number.isRequired,
+    setUsageLimit: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    usage: PropTypes.number.isRequired,
+};
 
   const [chatInput, setChatInput] = useState("chat-input");
   const history = useNavigate()
