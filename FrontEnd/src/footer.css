@@ -5,9 +5,10 @@
 
 
 .footer{
+    border-top: #292929 1px solid;
     color:#ffecd7;
     font-family: 'Roboto-Regular';
-    background-color: #071a57;
+    background-color: #171717;
     height: fit-content;
     padding: 3% 30% 1% 30%;
     display: flex;
@@ -15,7 +16,7 @@
 }
 
 .footer-line h1{
-    color: #9dc4f0;
+    color: #444444;
     font-size: 1.5rem;
     line-height: 2rem;
 }

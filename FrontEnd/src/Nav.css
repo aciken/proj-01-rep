@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url(./assets/Roboto-Regular.ttf);
+    src: url(./assets/FrontEnd/ProductSansRegular.ttf);
 }
 
 .body{
@@ -18,11 +18,11 @@
     justify-content: space-between;
     padding: 0 25%;
     align-items: center;
-    background-color: #ffffff;
+    background-color: #171717;
 }
 
 .left-nav-part img{
- height: 120px;
+ height: 60px;
  width: auto;
 }
 
@@ -36,7 +36,7 @@
 
 .right-nav-part a{
     text-decoration: none;
-    color: rgb(17, 19, 104);
+    color: rgb(255, 255, 255);
     font-size: 1.2rem;
     font-family: 'Roboto-Regular';
 }
@@ -71,6 +71,17 @@ margin-bottom: 20px;
 .dropdown a:hover {
     text-decoration: none;
     box-shadow: 0 0 3px 1px rgb(117, 172, 223);
+}
+
+.sign-up{
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sign-up a{
+    color: black;
 }
 
 

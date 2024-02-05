@@ -9,9 +9,9 @@
     align-items: center;
     gap: 30px;
     font-family:'roboto-regular';
-    background-color: #ffffff;
+    background-color: #171717;
     height: 100vh;
-    color:rgb(17, 19, 104);
+    color:rgb(255, 255, 255);
     padding: 0 25%;
 }
 
@@ -26,26 +26,29 @@ justify-content: center ;
 }
 
 .hero-text p{
-    color:rgba(17, 19, 104, 0.7);
+    color:rgba(255, 255, 255, 0.7);
 }
 
 .get-started-btn {
-    box-shadow: 0 4px 20px rgba(26, 28, 143, 0.8);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
     margin-top: 30px;
     cursor: pointer;
     padding: 10px 20px;
     border: none;
     border-radius: 15px;
-    background-color: rgb(37, 40, 196);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
     font-size: 1.6rem;
 }
 
+.get-started-btn a {
+color:#171717;
+}
 
 
 .boring-part{
-    background-color: rgb(17, 19, 104);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     padding: 4px;
     border-radius: 15px;
 }

@@ -5,8 +5,14 @@
 
 .youtube-upload {
     font-family: 'Roboto-Regular';
-    height: 85vh;
+    height: 93.6vh;
     padding: 0 25%;
+    background-color: #171717;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }
 
 .imageGen{
@@ -20,7 +26,7 @@
     display: inline-block;
     padding: 5px 10px;
     background-color: #ffffff;
-    color: #337ef0;
+    color: #171717;
     border-radius: 3px;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
@@ -28,6 +34,33 @@
 
 input[type="file"] {
     display: none;
+}
+
+.title-input{
+    padding: 6px 12px;
+    background: rgb(31, 32, 35);
+    border: 1px solid rgb(60, 63, 68);
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgb(247, 248, 248);
+    height: 46px;
+    width: 500px;
+    appearance: none;
+    transition: border 0.15s ease 0s; 
+
+}
+
+.description-input{
+    padding: 6px 12px;
+    background: rgb(31, 32, 35);
+    border: 1px solid rgb(60, 63, 68);
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgb(247, 248, 248);
+    height: 100px;
+    width: 500px;
+    appearance: none;
+    transition: border 0.15s ease 0s;  
 }
 
 .label-upload{
@@ -39,7 +72,7 @@ input[type="file"] {
 .label-upload svg{
     height: 30px;
     width: 30px;
-    fill: #337ef0;
+    fill: #171717;
 }
 
 .send-video-btn{

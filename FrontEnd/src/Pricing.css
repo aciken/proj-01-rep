@@ -5,7 +5,7 @@
 
 .pricing{
     height: 100vh;
-    background-color: #0f2777;
+    background-color: #171717;
     padding: 0 25%;
     display: flex;
     justify-content: center;
@@ -74,14 +74,14 @@
     cursor: pointer;
     padding: 10px 20px;
     border: none;
-    background: #1b399e;
+    background: #353535;
     border-radius: 5px;
     color: white;
     font-size: 1.5rem;
 }
 
 .price-card-footer button:hover{
-    background: #102877;
+    background: #292929;
 
 }
 

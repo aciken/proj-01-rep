@@ -211,6 +211,7 @@ const handleSubmit = (e) => {
 const handleSend = (e) => {
 e.preventDefault();
 
+if(usageLimit > 0){
 
 const videoData = new FormData();
 
@@ -225,7 +226,7 @@ axios.post("http://localhost:3000/send", videoData)
 
 main1(res.data);
 main2(40, res.data);
-// imageGen(res.data);
+imageGen(res.data);
 
 
 
@@ -249,6 +250,10 @@ main2(40, res.data);
         console.log("Error Config:", err.config);
     })
 
+} else {
+    console.log('Usage Limit Reached')
+
+}
 }
 
     return(
@@ -269,12 +274,12 @@ main2(40, res.data);
 
                 </label>
 
-            <button onClick={handleSend} className='send-video-btn' disabled>Send Video</button>
+            <button onClick={handleSend} className='send-video-btn' >Send Video</button>
                 <div>
-                    <input onChange={handleResponseChange} type="text" name="title" placeholder="Title" value={response} />
+                    <input onChange={handleResponseChange} className='title-input' type="text" name="title" placeholder="Title" value={response} />
                 </div>
                 <div>
-                    <textarea onChange={handleDescriptionChange} name="description" id="" cols="30" rows="10" placeholder="Description" value={description}></textarea>
+                    <textarea onChange={handleDescriptionChange} className='description-input'  name="description" id="" cols="30" rows="10" placeholder="Description" value={description}></textarea>
                 </div>
 
         
