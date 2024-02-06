@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url(./assets/Roboto-Regular.ttf);
+    src: url(./assets/ProductSansRegular.ttf);
 }
 
 .youtube-upload {
@@ -22,7 +22,8 @@
 }
 
 .video-add-btn {
-    font-family: sans-serif;
+    height: 45px;
+    font-family: 'Roboto-Regular';
     display: inline-block;
     padding: 5px 10px;
     background-color: #ffffff;
@@ -34,6 +35,12 @@
 
 input[type="file"] {
     display: none;
+}
+
+.top-btns{
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .title-input{
@@ -76,14 +83,36 @@ input[type="file"] {
 }
 
 .send-video-btn{
+    font-size: 1rem;
+    font-family: 'Roboto-Regular';
     margin: 10px;
     border: none;
-background-color: #337ef0;
-color: white;
-padding: 10px 20px;
+background-color: #f3f030;
+color: rgb(0, 0, 0);
+padding: 14px 20px;
 border-radius: 3px;
 cursor: pointer;
 }
 
+.upload-video-btn{
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    font-family: 1rem;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.upload-video-btn.disabled{
+    cursor: not-allowed;
+    background-color: #b6b6b6;
+    color: black;
+    padding: 10px 20px;
+    font-family: 1rem;
+    border-radius: 10px;
+    margin-top: 15px;
+}
 
 

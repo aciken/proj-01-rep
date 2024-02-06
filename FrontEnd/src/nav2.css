@@ -3,6 +3,12 @@
     src: url(./assets/ProductSansRegular.ttf);
 }
 
+@font-face {
+    font-family: 'Font-Bold';
+    src: url(./assets/ProductSansBold.ttf);
+}
+
+
 
 .whole-nav{
     display: flex;
@@ -41,11 +47,13 @@
     background-color: white;
     color: black;
     border-radius: 5px;
+
 }
 
 .profile-btn a{
     color: black;
     padding: 5px 10px;
+
 }
 
 .profile-btn a:hover{

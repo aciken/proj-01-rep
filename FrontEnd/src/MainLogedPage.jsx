@@ -21,6 +21,8 @@ export function MainLoged() {
 
     console.log(`ID is ${id} || Tier is ${tier} || Usage is ${usage} || UsageLocal is ${usageLocal}`)
  
+
+
     console.log(usageLocal);
   
     useEffect(() => {

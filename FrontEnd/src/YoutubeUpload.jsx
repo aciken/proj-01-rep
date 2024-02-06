@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import OpenAI from "openai";
 import PropTypes from 'prop-types';
+import noThumbnail from './assets/noThumbnail.png';
 
 
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
@@ -37,12 +38,14 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
  
     const [response, setResponse] = useState("");
     const [description, setDescription] = useState("");
-    const [url, setUrl] = useState("");
+    const [url, setUrl] = useState(noThumbnail);
 
-
+    const isButtonDisabled = !response|| !description || url === 'noThumbnail.png' || usageLimit === 0;
+    const buttonClassName = isButtonDisabled ? 'upload-video-btn disabled' : 'upload-video-btn';
 
     async function updateUsage(id, usageLocal) {
         const updatedUsage = ++usageLocal;
+        setUsageLocal(updatedUsage);
         console.log(`Updated usage to ${updatedUsage}`)
         try {
           usageLocal = updatedUsage;
@@ -264,17 +267,16 @@ imageGen(res.data);
 
             <form onSubmit={handleSubmit} >
 
-            <label className='video-add-btn'>
-                <input  onChange={handleChange}  accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
-
-                    <div className="label-upload">
-                        Upload File
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
-                    </div>
-
-                </label>
-
-            <button onClick={handleSend} className='send-video-btn' >Send Video</button>
+            <div className="top-btns">
+                <label className='video-add-btn'>
+                    <input  onChange={handleChange}  accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
+                        <div className="label-upload">
+                            Upload File
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
+                        </div>
+                    </label>
+                <button onClick={handleSend} className='send-video-btn' >Send Video</button>
+            </div>
                 <div>
                     <input onChange={handleResponseChange} className='title-input' type="text" name="title" placeholder="Title" value={response} />
                 </div>
@@ -286,10 +288,11 @@ imageGen(res.data);
                 {/* <div>
                     <input onChange={handleThumbnailChange} accept='image/jpeg' type="file" name="thumbnail" placeholder='Add Thumbnail File' />
                 </div> */}
-                <button type="submit">Upload Video</button>
-
-            </form>
             <img className="imageGen" src={url} alt="" />
+    <button type="submit" className={buttonClassName} disabled={isButtonDisabled}>Upload Video</button>
+            </form>
+
+
             {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>}
         </div>
     )

@@ -316,6 +316,10 @@ const UserSchema = new mongoose.Schema({
 
 
 
+
+
+
+
 app.get("/login", cors(), (req, res) =>{
 
 })
@@ -424,7 +428,7 @@ wss.on('connection', (ws) => {
   });
 });
 
-cron.schedule('32 22 * * *', async () => {
+cron.schedule('29 15 * * *', async () => {
   try {
     // Assuming `collection` is your Mongoose model
     await collection.updateMany({}, { usage: 0 });

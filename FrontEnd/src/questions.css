@@ -55,7 +55,7 @@ ul li{
     text-align: center;
     font-family: 'Roboto-Regular';
     font-size: 1.2rem;
-    color:rgb(37, 40, 196);
+    color:#171717;
     cursor: pointer;
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -66,7 +66,7 @@ display: flex;
 justify-content: space-between;
     background-color: #ffffff;
     text-decoration: none;
-    color:#183183;
+    color:#171717;
     font-size: 1.2rem;
     font-family: 'Roboto-Regular';
 
@@ -84,7 +84,7 @@ justify-content: space-between;
     display: block;
     border-top: 1px solid rgb(163, 140, 140);
     animation: slideDown 200ms ease-in-out forwards;
-    color:rgb(25, 27, 156);
+    color:#171717;
 }
 
 @keyframes slideDown {

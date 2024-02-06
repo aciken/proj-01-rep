@@ -6,7 +6,12 @@
 
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url(./assets/FrontEnd/ProductSansRegular.ttf);
+    src: url(./assets/ProductSansRegular.ttf);
+}
+
+@font-face {
+    font-family: 'Font-Bold';
+    src: url(./assets/ProductSansBold.ttf);
 }
 
 .body{
