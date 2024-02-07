@@ -23,7 +23,7 @@ export function MainLoged() {
   const [usage, setUsage] = useState(initialUsage);
   const [usageLocal, setUsageLocal] = useState(usage);
   
-  console.log(`ID is ${id} || Tier is ${tier} || Usage is ${usage} || UsageLocal is ${usageLocal}`)
+ console.log(localStorage)
   
   useEffect(() => {
     localStorage.setItem('tier', tier);
@@ -37,8 +37,7 @@ export function MainLoged() {
     localStorage.setItem('usage', usage);
   }, [usage]);
 
-console.log(location.state.id)
-console.log(localStorage)
+
 
     console.log(`ID is ${id} || Tier is ${tier} || Usage is ${usage} || UsageLocal is ${usageLocal}`)
 

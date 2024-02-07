@@ -6,6 +6,12 @@ import { Link } from "react-router-dom";
 
 export function ProfilePage({ tier, usageLimit }) {
 
+    const removeLocalStorage = () => {
+        localStorage.removeItem('id');
+        localStorage.removeItem('tier');
+        localStorage.removeItem('usage');
+    }
+
 let timeReset = 0;
     const date = new Date();
     const currentTime = date.getHours();
@@ -39,7 +45,7 @@ let tierName = "";
                     <p>Usage Resets In: <span>{timeReset}</span> Hours</p>
                 </div>
                 <div className="logOut-part">
-                <Link className="logOut-btn" to="/">Log Out</Link>
+                <Link onClick={removeLocalStorage} className="logOut-btn" to="/">Log Out</Link>
             </div>
             </div>
 

@@ -6,6 +6,10 @@ import { OtherNav} from './OtherNav';
 
 export function Login(){
 
+    localStorage.removeItem('id');
+    localStorage.removeItem('tier');
+    localStorage.removeItem('usage');
+
     const history = useNavigate()
 
     const [email, setEmail] = useState('');

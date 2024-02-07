@@ -271,7 +271,7 @@ imageGen(res.data);
 
                
 
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit} className='youtube-form' >
 
             <div className="top-btns">
                 <label className='video-add-btn'>
