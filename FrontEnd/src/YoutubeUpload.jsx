@@ -9,7 +9,7 @@ import noThumbnail from './assets/noThumbnail.png';
 
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
-export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageLimit, setUsageLimit}) {
+export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageLimit, setUsageLimit, setUsage}) {
 
     const history = useNavigate()
 
@@ -33,18 +33,23 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
         uses: PropTypes.number.isRequired,
         usageLimit: PropTypes.number.isRequired,
         setUsageLimit: PropTypes.func.isRequired,
-
+        setUsage: PropTypes.func.isRequired,
     };
  
     const [response, setResponse] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState(noThumbnail);
 
-    const isButtonDisabled = !response|| !description || url === 'noThumbnail.png' || usageLimit === 0;
+  
+
+    const isButtonDisabled = !response|| !description || url == '/src/assets/noThumbnail.png' || usageLimit === 0;
     const buttonClassName = isButtonDisabled ? 'upload-video-btn disabled' : 'upload-video-btn';
 
     async function updateUsage(id, usageLocal) {
         const updatedUsage = ++usageLocal;
+        setUsage(updatedUsage);
+         localStorage.setItem('usage', updatedUsage);
+
         setUsageLocal(updatedUsage);
         console.log(`Updated usage to ${updatedUsage}`)
         try {
@@ -54,6 +59,7 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
           console.log("Usage updated successfully!", response.data);
           history("/logedPage",{state: {id: id, tier: tier, usage: updatedUsage}});
       
+          console.log(usageLocal)
           if(usageLocal <= uses){
             setUsageLimit(uses - usageLocal);
             console.log(`${uses} ${usageLocal}`)

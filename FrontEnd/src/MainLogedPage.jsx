@@ -13,21 +13,35 @@ export function MainLoged() {
 
 
 
-    const location = useLocation();
-    const {id} = location.state;
-    const {tier} = location.state;
-    const {usage} = location.state;
-    const [usageLocal, setUsageLocal] = useState(usage);
+  const location = useLocation();
+  const initialID = localStorage.getItem('id') || location.state.id;
+  console.log(initialID)
+  const [id, setID] = useState(initialID);
+  const initialTier = localStorage.getItem('tier') || location.state.tier;
+  const [tier, setTier] = useState(initialTier);
+  const initialUsage = localStorage.getItem('usage') || location.state.usage;
+  const [usage, setUsage] = useState(initialUsage);
+  const [usageLocal, setUsageLocal] = useState(usage);
+  
+  console.log(`ID is ${id} || Tier is ${tier} || Usage is ${usage} || UsageLocal is ${usageLocal}`)
+  
+  useEffect(() => {
+    localStorage.setItem('tier', tier);
+  }, [tier]);
+  
+  useEffect(() => {
+    localStorage.setItem('id', id);
+  }, [id]);
+  
+  useEffect(() => {
+    localStorage.setItem('usage', usage);
+  }, [usage]);
+
+console.log(location.state.id)
+console.log(localStorage)
 
     console.log(`ID is ${id} || Tier is ${tier} || Usage is ${usage} || UsageLocal is ${usageLocal}`)
- 
 
-
-    console.log(usageLocal);
-  
-    useEffect(() => {
-      setUsageLocal(usage); // Update the usageLocal state when the usage prop changes
-    }, [usage]);
 
     let uses = 0;
 
@@ -69,6 +83,8 @@ export function MainLoged() {
           console.log('Received message:', event.data);
           if (event.data === 'usage reset') {
             setUsageLocal(0);
+            setUsage(0);
+            localStorage.setItem('usage', usage);
             console.log(usageLocal)
             console.log('Usage was reset!');
             setUsageLimit(uses)
@@ -99,7 +115,7 @@ export function MainLoged() {
         <div className="main-page">
             <LogedNav navRes={navRes} onChangeNavRes={changeNavRes}/>
             {navRes === "main-page" ? (
-            <YoutubeUpload id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}/>
+            <YoutubeUpload id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage} setUsage={setUsage}/>
 
             ) : (
           //  <LogedHero id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}  />

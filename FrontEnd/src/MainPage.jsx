@@ -8,6 +8,10 @@ import { AiChat } from "./AiChat";
 import { Nav2 } from "./Nav2";
 
 export function MainPage(){
+
+    localStorage.removeItem('usage');
+    localStorage.removeItem('tier');
+    localStorage.removeItem('id');
     return(
         <div className="main-page">
             <Nav2/>
