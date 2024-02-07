@@ -40,6 +40,8 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState(noThumbnail);
 
+    const [addedVideo, setAddedVideo] = useState("No Video Added Yet");
+
   
 
     const isButtonDisabled = !response|| !description || url == '/src/assets/noThumbnail.png' || usageLimit === 0;
@@ -159,6 +161,9 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
         const inputValue = e.target.name === "file" ? e.target.files[0] : e.target.value;
         console.log(`Input value:`, inputValue);
         
+if(e.target.name === "file"){
+    setAddedVideo(e.target.files[0].name);
+}
         setForm({
             ...form,
             [e.target.name]: inputValue
@@ -283,6 +288,7 @@ imageGen(res.data);
                     </label>
                 <button onClick={handleSend} className='send-video-btn' >Send Video</button>
             </div>
+            <p>{addedVideo}</p>
                 <div>
                     <input onChange={handleResponseChange} className='title-input' type="text" name="title" placeholder="Title" value={response} />
                 </div>
