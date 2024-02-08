@@ -101,6 +101,11 @@ border-radius: 3px;
 cursor: pointer;
 }
 
+.send-video-btn.disabled{
+    background-color: #b1ae0e;
+    cursor: not-allowed;
+}
+
 .upload-video-btn{
     cursor: pointer;
     border: none;

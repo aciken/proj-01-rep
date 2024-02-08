@@ -43,6 +43,10 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
     const [addedVideo, setAddedVideo] = useState("No Video Added Yet");
 
   
+    const isSendDisabled = addedVideo == "No Video Added Yet" || usageLimit === 0;
+    const sendClassName = isSendDisabled ? 'send-video-btn disabled' : 'send-video-btn';
+
+    console.log(isSendDisabled, sendClassName)
 
     const isButtonDisabled = !response|| !description || url == '/src/assets/noThumbnail.png' || usageLimit === 0;
     const buttonClassName = isButtonDisabled ? 'upload-video-btn disabled' : 'upload-video-btn';
@@ -225,7 +229,8 @@ const handleSubmit = (e) => {
 const handleSend = (e) => {
 e.preventDefault();
 
-if(usageLimit > 0){
+
+if(usageLimit > 0 && addedVideo != "No Video Added Yet"){
 
 const videoData = new FormData();
 
@@ -286,7 +291,7 @@ imageGen(res.data);
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
                         </div>
                     </label>
-                <button onClick={handleSend} className='send-video-btn' >Send Video</button>
+                <button onClick={handleSend} className={sendClassName} >Send Video</button>
             </div>
             <p>{addedVideo}</p>
                 <div>
