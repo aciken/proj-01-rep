@@ -428,7 +428,7 @@ wss.on('connection', (ws) => {
   });
 });
 
-cron.schedule('15 21 * * *', async () => {
+cron.schedule('00 00 * * *', async () => {
   try {
     // Assuming `collection` is your Mongoose model
     await collection.updateMany({}, { usage: 0 });
@@ -439,6 +439,10 @@ cron.schedule('15 21 * * *', async () => {
     console.error('Failed to reset usage:', error);
   }
 });
+
+
+
+
 
 
 
