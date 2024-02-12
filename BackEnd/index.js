@@ -460,6 +460,13 @@ app.post('/api/purchaseProduct', async (req, res) => {
     const response = await lemonSqueeztApiInstance.post('/checkouts', {
       data: {
         type: "checkouts",
+        attributes:{
+          checkout_data:{
+          custom:{
+            user_id: '123',
+          },
+        },
+        },
         relationships: {
           store: {
             data: {
