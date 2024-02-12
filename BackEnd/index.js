@@ -1,6 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const {lemonSqueeztApiInstance} = require("./utils/axios.js");
+
+
+
 let open;
 
 import('open').then((module) => {
@@ -444,6 +448,46 @@ cron.schedule('00 00 * * *', async () => {
 
 
 
+
+app.post('/api/purchaseProduct', async (req, res) => {
+  try {
+    const reqData = req.body;
+
+    if(!reqData.productId) 
+      return res.status(400).json({message: "productId is required"});
+
+      console.log('asd')
+    const response = await lemonSqueeztApiInstance.post('/checkouts', {
+      data: {
+        type: "checkouts",
+        relationships: {
+          store: {
+            data: {
+              type: "stores",
+              id: process.env.LEMON_SQUEZZY_STORE_ID,
+            },
+          },
+          variant: {
+            data: {
+              type: "variants",
+              id: reqData.productId.toString(),
+            },
+          },
+        },
+      },
+    });
+
+    const checkoutUrl = response.data.data.attributes.url;
+
+    console.log(response.data);
+    console.log('yea')
+
+    return res.json({checkoutUrl})
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+})
 
 
 
