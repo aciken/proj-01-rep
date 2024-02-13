@@ -497,5 +497,11 @@ app.post('/api/purchaseProduct', async (req, res) => {
 })
 
 
+app.post('https://ploady/webhook', (req, res) => {
+  console.log(req.body);
+  res.send('ok');
+});
+
+
 
 app.listen(3000, () => console.log("Server is running on port 3000"));
