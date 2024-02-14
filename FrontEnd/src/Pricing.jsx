@@ -4,20 +4,7 @@ import axios from 'axios';
 
 export function Pricing() {
 
-  const buyProduct1 = async () =>{
-    try{
-        const response = await axios.post('http://localhost:3000/api/purchaseProduct', {
-            productId: "249354"
-        });
 
-        console.log(response.data)
-
-        window.open(response.data.checkoutUrl, '_blank')
-    }catch(error){
-        console.log(error);
-    
-    }
-  }
     
 
   return (
@@ -71,7 +58,7 @@ export function Pricing() {
                 <p className='content-text no'><span>&#10005;</span> Video Marketing</p>
             </div>
             <div className='price-card-footer'>
-                <button onClick={buyProduct1}>Buy</button>
+                <button >Buy</button>
             </div>
         </div>
 

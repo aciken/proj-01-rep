@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const {lemonSqueeztApiInstance} = require("./utils/axios.js");
 
+const crypto = require('crypto');
 
 
 let open;
@@ -308,6 +309,10 @@ const UserSchema = new mongoose.Schema({
     usage:{
       type: Number,
       default: 0
+    },
+    credits:{
+      type: Number,
+      default: 0
     }
     });
 
@@ -452,6 +457,11 @@ cron.schedule('00 00 * * *', async () => {
 app.post('/api/purchaseProduct', async (req, res) => {
   try {
     const reqData = req.body;
+    const email = req.body.id;
+
+    console.log(reqData, email)
+
+    console.log(req.body)
 
     if(!reqData.productId) 
       return res.status(400).json({message: "productId is required"});
@@ -463,7 +473,7 @@ app.post('/api/purchaseProduct', async (req, res) => {
         attributes:{
           checkout_data:{
           custom:{
-            user_id: '123',
+            user_id: email,
           },
         },
         },
@@ -497,10 +507,59 @@ app.post('/api/purchaseProduct', async (req, res) => {
 })
 
 
-app.post('https://ploady/webhook', (req, res) => {
-  console.log(req.body);
-  res.send('ok');
+app.post('/api/webhook', async (req, res) => {
+  try {
+    let reqClone = Object.assign({}, req);
+const eventType = req.headers.content_type;
+const body = req.body;
+
+    const secret = process.env.LEOMON_SQUEEZY_WEBHOOK_SIGNATURE;
+    if (!secret) {
+      console.error('The secret is undefined!');
+      return res.status(500).json({message: "Server Error"});
+    }
+
+
+
+    const hmac      = crypto.createHmac('sha256', secret);
+    const digest    = Buffer.from(hmac.update(JSON.stringify(req.body)).digest('hex'), 'utf8');
+    const signature = Buffer.from(req.get('X-Signature') || '', 'utf8');
+
+    console.log(digest, signature)
+    console.log(signature.length, digest.length)
+    if (digest.length !== signature.length) {
+      console.error('The digest and signature have different lengths!');
+      return res.status(400).json({message: "Invalid request"});
+    }
+
+
+    console.log(body);
+
+    if(eventType === "order_created"){
+      const userId = body.meta.custom_data.user_id;
+      const isSuccesful = body.data.attributes.status === "paid";
+    }
+
+    const userID = body.meta.custom_data.user_id
+    const tokenValue = body.data.attributes.total_usd
+
+    const user = await collection.findOne({ email: userID });
+    if (user) {
+      user.credits += tokenValue;
+      await user.save();
+      console.log("added credits")
+    } else {
+      console.log("user not found")
+    }
+
+    return res.status(200).json({message: "Webhook received successfully"});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({message: "Server Error"});
+  }
 });
+
+
 
 
 

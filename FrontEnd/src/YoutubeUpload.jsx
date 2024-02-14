@@ -275,6 +275,22 @@ imageGen(res.data);
 }
 }
 
+const buyProduct1 = async () =>{
+    try{
+        const response = await axios.post('http://localhost:3000/api/purchaseProduct', {
+            productId: "249354",
+            id: id
+        });
+
+        console.log(response.data)
+
+        window.open(response.data.checkoutUrl, '_blank')
+    }catch(error){
+        console.log(error);
+    
+    }
+  }
+
     return(
         <div className="youtube-upload">
             <h1>Upload Your Video</h1>
@@ -309,7 +325,7 @@ imageGen(res.data);
     <button type="submit" className={buttonClassName} disabled={isButtonDisabled}>Upload Video</button>
             </form>
 
-
+                <button onClick={buyProduct1} className='buy-btn' >Purchase Credits</button>
             {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>}
         </div>
     )
