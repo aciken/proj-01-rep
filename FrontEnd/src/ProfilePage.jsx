@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 
 
 
-export function ProfilePage({ tier, usageLimit }) {
+export function ProfilePage() {
 
     const removeLocalStorage = () => {
         localStorage.removeItem('id');
-        localStorage.removeItem('tier');
-        localStorage.removeItem('usage');
     }
 
 let timeReset = 0;
@@ -20,28 +18,22 @@ let timeReset = 0;
     timeReset = time;
 
 
-let tierName = "";
 
-    if (tier == 1) {
-        tierName = "Free"
-    } else if (tier == 2) {
-       tierName = "Basic"
-    } else {
-        tierName = "Premium"
-    }
+
+
 
     return (
         <div className="profile-page">
             <div className="profile-part">
                 <h1>Profile</h1>
                 <div className="tier-part">
-                    <p>Current Tier: <span>{tierName}</span></p>
+                    <p>Current Tier: <span></span></p>
                     <a href="#" className="upgrade-btn" onClick={(e) => e.preventDefault()}>Upgrade</a>
                 </div>
                 <h1>Usage</h1>
                 <div className="usage-part">
 
-                    <p>Uses Left: <span>{usageLimit}</span></p>
+                    <p>Uses Left: <span></span></p>
                     <p>Usage Resets In: <span>{timeReset}</span> Hours</p>
                 </div>
                 <div className="logOut-part">

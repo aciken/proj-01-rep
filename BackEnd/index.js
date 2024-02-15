@@ -403,6 +403,39 @@ app.put('/updateUsage', async (req, res) => {
   }
 });
 
+app.put('/updateCredits', async (req, res) => {
+  const {id, credits} = req.body;
+
+  try{
+    const user = await collection .findOne({email: id});
+    if(user){
+      user.credits = credits;
+      await user.save();
+      res.json({message: 'Credits updated successfully!', credits: user.credits});
+    } else {
+      res.status(404).json({message: 'User not found'});
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: 'Internal server error'});
+  }
+})
+
+
+app.post('/creditSend', async (req, res) => {
+  const {id} = req.body;
+
+  try {
+    const logedUser = await collection.findOne({email: id})
+      res.json(logedUser)
+
+  } catch (error) {
+    
+  }
+
+
+})
+
 // app.put('/updateUsage', async (req, res) => {
 //   const { id, usage } = req. body;
 //   console.log(id, usage)

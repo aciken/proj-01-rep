@@ -14,10 +14,16 @@ export function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [wrongInput, setWrongInput] = useState('');
 
     async function submit(e){
         e.preventDefault();
 
+        if(email === "" || password === ""){
+            setWrongInput("Please fill all the fields")
+        } else{
+
+        
         try{
 
             await axios.post("http://localhost:3000/login", {
@@ -25,20 +31,20 @@ export function Login(){
             })
             .then(res => {
                 if(res.data !== "not exist"){
-                    const tier =  res.data.tier
-                    const usage = res.data.usage
+ 
+
                     
 
  
-                    history("/logedPage",{state: {id: email, tier, usage}})
+                    history("/logedPage",{state: {id: email}})
                 }
                 else if(res.data === "not exist"){
-                    alert("user does not exist")
+                    setWrongInput("Wrong Email or Password")
                 }
             })
             .catch(e => {
-                alert("wrong details")
                 console.log(e);
+                setWrongInput("Wrong Email or Password")
             })
 
             
@@ -46,6 +52,7 @@ export function Login(){
         catch(e){
             console.log(e)
         }
+    }
 
     }
 
@@ -56,12 +63,15 @@ export function Login(){
                         <div className="form-border">
                         <p>Log in to your account</p>
                             <form className="login-form">
-                                <input className="login-email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}}/>
-                                <input type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
+                                <input className="login-email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}} required/>
+                                <input type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}} required/>
+                                <p className='wrong-input'>{wrongInput}</p>
                                 <a href='#' className="forgot">Forgot Password?</a>
                                 <button className='sign-btn' onClick={submit}>Sign In</button>
                             </form>
+
                             <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
+
                         </div>
              </div>
         </div>

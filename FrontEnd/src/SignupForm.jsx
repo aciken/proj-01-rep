@@ -13,11 +13,17 @@ export function Signup(){
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [wrongInput, setWrongInput] = useState('');  
 
 
     async function submit(e){
       e.preventDefault();
 
+        if(email === "" || password === "" || firstName === "" || lastName === ""){
+            setWrongInput("Please fill all the fields")
+        } else{
+
+        
       try{
 
           await axios.post("http://localhost:3000/signup", {
@@ -26,15 +32,14 @@ export function Signup(){
           .then(res => {
             console.log(res.data)
               if(res.data !== "exist"){
-                  const tier =  res.data.tier
-                  const usage = res.data.usage
+
                   
 
 
-                  history("/logedPage",{state: {id: email, tier, usage}})
+                  history("/logedPage",{state: {id: email}})
               }
               else if(res.data === "exist"){
-                  alert("user does not exist")
+                  setWrongInput("Email already exist")
               }
           })
           .catch(e => {
@@ -48,7 +53,7 @@ export function Signup(){
           console.log(e)
       }
 
-  }
+  }}
 
 
     return(
@@ -57,12 +62,13 @@ export function Signup(){
             <div className="signup">
                         <div className="signForm-border">
                         <p>Create your account</p>
-                            <form className="signup-form">
+                            <form className="signup-form" onSubmit={submit}>
                             <input className="sign-firstName" type="text" placeholder="First Name" onChange={(e) => {setFirstName(e.target.value)}}/>
                             <input className="sign-lastName" type="text" placeholder="Last Name" onChange={(e) => {setLastName(e.target.value)}}/>
                                 <input className="sign-email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}}/>
                                 <input type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
-                                <button className='sign-btn' onClick={submit}>Sign Up</button>
+                                <p className='wrong-input'>{wrongInput}</p>
+                                <button className='sign-btn' type='submit'>Sign Up</button>
                                 <p className='login-link'>Already have an account? <Link to="/login">Log In</Link></p>
                             </form>
                         </div>

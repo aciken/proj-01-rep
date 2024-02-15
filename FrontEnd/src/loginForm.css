@@ -92,3 +92,8 @@ color: white
     color: rgb(255, 255, 255);  
 }
 
+.wrong-input{
+    font-size: .9rem;
+    color: red;
+}
+

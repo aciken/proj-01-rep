@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 import noThumbnail from './assets/noThumbnail.png';
 
 
+
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
-export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageLimit, setUsageLimit, setUsage}) {
+export function YoutubeUpload({id, credits, setCredits}) {
 
     const history = useNavigate()
 
-    console.log(usageLimit)
 
     const [form, setForm] = useState({
     title:"",
@@ -27,14 +27,23 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
 
     YoutubeUpload.propTypes = {
         id: PropTypes.string.isRequired,
-        tier: PropTypes.string.isRequired,
-        usageLocal: PropTypes.number.isRequired,
-        setUsageLocal: PropTypes.func.isRequired,
-        uses: PropTypes.number.isRequired,
-        usageLimit: PropTypes.number.isRequired,
-        setUsageLimit: PropTypes.func.isRequired,
-        setUsage: PropTypes.func.isRequired,
+        credits: PropTypes.number.isRequired,
+        setCredits: PropTypes.func.isRequired
     };
+
+    async function updateCredits(num){
+
+        setCredits(credits - num);
+        try{
+            const response = await axios.put('http://localhost:3000/updateCredits', {
+                id: id,
+                credits: credits - num,
+            });
+            console.log(response.data)
+        }catch(error){
+            console.log(error);
+        }
+    }
  
     const [response, setResponse] = useState("");
     const [description, setDescription] = useState("");
@@ -43,41 +52,21 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
     const [addedVideo, setAddedVideo] = useState("No Video Added Yet");
 
   
-    const isSendDisabled = addedVideo == "No Video Added Yet" || usageLimit === 0;
+    const isSendDisabled = addedVideo == "No Video Added Yet" || credits === 0;
     const sendClassName = isSendDisabled ? 'send-video-btn disabled' : 'send-video-btn';
+
+    console.log(isSendDisabled)
 
     console.log(isSendDisabled, sendClassName)
 
-    const isButtonDisabled = !response|| !description || url == '/src/assets/noThumbnail.png' || usageLimit === 0;
+console.log(url)
+
+    const isButtonDisabled = !response|| !description || url === '/src/assets/NoThumbnail.png' || credits === 0 || response === "loading..." || description === "loading...";
     const buttonClassName = isButtonDisabled ? 'upload-video-btn disabled' : 'upload-video-btn';
 
-    async function updateUsage(id, usageLocal) {
-        const updatedUsage = ++usageLocal;
-        setUsage(updatedUsage);
-         localStorage.setItem('usage', updatedUsage);
 
-        setUsageLocal(updatedUsage);
-        console.log(`Updated usage to ${updatedUsage}`)
-        try {
-          usageLocal = updatedUsage;
-          console.log(`Usage Local is now ${usageLocal}`)
-          const response = await axios.put("http://localhost:3000/updateUsage", { id, usage: updatedUsage });
-          console.log("Usage updated successfully!", response.data);
-          history("/logedPage",{state: {id: id, tier: tier, usage: updatedUsage}});
-      
-          console.log(usageLocal)
-          if(usageLocal <= uses){
-            setUsageLimit(uses - usageLocal);
-            console.log(`${uses} ${usageLocal}`)
-            console.log(usageLimit)
-          } else{
-            setUsageLimit(0);
-          
-          }
-        } catch (error) {
-          console.error("Failed to update usage:", error);
-        }
-      }
+
+
 
 
     async function main1(chat) {
@@ -97,6 +86,8 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
 
 
     }
+
+
 
 
     
@@ -130,7 +121,7 @@ export function YoutubeUpload({id, tier, usageLocal, setUsageLocal, uses, usageL
     
       async function imageGen(chat){
         console.log('imageGen called')
-        const image = await openai.images.generate({ model: "dall-e-3", prompt: "Make youtube thumbnail from this video description " + chat, n:1,size: "1792x1024", });
+        const image = await openai.images.generate({ model: "dall-e-3", prompt: "Make eye catching thumbnail from this video description " + chat, n:1,size: "1792x1024", });
         setUrl(image.data[0].url);
 
 
@@ -203,8 +194,11 @@ const handleSubmit = (e) => {
 
 
     axios.post("http://localhost:3000/upload", videoData)
-    .then((res) => { 
+    .then(res => { 
+        console.log('uploaddeDDD')
+        updateCredits(100);
         console.log(res.data);
+
     })
     .catch((err) => {
         if (err.response) {
@@ -230,7 +224,9 @@ const handleSend = (e) => {
 e.preventDefault();
 
 
-if(usageLimit > 0 && addedVideo != "No Video Added Yet"){
+if(addedVideo != "No Video Added Yet"){
+setDescription("loading...");
+setResponse("loading...");
 
 const videoData = new FormData();
 
@@ -239,13 +235,14 @@ videoData.append("videoFile", form.file);
 axios.post("http://localhost:3000/send", videoData)
     .then((res) => { 
         console.log(res.data);
-        updateUsage(id, usageLocal);
         
 
 
 main1(res.data);
 main2(40, res.data);
 imageGen(res.data);
+updateCredits(100);
+
 
 
 
@@ -307,7 +304,7 @@ const buyProduct1 = async () =>{
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
                         </div>
                     </label>
-                <button onClick={handleSend} className={sendClassName} >Send Video</button>
+                <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
             </div>
             <p>{addedVideo}</p>
                 <div>
@@ -326,7 +323,8 @@ const buyProduct1 = async () =>{
             </form>
 
                 <button onClick={buyProduct1} className='buy-btn' >Purchase Credits</button>
-            {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>}
+                <p>{credits}</p>
+            {/* {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>} */}
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { ProfilePage } from "./ProfilePage"
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { YoutubeUpload } from "./YoutubeUpload";
+import axios from "axios";
 
 
 
@@ -17,86 +18,73 @@ export function MainLoged() {
   const initialID = localStorage.getItem('id') || location.state.id;
   console.log(initialID)
   const [id, setID] = useState(initialID);
-  const initialTier = localStorage.getItem('tier') || location.state.tier;
-  const [tier, setTier] = useState(initialTier);
-  const initialUsage = localStorage.getItem('usage') || location.state.usage;
-  const [usage, setUsage] = useState(initialUsage);
-  const [usageLocal, setUsageLocal] = useState(usage);
+  const [credits, setCredits] = useState(0);
   
- console.log(localStorage)
   
-  useEffect(() => {
-    localStorage.setItem('tier', tier);
-  }, [tier]);
+
   
   useEffect(() => {
     localStorage.setItem('id', id);
   }, [id]);
   
-  useEffect(() => {
-    localStorage.setItem('usage', usage);
-  }, [usage]);
 
+async function creditSend() {
 
-
-    console.log(`ID is ${id} || Tier is ${tier} || Usage is ${usage} || UsageLocal is ${usageLocal}`)
-
-
-    let uses = 0;
-
-    if(tier == 1){
-      uses = 5;
-    } else if(tier == 2){
-      uses = 10;
-    } else{
-      uses = 15;
-    }
-  
-  let firstUse = 0;
-  
-  if(usageLocal >= uses){
-     firstUse = 0;
-  } else {
-     firstUse = uses - usageLocal;
+  try {
+    await axios.post('http://localhost:3000/creditSend', {
+    id
+  })
+  .then(res => {
+    setCredits(res.data.credits)
+  })
+  } catch (error) {
+    console.log(error)
   }
-  
-    const [usageLimit, setUsageLimit] = useState(firstUse);
 
 
-    useEffect(() => {
-        const ws = new WebSocket('ws://localhost:8080');
+}
+
+useEffect(() => {
+  creditSend();
+}, []); 
+
+
+
+
+    // useEffect(() => {
+    //     const ws = new WebSocket('ws://localhost:8080');
       
-        ws.onopen = () => {
-          console.log('WebSocket connection opened');
-        };
+    //     ws.onopen = () => {
+    //       console.log('WebSocket connection opened');
+    //     };
       
-        ws.onerror = (error) => {
-          console.error('WebSocket error:', error);
-        };
+    //     ws.onerror = (error) => {
+    //       console.error('WebSocket error:', error);
+    //     };
       
-        ws.onclose = (event) => {
-          console.log('WebSocket connection closed:', event.code, event.reason);
-        };
+    //     ws.onclose = (event) => {
+    //       console.log('WebSocket connection closed:', event.code, event.reason);
+    //     };
       
-        ws.onmessage = (event) => {
-          console.log('Received message:', event.data);
-          if (event.data === 'usage reset') {
-            setUsageLocal(0);
-            setUsage(0);
-            localStorage.setItem('usage', usage);
-            console.log(usageLocal)
-            console.log('Usage was reset!');
-            setUsageLimit(uses)
-          }
+    //     ws.onmessage = (event) => {
+    //       console.log('Received message:', event.data);
+    //       if (event.data === 'usage reset') {
+    //         setUsageLocal(0);
+    //         setUsage(0);
+    //         localStorage.setItem('usage', usage);
+    //         console.log(usageLocal)
+    //         console.log('Usage was reset!');
+    //         setUsageLimit(uses)
+    //       }
       
-        };
+    //     };
       
-        return () => {
-          if (ws.readyState === WebSocket.OPEN) {
-            ws.close();
-          }
-        };
-      }, []);
+    //     return () => {
+    //       if (ws.readyState === WebSocket.OPEN) {
+    //         ws.close();
+    //       }
+    //     };
+    //   }, []);
 
 
 
@@ -114,11 +102,11 @@ export function MainLoged() {
         <div className="main-page">
             <LogedNav navRes={navRes} onChangeNavRes={changeNavRes}/>
             {navRes === "main-page" ? (
-            <YoutubeUpload id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage} setUsage={setUsage}/>
+            <YoutubeUpload id={id} credits={credits} setCredits={setCredits} />
 
             ) : (
           //  <LogedHero id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}  />
-            <ProfilePage tier={tier} usageLimit={usageLimit} />
+            <ProfilePage/>
 
             )}
         </div>
