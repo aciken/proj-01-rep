@@ -63,12 +63,16 @@ async function convertToJpg(imageUrl, key) {
 
 
 const convertToAudio = (inputPath, outputPath) => {
+  console.log(inputPath, outputPath)
   return new Promise((resolve, reject) => {
+    console.log('Converting to audio')
+      console.log(inputPath)
       ffmpeg(inputPath)
           .output(outputPath)
           .on('end', resolve)
           .on('error', reject)
           .run();
+
   });
 };
 
@@ -94,11 +98,20 @@ const upload = multer({
 
 
 
-
+function limitTextLength(text) {
+  if (text.length > 3500) {
+    return text.substring(0, 3500);
+  } else {
+    return text;
+  }
+}
 
 
 
 app.post('/send', uploadVideoFile, async (req, res) => {
+
+
+
 
   async function main1(transcriptionText) {
     const completion = await openai.chat.completions.create({
@@ -131,8 +144,10 @@ app.post('/send', uploadVideoFile, async (req, res) => {
             file:fs.createReadStream(`./uploads/${audioKey}.mp3`),
            model:"whisper-1"
         })
-    
-        main1(transcription.text)
+
+        
+        const newText = limitTextLength(transcription.text);
+        main1(newText)
     
     
     
@@ -143,7 +158,7 @@ audioFun()
     .catch(console.error);
 
 
-console.log(req.file.filename)
+// console.log(req.file.filename)
 
 
 
