@@ -2,7 +2,8 @@ import { LogedNav } from "./LogedNav"
 import { LogedHero } from "./LogedHero"
 import { ProfilePage } from "./ProfilePage"
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { YoutubeUpload } from "./YoutubeUpload";
 import axios from "axios";
 
@@ -11,8 +12,27 @@ import axios from "axios";
 
 export function MainLoged() {
 
+  const navigate = useNavigate();
 
+  let i = 0;
 
+  console.log(i)
+window.addEventListener('load', function() {
+  console.log(localStorage.getItem('TabOpen'))
+  if(i < 1){
+ if(localStorage.getItem('TabOpen') == 'true'){
+  navigate('/');
+ } else {
+  localStorage.setItem('TabOpen', 'true');
+ }
+ i++;
+ console.log(i)
+} 
+});
+
+window.addEventListener('beforeunload', function() {
+  localStorage.setItem('TabOpen', 'false');
+})
 
 
   const location = useLocation();
