@@ -7,7 +7,7 @@ export function Nav() {
 
 
     const handleScrollToPricing = () => {
-        const pricingSection = document.querySelector('.pricing');
+        const pricingSection = document.querySelector('.token');
         pricingSection.scrollIntoView({ behavior: 'smooth' });
     };
 

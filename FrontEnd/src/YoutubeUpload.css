@@ -3,9 +3,14 @@
     src: url(./assets/ProductSansRegular.ttf);
 }
 
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url(./assets/ProductSansBold.ttf);
+}
+
 .youtube-upload {
     font-family: 'Roboto-Regular';
-    height: 93.2vh;
+    min-height: 100vh;
     padding: 0 25%;
     background-color: #171717;
     color: white;
@@ -23,8 +28,8 @@
 
 .imageGen{
     border-radius: 10px;
-    width: 300px;
-    height: 170px;
+    max-width: 300px;
+    max-height: 170px;
 }
 
 .video-add-btn {
@@ -139,4 +144,80 @@ cursor: pointer;
 .buy-btn:hover{
 background-color: #e0e0e0;
 }
+
+.download-img-wrapper{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+}
+
+.download-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: #171717;
+    background-color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.download-svg{
+    width: 30px;
+    height: 30px;
+}
+
+
+
+.download-btn.disabled{
+    background-color: #b6b6b6;
+    cursor: default;
+}
+
+.copy-btn{
+    color:black;
+    background-color: white;
+    padding: 5px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.response-wrap{
+    display: flex;
+    gap: 10px;
+}
+
+.copy-svg{
+    fill: black;
+}
+
+.show-popUp{
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    background-color: rgb(255, 242, 55);
+    color: black;
+    padding: 6px 12px;
+    border-radius: 10px;
+    animation: .3s fadeIn ease-in-out;
+}
+
+.cost{
+
+    font-family: 'Roboto-Bold';
+    color: white;
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 

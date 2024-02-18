@@ -58,8 +58,10 @@ async function convertToJpg(imageUrl, key) {
 
   await sharp(response.data)
     .jpeg()
-    .toFile(`./uploads/${key}.jpg`);
+    .toFile(`E:/programiranje/repos/proj-01-rep/FrontEnd/public/thumbnails/${key}.jpg`);
 }
+
+
 
 
 const convertToAudio = (inputPath, outputPath) => {
@@ -106,6 +108,20 @@ function limitTextLength(text) {
   }
 }
 
+
+
+
+app.use('/convertUrl', async (req, res) => {
+  const key = generateRandomKey(7);
+  console.log(req.body.url)
+  try {
+    await convertToJpg(req.body.url, `${key}`);
+    res.json({key: key});
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while converting the URL to JPG.');
+  }
+});
 
 
 app.post('/send', uploadVideoFile, async (req, res) => {

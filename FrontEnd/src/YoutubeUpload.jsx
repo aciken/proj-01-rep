@@ -52,6 +52,10 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
     const [addedVideo, setAddedVideo] = useState("No Video Added Yet");
 
+    const [showPopup, setShowPopup] = useState(false);
+
+    const [downloadUrl, setDownloadUrl] = useState("");
+
   
     const isSendDisabled = addedVideo == "No Video Added Yet" || credits === 0;
     const sendClassName = isSendDisabled ? 'send-video-btn disabled' : 'send-video-btn';
@@ -62,7 +66,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
 console.log(url)
 
-    const isButtonDisabled = !response|| !description || url === '/src/assets/NoThumbnail.png' || credits === 0 || response === "loading..." || description === "loading...";
+    const isButtonDisabled = !response|| !description || url === '/src/assets/NoThumbnail.png' || credits === 0 || response === "loading..." || description === "loading..." || url === gif;
     const buttonClassName = isButtonDisabled ? 'upload-video-btn disabled' : 'upload-video-btn';
 
 
@@ -126,9 +130,40 @@ console.log(url)
         setUrl(image.data[0].url);
 
 
+
       }
 
 
+
+      useEffect(() => {
+        console.log(url)
+        if (url.includes("https://")) {
+          axios.post("http://localhost:3000/convertUrl", {
+              url: url
+          })
+          .then(res => {
+              console.log(`${res.data.key}.jpg`)
+            setDownloadUrl(`${res.data.key}.jpg`);
+          })
+          .catch((err) => {
+              console.log(err);
+          })
+        }
+      }, [url]);
+
+const downloadFile = (e) => {
+e.preventDefault();
+
+const url = `http://localhost:5173/thumbnails/${downloadUrl}`;
+const fileName = url.split('/').pop();
+const aTag = document.createElement('a');
+aTag.href = url;
+aTag.setAttribute('download', fileName);
+document.body.appendChild(aTag);
+aTag.click();
+aTag.remove();
+
+}
 
 
 
@@ -229,6 +264,9 @@ if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
 setResponse("loading...");
 setUrl(gif)
+setDownloadUrl("")
+
+console.log(url);
 
 const videoData = new FormData();
 
@@ -243,6 +281,9 @@ axios.post("http://localhost:3000/send", videoData)
 main1(res.data);
 main2(40, res.data);
 imageGen(res.data);
+console.log(url)
+
+
 updateCredits(100);
 
 
@@ -290,13 +331,21 @@ const buyProduct1 = async () =>{
     }
   }
 
+
+  function handlePopup() {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 1000);
+  }
+
     return(
         <div className="youtube-upload">
             <h1>Upload Your Video</h1>
 
                
 
-            <form onSubmit={handleSubmit} className='youtube-form' >
+            <form  className='youtube-form' >
 
             <div className="top-btns">
                 <label className='video-add-btn'>
@@ -307,25 +356,36 @@ const buyProduct1 = async () =>{
                         </div>
                     </label>
                 <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
+                <p><span className='cost'>Cost:</span> 100 Tokens</p>
             </div>
             <p>{addedVideo}</p>
-                <div>
+                <div className='response-wrap'>
                     <input onChange={handleResponseChange} className='title-input' type="text" name="title" placeholder="Title" value={response} />
+                    <a className='copy-btn' href="#" onClick={(e) => {e.preventDefault(); if(response != '' && response != 'loading...'){navigator.clipboard.writeText(response); handlePopup()}; }}><svg className='copy-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>content-copy</title><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg></a>
                 </div>
-                <div>
+                <div className='response-wrap'>
                     <textarea onChange={handleDescriptionChange} className='description-input'  name="description" id="" cols="30" rows="10" placeholder="Description" value={description}></textarea>
+                    <a className='copy-btn' href="#" onClick={(e) => {e.preventDefault(); if(description != '' && description != 'loading...'){navigator.clipboard.writeText(description); handlePopup()}}}><svg className='copy-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>content-copy</title><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg></a>
                 </div>
 
         
                 {/* <div>
                     <input onChange={handleThumbnailChange} accept='image/jpeg' type="file" name="thumbnail" placeholder='Add Thumbnail File' />
                 </div> */}
-            <img className="imageGen" src={url} alt="" />
-    <button type="submit" className={buttonClassName} disabled={isButtonDisabled}>Upload Video</button>
+            <div className="download-img-wrapper">
+                <img className="imageGen" src={url} alt="" />
+                {downloadUrl != "" ?(
+                    <button onClick={downloadFile} className='download-btn' disabled={false}>Download <svg className='download-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>download</title><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" /></svg></button>
+                ) : <button onClick={downloadFile} className='download-btn disabled' disabled={true}>Download <svg className='download-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>download-lock</title><path d="M5 20H14V18H5M19 9H15V3H9V9H5L12 16M22 16A1.08 1.08 0 0 1 23 17V21A1.08 1.08 0 0 1 22 22H17A1.08 1.08 0 0 1 16 21V17A1.08 1.08 0 0 1 17 16V14.5A2.5 2.5 0 0 1 22 14.5V16M21 16V14.5A1.5 1.5 0 0 0 18 14.5V16H21" /></svg></button>
+                }
+            </div>
+    {/* <button type="submit" className={buttonClassName} disabled={isButtonDisabled}>Upload Video</button> */}
             </form>
 
                 <button onClick={buyProduct1} className='buy-btn' >Purchase Credits</button>
-                <p>{credits}</p>
+                <p>{credits} Tokens</p>
+
+                {showPopup ? <p className='show-popUp'>Copied to Clipboard</p> : null}
             {/* {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>} */}
         </div>
     )

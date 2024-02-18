@@ -6,6 +6,7 @@ import { Tools } from "./Tools";
 import { Footer } from "./Footer";
 import { AiChat } from "./AiChat";
 import { Nav2 } from "./Nav2";
+import { Token } from "./Token";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -39,8 +40,8 @@ export function MainPage(){
             <Hero />
             {/* <Tools /> */}
             <Questions/>
-            <Pricing />
-            <Footer />
+            <Token />
+            {/* <Footer /> */}
         </div>
     )
 }
