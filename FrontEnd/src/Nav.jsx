@@ -6,22 +6,9 @@ import { useState } from 'react';
 export function Nav() {
 
 
-    const handleScrollToPricing = () => {
-        const pricingSection = document.querySelector('.token');
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
-    };
 
-    const handleScrollToTools = () => {
-        const toolsSection = document.querySelector('.tools');
-        toolsSection.scrollIntoView({ behavior: 'smooth' });
 
-    }
 
-    const handleScrollToQuestions = () => {
-        const questionsSection = document.querySelector('.questions');
-        questionsSection.scrollIntoView({ behavior: 'smooth' });
-
-    }
 
     return (
         <div className="whole-nav">

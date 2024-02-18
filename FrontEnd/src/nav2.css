@@ -60,3 +60,21 @@
     text-decoration: none;
 
 }
+
+.logOut-btn{
+    color: rgb(39, 39, 39);
+    background-color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+a.logOut-btn{
+    color: black;
+}
+
+
+
+a.logOut-btn:hover{
+text-decoration: none;
+}

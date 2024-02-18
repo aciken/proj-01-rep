@@ -1,9 +1,15 @@
 import './nav2.css';
 import logo from './assets/plaodylogowhite1.png';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 export function LogedNav({navRes, onChangeNavRes}){
+
+
+    const removeLocalStorage = () => {
+        localStorage.removeItem('id');
+    }
 
     const [navValue, setNavValue] = useState('Profile');
 
@@ -27,9 +33,10 @@ export function LogedNav({navRes, onChangeNavRes}){
                     <img src={logo} onClick={(e) => e.preventDefault()} alt="Logo" />
                 </a>
                 <div className="right-nav-part">
-                <div className="profile-btn" >
+                <Link onClick={removeLocalStorage} className="logOut-btn" to="/">Log Out</Link>
+                {/* <div className="profile-btn" >
                     <a href="#" onClick={changeNavRes}>{navValue}</a>
-                </div>
+                </div> */}
                     {/* <Link to="/">Logout</Link> */}
                 </div>
             </div>

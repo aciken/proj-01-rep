@@ -9,7 +9,7 @@
 }
 
 .token{
-    min-height: 50vh;
+    min-height: 40vh;
     background-color: #171717;
     color: white;
     font-family: 'Roboto-Regular';
@@ -17,11 +17,20 @@
     flex-direction: column;
     align-items: center;
     gap: 30px;
-}
-
-p{
     font-size: 1.6rem;
 }
+
+.text-place{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+
+}
+
+
 
 .buy-btn{
     border: none;
@@ -37,6 +46,8 @@ p{
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    font-size: 2rem;
+    padding: 10px;
 }
 
 .plus-balance{
@@ -44,9 +55,9 @@ p{
     animation: plus-balance 1s ;
 }
 
-.cost{
+p.cost{
     font-size: 1rem;
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto-Bold';
 
 }
 
@@ -58,4 +69,12 @@ p{
         transform: translateY(-10px);
     }
 
+}
+
+
+@media screen and (max-width: 768px){
+    .token{
+        min-height: 65vh;
+    }
+    
 }

@@ -26,9 +26,11 @@ setTimeout(() => {
 
     return (
         <div className='token'>
-            <h1>How Pricing Works?</h1>
-            <p>Our pricing is simple and transparent. You buy tokens that you use to generate Title, Description and Thumbnail.</p>
-            <p className='cost'>One call costs 100 tokens.</p>
+            <div className="text-place">
+                <h1>How Pricing Works?</h1>
+                <p>Our pricing is simple and transparent. You buy tokens that you use to generate Title, Description and Thumbnail.</p>
+                <p className='cost'>One call costs 100 tokens.</p>
+            </div>
 
             <button className='buy-btn' onClick={addBalance}>Purchase Tokens</button>
             <div className="balance-place">

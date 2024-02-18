@@ -14,6 +14,7 @@ export function MainLoged() {
 
 
 
+
   const location = useLocation();
   const initialID = localStorage.getItem('id') || location.state.id;
   console.log(initialID)
