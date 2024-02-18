@@ -8,6 +8,9 @@ import noThumbnail from './assets/noThumbnail.png';
 import gaming from './assets/gaming.png'
 import fasting from './assets/fasting.png'
 import testosteron from './assets/testosteron.png'
+import gif from './assets/Infinity-1.4s-184px (2).gif'
+
+
 
 export function Hero() {
 
@@ -33,10 +36,24 @@ const changeVideo = () => {
 
 if(randomNumber !== 4) setRandomNumber(randomNumber + 1);
 else setRandomNumber(0);
-    setVideoName(videoArr[randomNumber][0]);
-    setVideoTitle(videoArr[randomNumber][1]);
+
+setVideoTitle("Loading...");
+setVideoDescription("Loading...");
+setImageSrc(gif);
+
+setTimeout(() => {
+setVideoTitle(videoArr[randomNumber][1]);
+}, 2000)
+
+setTimeout(() => {
     setVideoDescription(videoArr[randomNumber][2]);
-    setImageSrc(videoArr[randomNumber][3]);
+},4000);
+
+setTimeout(() => {
+ setImageSrc(videoArr[randomNumber][3]);
+}, 6000)
+
+    setVideoName(videoArr[randomNumber][0]);
 }
 
 const uploadVideo = () => {

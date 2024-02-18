@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Font-Regular';
+    src: url('./assets/ProductSansRegular.ttf');
+}
+
+.success{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Font-Regular';
+    font-size: 3rem;
+    background-color:rgb(39, 39, 39);
+    color:slategray;
+}

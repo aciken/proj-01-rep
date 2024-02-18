@@ -197,6 +197,7 @@ const imageKey = generateRandomKey(7)
     open(oAuth.generateAuthUrl({
       acces_type: 'offline',
       scope: 'https://www.googleapis.com/auth/youtube.upload',
+      prompt: 'consent',
       state: JSON.stringify({
         filename,
         title,

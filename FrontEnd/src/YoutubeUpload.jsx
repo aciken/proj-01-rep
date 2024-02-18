@@ -5,6 +5,7 @@ import axios from "axios";
 import OpenAI from "openai";
 import PropTypes from 'prop-types';
 import noThumbnail from './assets/noThumbnail.png';
+import gif from './assets/Infinity-1.4s-184px (2).gif'
 
 
 
@@ -227,6 +228,7 @@ e.preventDefault();
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
 setResponse("loading...");
+setUrl(gif)
 
 const videoData = new FormData();
 
