@@ -28,8 +28,8 @@ export function Nav2() {
                 <img src={logo} alt="plaody logo" className="nav-logo" />
             </div>
             <div className="nav-links">
-            <a href="#" onClick={handleScrollToQuestions} className='demo-nav'>FAQ</a>
-                <a href="#" onClick={handleScrollToPricing}>Pricing</a>
+            {/* <a href="#" onClick={handleScrollToQuestions} className='demo-nav'>FAQ</a>
+                <a href="#" onClick={handleScrollToPricing}>Pricing</a> */}
                 <Link to="/Login">Login</Link>
                 <Link to="/signup" className="sign-up-btn">Signup</Link>
             </div>

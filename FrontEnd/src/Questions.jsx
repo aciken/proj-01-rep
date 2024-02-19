@@ -80,37 +80,30 @@ return(
         
         <ul className='question-list'>
             <li>
-                <a href="#" onClick={handleQuestionClick} >What do I get exactly<span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>1/ The NextJS starter with all the boilerplate code you need to run an online business: a payment system, a database, login, a blog, UI components, and much more.
-The repo is available in:
-- Javascript and Typescript
-- /app router and /pages router.
-
-2/ The documentation helps you set up your app from scratch, write copy that sells, and ship fast.
-
-3/ Access to our Discord with makers who build fast to stay accountable!</p>
+                <a href="#" onClick={handleQuestionClick} >What exactly Ploady does?<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>Ploady is a tool that scans content of your video and than generates best title, description and thumbnail for that video.</p>
             </li>
             <li>
-                <a href="#" onClick={handleQuestionClick} >Question 2 <span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
+                <a href="#" onClick={handleQuestionClick} >What languages are supported?<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>Only supported output language is english. If video you imported is in any other language you will get right output but it will be translated to engilsh. </p>
             </li>
             <li>
-                <a href="#" onClick={handleQuestionClick} >Question 3 <span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
+                <a href="#" onClick={handleQuestionClick} >What is the maximum lenght of imported video?<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>Imported videos should not be longer than 25 minutes.</p>
             </li>
             <li>
-                <a href="#" onClick={handleQuestionClick} >Question 4 <span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
+                <a href="#" onClick={handleQuestionClick} >Is Auto-upload aveilable?<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>It's still in development.</p>
             </li>
             <li>
-                <a href="#" onClick={handleQuestionClick} >Question 5 <span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
+                <a href="#" onClick={handleQuestionClick} >How long does it take to generate response?<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>From 10 to 60 secounds.</p>
             </li>
             <li>
-                <a href="#" onClick={handleQuestionClick} >Question 6 <span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
+                <a href="#" onClick={handleQuestionClick} >Is there a supscription plan.<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>No.</p>
             </li>
-            <li>
+            {/* <li>
                 <a href="#" onClick={handleQuestionClick} >Question 7 <span className='sign'>+</span></a>
                 <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
             </li>
@@ -125,7 +118,7 @@ The repo is available in:
             <li>
                 <a href="#" onClick={handleQuestionClick} >Question 10 <span className='sign'>+</span></a>
                 <p onClick={closingQuestion} className='under-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa totam odio obcaecati dolor molestiae amet voluptas fuga enim sit. Alias laudantium obcaecati rem quas! Voluptate mollitia repellat harum voluptas expedita.</p>
-            </li>
+            </li> */}
         </ul>
 
     </div>

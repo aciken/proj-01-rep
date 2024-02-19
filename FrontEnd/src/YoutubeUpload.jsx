@@ -9,9 +9,12 @@ import gif from './assets/Infinity-1.4s-184px (2).gif'
 
 
 
+
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
 export function YoutubeUpload({id, credits, setCredits}) {
+
+    localStorage.setItem('credits', credits);
 
     const history = useNavigate()
 
@@ -40,6 +43,8 @@ export function YoutubeUpload({id, credits, setCredits}) {
                 id: id,
                 credits: credits - num,
             });
+            localStorage.setItem('credits', credits - num);
+            console.log(localStorage.getItem('credits'));
             console.log(response.data)
         }catch(error){
             console.log(error);
@@ -256,9 +261,21 @@ const handleSubmit = (e) => {
     })
 }
 
+
+setInterval(function() {
+    var storedCredits = Number(localStorage.getItem('credits'));
+    if(storedCredits < credits){
+      setCredits(storedCredits);
+    }
+  }, 5000);
+
 const handleSend = (e) => {
 e.preventDefault();
 
+console.log(`${localStorage.getItem('credits')} CRedits`);
+if(localStorage.getItem('credits') < credits){
+    setCredits(localStorage.getItem('credits'));
+}
 
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
