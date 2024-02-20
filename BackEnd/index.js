@@ -46,6 +46,11 @@ function generateRandomKey(length) {
 }
 
 
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 
 
 
@@ -345,6 +350,10 @@ const UserSchema = new mongoose.Schema({
     credits:{
       type: Number,
       default: 0
+    },
+    verified:{
+      type: Number,
+      default: 0
     }
     });
 
@@ -393,12 +402,15 @@ app.get("/signup", cors(), (req, res) =>{
 app.post("/signup",async(req,res) => {
   const {firstName, lastName, email, password} = req.body;
 
+const verification = getRandomNumber(1000,9999);
+console.log(verification)
+
   const coll = new collection({
     firstName: firstName,
     lastName: lastName,
     email: email,
     password: password,
-    tier: "3"
+    verified: verification
   });
 
   try {
@@ -416,6 +428,24 @@ app.post("/signup",async(req,res) => {
     console.error(e);
   }
 });
+
+
+app.put('/verified', async (req, res) => {
+ const {email} = req.body;
+
+ try {
+   const user = await collection.findOne({ email: email });
+
+   if(user){
+      user.verified = 1;
+      await user.save();
+      res.json({message: 'User verified successfully!'});
+   }
+ } catch (error) {
+    console.error(error);
+    res.status(500).json({message: 'Internal server error'});
+  }
+})
 
 app.put('/updateUsage', async (req, res) => {
   const { id, usage } = req.body;

@@ -13,8 +13,32 @@ export function Signup(){
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const [wrongInput, setWrongInput] = useState('');  
+    const [wrongInput, setWrongInput] = useState(''); 
+    const [number, setNumber] = useState('');
+    const [wrong, setWrong] = useState('');
+    const [verificationCode, setVerificationCode] = useState(0);
 
+    
+    const [verified, setVerified] = useState(false);
+
+
+    const handleChange = (event) => {
+        setNumber(event.target.value);
+      };
+
+    const sendVerification = async function(e){
+        if(verificationCode == number){
+            
+                  history("/logedPage",{state: {id: email}});
+                  await axios.put("http://localhost:3000/verified", {
+                    email 
+                })
+                .then(console.log('verified user'))
+        } else {
+            e.preventDefault()
+            setWrong("Wrong verification code")
+        }
+    }
 
     async function submit(e){
       e.preventDefault();
@@ -32,11 +56,16 @@ export function Signup(){
           .then(res => {
             console.log(res.data)
               if(res.data !== "exist"){
+                if(res.data.verified > 1){
+                    setVerified(true)
+                    setVerificationCode(res.data.verified)
 
-                  
+                    
+                }
+  
 
 
-                  history("/logedPage",{state: {id: email}})
+
               }
               else if(res.data === "exist"){
                   setWrongInput("Email already exist")
@@ -60,6 +89,7 @@ export function Signup(){
         <div>
             <OtherNav/>
             <div className="signup">
+                {!verified ? (
                         <div className="signForm-border">
                         <p>Create your account</p>
                             <form className="signup-form" onSubmit={submit}>
@@ -72,6 +102,15 @@ export function Signup(){
                                 <p className='login-link'>Already have an account? <Link to="/login">Log In</Link></p>
                             </form>
                         </div>
+                ) : (
+                    <div>
+                        <form  onSubmit={sendVerification}>
+                            <input type="numbers" name="" id="" required onChange={handleChange}/>
+                            <button type='submit'>Submit</button>
+                            <p>{wrong}</p>
+                        </form>
+                    </div>
+                )}
              </div>
         </div>
 

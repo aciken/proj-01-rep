@@ -15,6 +15,15 @@ export function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [wrongInput, setWrongInput] = useState('');
+    const [number, setNumber] = useState('');
+    const [verificationCode, setVerificationCode] = useState(0);
+    const [notverified, setnotVerified] = useState(false);
+    const [wrong, setWrong] = useState('');
+
+
+    const handleChange = (event) => {
+        setNumber(event.target.value);
+      };
 
     async function submit(e){
         e.preventDefault();
@@ -31,12 +40,17 @@ export function Login(){
             })
             .then(res => {
                 if(res.data !== "not exist"){
+                    console.log(res.data)
+
+                    if(res.data.verified !== 1 ){
+                        setnotVerified(true)
+                        setVerificationCode(res.data.verified)
+                    } else {
+                        history("/logedPage",{state: {id: email}})
+                    }
+
  
 
-                    
-
- 
-                    history("/logedPage",{state: {id: email}})
                 }
                 else if(res.data === "not exist"){
                     setWrongInput("Wrong Email or Password")
@@ -56,10 +70,25 @@ export function Login(){
 
     }
 
+
+    const sendVerification = async function(e){
+        if(verificationCode == number){
+                  history("/logedPage",{state: {id: email}});
+                  await axios.put("http://localhost:3000/verified", {
+                    email 
+                })
+                .then(console.log('verified user'))
+        } else {
+            e.preventDefault()
+            setWrong("Wrong verification code")
+        }
+    }
+
     return(
         <div>
             <OtherNav/>
             <div className="login">
+                {!notverified ? (
                         <div className="form-border">
                         <p>Log in to your account</p>
                             <form className="login-form">
@@ -72,7 +101,17 @@ export function Login(){
 
                             <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
 
-                        </div>
+                        </div> 
+                ) : (
+                    <div>
+                        <form  onSubmit={sendVerification}>
+                            <input type="numbers" name="" id="" required onChange={handleChange}/>
+                            <button type='submit'>Submit</button>
+                            <p>{wrong}</p>
+                        </form>
+                    </div>
+                )
+}
              </div>
         </div>
 
