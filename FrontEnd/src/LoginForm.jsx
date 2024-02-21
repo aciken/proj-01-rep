@@ -3,6 +3,9 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import { OtherNav} from './OtherNav';
+import {Icon} from 'react-icons-kit';
+import {eyeOff} from 'react-icons-kit/feather/eyeOff';
+import {eye} from 'react-icons-kit/feather/eye'
 
 export function Login(){
 
@@ -20,6 +23,18 @@ export function Login(){
     const [notverified, setnotVerified] = useState(false);
     const [wrong, setWrong] = useState('');
 
+    const [type, setType] = useState('password');
+const [icon, setIcon] = useState(eyeOff);
+
+const handleToggle = () => {
+    if (type==='password'){
+       setIcon(eye);
+       setType('text')
+    } else {
+       setIcon(eyeOff)
+       setType('password')
+    }
+ }
 
     const handleChange = (event) => {
         setNumber(event.target.value);
@@ -93,9 +108,21 @@ export function Login(){
                         <p>Log in to your account</p>
                             <form className="login-form">
                                 <input className="login-email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}} required/>
-                                <input type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}} required/>
+                                <div className='password-combined'>
+                <input className="login-password"
+                  type={type}
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+             />
+             <span className='toggle-btn'  onClick={handleToggle}>
+                  <Icon class="absolute mr-10" icon={icon} size={25}/>
+              </span>
+            </div>
                                 <p className='wrong-input'>{wrongInput}</p>
-                                <a href='#' className="forgot">Forgot Password?</a>
+                                {/* <a href='#' className="forgot">Forgot Password?</a> */}
                                 <button className='sign-btn' onClick={submit}>Sign In</button>
                             </form>
 
@@ -104,10 +131,11 @@ export function Login(){
                         </div> 
                 ) : (
                     <div>
-                        <form  onSubmit={sendVerification}>
-                            <input type="numbers" name="" id="" required onChange={handleChange}/>
-                            <button type='submit'>Submit</button>
-                            <p>{wrong}</p>
+                        <form className='verification-form'  onSubmit={sendVerification}>
+                            <p>Check inbox for verification code</p>
+                            <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number} placeholder='Verification Code' className='verification-input'/>
+                            <button  className='submit-verification'>Submit</button>
+                            <p className='wrong-verification'>{wrong}</p>
                         </form>
                     </div>
                 )

@@ -329,10 +329,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  lastName:{
-    type: String,
-    required: true,
-  },
     email:{
         type: String,
         required: true,
@@ -421,14 +417,13 @@ app.get("/signup", cors(), (req, res) =>{
 
 
 app.post("/signup",async(req,res) => {
-  const {firstName, lastName, email, password} = req.body;
+  const {firstName, email, password} = req.body;
 
 const verification = getRandomNumber(1000,9999);
 console.log(verification)
 
   const coll = new collection({
     firstName: firstName,
-    lastName: lastName,
     email: email,
     password: password,
     verified: verification

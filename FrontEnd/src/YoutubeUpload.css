@@ -220,4 +220,17 @@ background-color: #e0e0e0;
     }
 }
 
+@media screen and (max-width: 768px){
+    .youtube-upload{
+        padding: 0 10%;
+    }
+    .title-input{
+        width: 100%;
+    }
+    .description-input{
+        width: 100%;
+    }
+    
+}
+
 

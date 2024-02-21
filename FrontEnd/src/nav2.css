@@ -78,3 +78,9 @@ a.logOut-btn{
 a.logOut-btn:hover{
 text-decoration: none;
 }
+
+@media screen and (max-width: 768px){
+
+
+    
+}

@@ -32,6 +32,7 @@
 }
 
 .signup-form input{
+    width: 100%;
     padding: 6px 12px;
     background: rgb(31, 32, 35);
     border: 1px solid rgb(60, 63, 68);
@@ -54,4 +55,46 @@
 .login-link a{
     color: rgb(255, 255, 255);
     text-decoration: underline;
+}
+.verification-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}
+
+.verification-input{
+    padding: 6px 12px;
+    background: rgb(31, 32, 35);
+    border: 1px solid rgb(60, 63, 68);
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgb(247, 248, 248);
+    height: 46px;
+    width: 150px;
+    appearance: none;
+    transition: border 0.15s ease 0s;
+}
+
+.submit-verification{
+    cursor: pointer;
+    padding: 6px 12px;
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.wrong-verification{
+    color: rgb(233, 73, 73);
+    font-size: 1rem;
+}
+
+.password-error{
+    color: rgb(233, 73, 73);
+    font-size: 1rem;
 }
