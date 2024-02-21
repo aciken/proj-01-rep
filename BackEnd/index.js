@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const sgMail = require('@sendgrid/mail');
 const {lemonSqueeztApiInstance} = require("./utils/axios.js");
 
 const crypto = require('crypto');
@@ -364,6 +365,26 @@ const UserSchema = new mongoose.Schema({
 
 
 
+sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+
+console.log(sgMail)
+
+app.post('/sendMail', async (req, res) => {
+  const {email, code} = req.body;
+  try {
+    const msg = {
+      to: email,
+      from: 'adrianmarton2006@gmail.com',
+      subject: 'Verification code',
+      text: `Your verification code is: ${code}`,
+      html: `<strong>Your verification code is: ${code}</strong>`,
+  };
+  await sgMail.send(msg);
+  } catch (e) {
+    console.error(e);
+  }
+
+})
 
 
 

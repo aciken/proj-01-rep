@@ -59,7 +59,17 @@ export function Signup(){
                 if(res.data.verified > 1){
                     setVerified(true)
                     setVerificationCode(res.data.verified)
+                    const code = res.data.verified
+                    console.log(code)
 
+                    axios.post("http://localhost:3000/sendMail", {
+                        email,code
+                    
+                })
+                .then(console.log('mail sent'))
+                .catch(e => {
+                    console.log(e);
+                })
                     
                 }
   
