@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import antarcticPNG from './assets/antarctic.png'
 import monkModePNG from './assets/MonkMode.pnh.png'
-import noThumbnail from './assets/noThumbnail.png';
+import noThumbnail from './assets/NoThumbnail.png';
 import gaming from './assets/gaming.png'
 import fasting from './assets/fasting.png'
 import testosteron from './assets/testosteron.png'
