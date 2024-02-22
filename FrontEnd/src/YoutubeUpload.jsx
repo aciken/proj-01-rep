@@ -159,7 +159,7 @@ console.log(url)
 const downloadFile = (e) => {
 e.preventDefault();
 
-const url = `www.ploady.com/thumbnails/${downloadUrl}`;
+const url = `https://www.ploady.com/thumbnails/${downloadUrl}`;
 const fileName = url.split('/').pop();
 const aTag = document.createElement('a');
 aTag.href = url;
