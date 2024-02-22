@@ -39,7 +39,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
         setCredits(credits - num);
         try{
-            const response = await axios.put('http://localhost:3000/updateCredits', {
+            const response = await axios.put('https://proj-01-rep-backend.vercel.app/updateCredits', {
                 id: id,
                 credits: credits - num,
             });
@@ -143,7 +143,7 @@ console.log(url)
       useEffect(() => {
         console.log(url)
         if (url.includes("https://")) {
-          axios.post("http://localhost:3000/convertUrl", {
+          axios.post("https://proj-01-rep-backend.vercel.app/convertUrl", {
               url: url
           })
           .then(res => {
@@ -159,7 +159,7 @@ console.log(url)
 const downloadFile = (e) => {
 e.preventDefault();
 
-const url = `http://localhost:5173/thumbnails/${downloadUrl}`;
+const url = `www.ploady.com/thumbnails/${downloadUrl}`;
 const fileName = url.split('/').pop();
 const aTag = document.createElement('a');
 aTag.href = url;
@@ -234,7 +234,7 @@ const handleSubmit = (e) => {
     console.log(`${videoData}`)
 
 
-    axios.post("http://localhost:3000/upload", videoData)
+    axios.post("https://proj-01-rep-backend.vercel.app/upload", videoData)
     .then(res => { 
         console.log('uploaddeDDD')
         updateCredits(100);
@@ -289,7 +289,7 @@ const videoData = new FormData();
 
 videoData.append("videoFile", form.file);
 
-axios.post("http://localhost:3000/send", videoData)
+axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
     .then((res) => { 
         console.log(res.data);
         
@@ -334,7 +334,7 @@ updateCredits(100);
 
 const buyProduct1 = async () =>{
     try{
-        const response = await axios.post('http://localhost:3000/api/purchaseProduct', {
+        const response = await axios.post('https://proj-01-rep-backend.vercel.app/api/purchaseProduct', {
             productId: "249354",
             id: id
         });

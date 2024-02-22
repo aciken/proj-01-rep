@@ -52,7 +52,7 @@ window.addEventListener('beforeunload', function() {
 async function creditSend() {
 
   try {
-    await axios.post('http://localhost:3000/creditSend', {
+    await axios.post('https://proj-01-rep-backend.vercel.app/creditSend', {
     id
   })
   .then(res => {

@@ -318,8 +318,7 @@ const oAuth = youtube.authenticate({
 
 
 
-
-mongoose.connect("mongodb://localhost:27017/proj-01")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("Connected to MongoDB"))
 .catch(err => console.log(err));
 
@@ -363,7 +362,7 @@ const UserSchema = new mongoose.Schema({
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-console.log(sgMail)
+
 
 app.post('/sendMail', async (req, res) => {
   const {email, code} = req.body;
