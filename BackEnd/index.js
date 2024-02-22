@@ -25,9 +25,12 @@ const dotenv = require('dotenv').config();
 const OpenAI = require('openai');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({
-  origin: 'https://www.ploady.com'
-}));
+
+app.use((req, res, next) => {
+  console.log('Incoming request:', req.method, req.path, 'from', req.headers.origin);
+  next();
+});
+
 const axios = require('axios'); 
 const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
