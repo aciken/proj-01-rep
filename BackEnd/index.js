@@ -392,7 +392,7 @@ app.post('/sendMail', async (req, res) => {
 
 
 app.get("/login", cors(), (req, res) =>{
-
+  res.send("Hello")
 })
 
 
