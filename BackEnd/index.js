@@ -91,7 +91,7 @@ const convertToAudio = (inputPath, outputPath) => {
 
 
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage({
   destination: './uploads',
   filename(req, file, cb) {
     const newFilename = `${uuid()}-${file.originalname}`
