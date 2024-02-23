@@ -538,31 +538,31 @@ app.post('/creditSend', async (req, res) => {
 //   }
 // });
 
-const WebSocket = require('ws');
+// const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8080 });
+// const wss = new WebSocket.Server({ port: 8080 });
 
-let clients = [];
+// let clients = [];
 
-wss.on('connection', (ws) => {
-  clients.push(ws);
+// wss.on('connection', (ws) => {
+//   clients.push(ws);
 
-  ws.on('close', () => {
-    clients = clients.filter(client => client !== ws);
-  });
-});
+//   ws.on('close', () => {
+//     clients = clients.filter(client => client !== ws);
+//   });
+// });
 
-cron.schedule('00 00 * * *', async () => {
-  try {
-    // Assuming `collection` is your Mongoose model
-    await collection.updateMany({}, { usage: 0 });
-    console.log('Usage reset successfully!');
+// cron.schedule('00 00 * * *', async () => {
+//   try {
+//     // Assuming `collection` is your Mongoose model
+//     await collection.updateMany({}, { usage: 0 });
+//     console.log('Usage reset successfully!');
 
-    clients.forEach(client => client.send('usage reset'));
-  } catch (error) {
-    console.error('Failed to reset usage:', error);
-  }
-});
+//     clients.forEach(client => client.send('usage reset'));
+//   } catch (error) {
+//     console.error('Failed to reset usage:', error);
+//   }
+// });
 
 
 
