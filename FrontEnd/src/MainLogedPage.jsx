@@ -14,25 +14,9 @@ export function MainLoged() {
 
   const navigate = useNavigate();
 
-  let i = 0;
 
-  console.log(i)
-window.addEventListener('load', function() {
-  console.log(localStorage.getItem('TabOpen'))
-  if(i < 1){
- if(localStorage.getItem('TabOpen') == 'true'){
-  navigate('/');
- } else {
-  localStorage.setItem('TabOpen', 'true');
- }
- i++;
- console.log(i)
-} 
-});
 
-window.addEventListener('beforeunload', function() {
-  localStorage.setItem('TabOpen', 'false');
-})
+
 
 
   const location = useLocation();
