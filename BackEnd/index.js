@@ -133,6 +133,9 @@ app.use('/convertUrl', async (req, res) => {
   }
 });
 
+app.get('/send', (req, res) => {
+  res.send('send message');
+})
 
 app.post('/send', uploadVideoFile, async (req, res) => {
 
