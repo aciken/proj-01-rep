@@ -26,10 +26,9 @@ const OpenAI = require('openai');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use((req, res, next) => {
-  console.log('Incoming request:', req.method, req.path, 'from', req.headers.origin);
-  next();
-});
+app.use(cors({
+  origin: 'https://www.ploady.com'
+}));
 
 const axios = require('axios'); 
 const sharp = require('sharp');
