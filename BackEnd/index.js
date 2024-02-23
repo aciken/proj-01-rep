@@ -20,7 +20,7 @@ const fs = require('fs');
 const path = require('path');
 const FormData = require('form-data');
 const multer = require('multer');
-const credentials = require('./credentials.json');
+// const credentials = require('./credentials.json');
 const dotenv = require('dotenv').config();
 const OpenAI = require('openai');
 app.use(express.json());
@@ -263,61 +263,61 @@ const imageKey = generateRandomKey(7)
 // })
 
 
-app.get('/oauth2callback', (req, res) => {
-  res.redirect('http://localhost:5173/success');
-  const {filename, title, description, thumbnail,imageKey} = JSON.parse(req.query.state);
+// app.get('/oauth2callback', (req, res) => {
+//   res.redirect('http://localhost:5173/success');
+//   const {filename, title, description, thumbnail,imageKey} = JSON.parse(req.query.state);
 
-  oAuth.getToken(req.query.code, (err, tokens) => {
-    if(err){
-      console.log(err);
-      return;
-    }
+//   oAuth.getToken(req.query.code, (err, tokens) => {
+//     if(err){
+//       console.log(err);
+//       return;
+//     }
 
-    oAuth.setCredentials(tokens);
+//     oAuth.setCredentials(tokens);
 
-    youtube.videos.insert({
-      resource: {
-        snippet: {title, description},
-        status: {privacyStatus: 'private'}
-      },
-      part: 'snippet,status',
-      media: {
-        body: fs.createReadStream(`./uploads/${filename}`)
-      },
-    }, (err, data) => {
-      if(err) {
-        console.log(err);
-        return;
-      }
+//     youtube.videos.insert({
+//       resource: {
+//         snippet: {title, description},
+//         status: {privacyStatus: 'private'}
+//       },
+//       part: 'snippet,status',
+//       media: {
+//         body: fs.createReadStream(`./uploads/${filename}`)
+//       },
+//     }, (err, data) => {
+//       if(err) {
+//         console.log(err);
+//         return;
+//       }
 
-      const videoId = data.data.id;
+//       const videoId = data.data.id;
 
-      youtube.thumbnails.set({
-        videoId: videoId,
-        media: {
-          mimeType: 'image/png',
-          body: fs.createReadStream(`./uploads/${imageKey}.jpg`)
-        }
-      }, (err, response) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
+//       youtube.thumbnails.set({
+//         videoId: videoId,
+//         media: {
+//           mimeType: 'image/png',
+//           body: fs.createReadStream(`./uploads/${imageKey}.jpg`)
+//         }
+//       }, (err, response) => {
+//         if (err) {
+//           console.log(err);
+//           return;
+//         }
 
-        console.log('Thumbnail uploaded.');
-        console.log('Done');
-        // process.exit();
-      });
-    });
-  });
-});
+//         console.log('Thumbnail uploaded.');
+//         console.log('Done');
+//         // process.exit();
+//       });
+//     });
+//   });
+// });
 
-const oAuth = youtube.authenticate({
-  type: 'oauth',
-  client_id: credentials.web.client_id,
-  client_secret: credentials.web.client_secret,
-  redirect_url: credentials.web.redirect_uris[0]
-});
+// const oAuth = youtube.authenticate({
+//   type: 'oauth',
+//   client_id: credentials.web.client_id,
+//   client_secret: credentials.web.client_secret,
+//   redirect_url: credentials.web.redirect_uris[0]
+// });
 
 
 
