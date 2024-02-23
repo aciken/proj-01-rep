@@ -12,7 +12,7 @@ import axios from "axios";
 
 export function MainLoged() {
 
-  const navigate = useNavigate();
+
 
 
 
@@ -56,41 +56,6 @@ useEffect(() => {
 
 
 
-    // useEffect(() => {
-    //     const ws = new WebSocket('ws://localhost:8080');
-      
-    //     ws.onopen = () => {
-    //       console.log('WebSocket connection opened');
-    //     };
-      
-    //     ws.onerror = (error) => {
-    //       console.error('WebSocket error:', error);
-    //     };
-      
-    //     ws.onclose = (event) => {
-    //       console.log('WebSocket connection closed:', event.code, event.reason);
-    //     };
-      
-    //     ws.onmessage = (event) => {
-    //       console.log('Received message:', event.data);
-    //       if (event.data === 'usage reset') {
-    //         setUsageLocal(0);
-    //         setUsage(0);
-    //         localStorage.setItem('usage', usage);
-    //         console.log(usageLocal)
-    //         console.log('Usage was reset!');
-    //         setUsageLimit(uses)
-    //       }
-      
-    //     };
-      
-    //     return () => {
-    //       if (ws.readyState === WebSocket.OPEN) {
-    //         ws.close();
-    //       }
-    //     };
-    //   }, []);
-
 
 
 
@@ -106,14 +71,7 @@ useEffect(() => {
     return (
         <div className="main-page">
             <LogedNav navRes={navRes} onChangeNavRes={changeNavRes}/>
-            {navRes === "main-page" ? (
             <YoutubeUpload id={id} credits={credits} setCredits={setCredits} />
-
-            ) : (
-          //  <LogedHero id={id} tier={tier} usageLocal={usageLocal} setUsageLocal={setUsageLocal} uses={uses} usageLimit={usageLimit} setUsageLimit={setUsageLimit} usage={usage}  />
-            <ProfilePage/>
-
-            )}
         </div>
     );
 }

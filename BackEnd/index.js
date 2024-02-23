@@ -119,7 +119,9 @@ function limitTextLength(text) {
 }
 
 
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/path-to-your/index.html'));
+});
 
 app.use('/convertUrl', async (req, res) => {
   const key = generateRandomKey(7);

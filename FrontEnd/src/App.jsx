@@ -27,9 +27,6 @@ export function App() {
 <Router>
 <Routes>
    <Route exact path="/" element={<MainPage/>} />
-   {/* <Route exact path="/">
-    {localStorage.getItem('id') ? <Redirect to="/logedPage" /> : <MainPage />}
-  </Route> */}
    <Route exact path="/login" element={<Login />} />
    <Route exact path="/signup" element={<Signup/>} />
    <Route exact path="/logedPage" element={<MainLoged/>} />
