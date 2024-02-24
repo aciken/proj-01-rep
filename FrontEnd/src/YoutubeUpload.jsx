@@ -461,7 +461,7 @@ const buyProduct1 = async () =>{
             <p>{addedVideo}</p>
                 <div className='response-wrap'>
                     <input onChange={handleResponseChange} className='title-input' type="text" name="title" placeholder="Title" value={response} />
-                    <a className='copy-btn' href="#" onClick={(e) => {e.preventDefault(); if(response != '' && response != 'loading...'){navigator.clipboard.writeText(response); handlePopup()}; }}><svg className='copy-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>content-copy</title><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg></a>
+                    <a className='copy-btn' href="#" onClick={(e) => {e.preventDefault(); if(response != '' && response != 'loading...'){navigator.clipboard.writeText(response); handlePopup()} }}><svg className='copy-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>content-copy</title><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg></a>
                 </div>
                 <div className='response-wrap'>
                     <textarea onChange={handleDescriptionChange} className='description-input'  name="description" id="" cols="30" rows="10" placeholder="Description" value={description}></textarea>
