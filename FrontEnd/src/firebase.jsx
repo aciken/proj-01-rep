@@ -12,7 +12,8 @@ const firebaseConfig = {
   storageBucket: "ploady-cafbb.appspot.com",
   messagingSenderId: "261842824705",
   appId: "1:261842824705:web:04f4db4ef206c951119a00",
-  measurementId: "G-960WM6HT8B"
+  measurementId: "G-960WM6HT8B",
+
 };
 
 // Initialize Firebase

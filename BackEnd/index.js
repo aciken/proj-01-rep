@@ -575,7 +575,14 @@ app.post('/creditSend', async (req, res) => {
 
 
 
-
+app.post('/api/sendVideoToStorage', async (req, res) => {
+  try{
+    console.log(req.body)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 app.post('/api/purchaseProduct', async (req, res) => {
   try {
