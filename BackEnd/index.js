@@ -576,9 +576,10 @@ app.post('/creditSend', async (req, res) => {
 
 
 app.post('/api/sendVideoToStorage', async (req, res) => {
-  const {inputs } = req.body;
-  try{
-    console.log(inputs)
+  try {
+    const inputs = req.body;
+    console.log(inputs);
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
