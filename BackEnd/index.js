@@ -579,20 +579,21 @@ app.post('/api/sendVideoToStorage', async (req, res) => {
   try {
     const inputs = req.body;
 
-    redirectUrl = 'https://www.youtube.com/watch?v=lCnyRHJ2Cws'
-//     const audioFun=async()=>{
 
-//       const transcription=await openai.audio.transcriptions.create({
-//           file:fs.createReadStream(inputs.videoUrl),
-//          model:"whisper-1"
-//       })
+    const audioFun=async()=>{
+      console.log(inputs.videoUrl)
+
+      const transcription=await openai.audio.transcriptions.create({
+          file:fs.createReadStream(inputs.videoUrl),
+         model:"whisper-1"
+      })
 
       
-//       const newText = limitTextLength(transcription.text);
-//       main1(newText)
-//       console.log(newText) 
-//   }
-// audioFun()
+      const newText = limitTextLength(transcription.text);
+      main1(newText)
+      console.log(newText) 
+  }
+audioFun()
 
   } catch (error) {
     console.error(error);
