@@ -6,6 +6,10 @@ import OpenAI from "openai";
 import PropTypes from 'prop-types';
 import noThumbnail from './assets/NoThumbnail.png';
 import gif from './assets/Infinity-1.4s-184px (2).gif'
+import app from './firebase';
+import { getStorage, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import { ref } from "firebase/storage";
+import { getDownloadURL } from "firebase/storage";
 
 
 
@@ -50,7 +54,10 @@ export function YoutubeUpload({id, credits, setCredits}) {
             console.log(error);
         }
     }
- 
+
+
+    const [inputs , setInputs] = useState({});
+    const [videoPercentage, setVideoPercentage] = useState(0);
     const [response, setResponse] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState(noThumbnail);
@@ -269,6 +276,80 @@ setInterval(function() {
     }
   }, 5000);
 
+
+useEffect(() => {
+    form.file && uploadFile(form.file, 'videoUrl');
+}, [form.file])
+
+const uploadFile = (file, fileType) =>{
+    const storage = getStorage(app);
+    const folder = 'videos/';
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, folder + fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+    (snapshot) => {
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setVideoPercentage(Math.round(progress));
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    }, 
+    (error) => {
+        switch (error.code) {
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+      
+            // ...
+      
+            case 'storage/unknown':
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+        }
+    }, 
+    () => {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        setInputs((prev) =>{
+            return {
+            ...prev,
+             [fileType]: downloadURL,
+            }}
+            );
+      });
+    }
+  );
+  
+
+}
+ 
+const videoSendStorage = async (e) =>{
+    e.preventDefault();
+    try{
+        await axios.post('https://proj-01-rep-backend.vercel.app/api/sendVideoToStorage', {...inputs});
+    } catch(error){
+        console.log(error);
+    }
+
+
+
+}
+
+
 const handleSend = (e) => {
 e.preventDefault();
 
@@ -289,7 +370,8 @@ const videoData = new FormData();
 
 videoData.append("videoFile", form.file);
 
-axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
+// axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
+axios.post("https://proj-01-rep-backend.vercel.app/sendFileToStorage", videoData)
     .then((res) => { 
         console.log(res.data);
         
@@ -365,6 +447,7 @@ const buyProduct1 = async () =>{
             <form  className='youtube-form' >
 
             <div className="top-btns">
+                {videoPercentage > 0 ? (<p>{videoPercentage}%</p> ): null}
                 <label className='video-add-btn'>
                     <input  onChange={handleChange}  accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
                         <div className="label-upload">
@@ -372,7 +455,7 @@ const buyProduct1 = async () =>{
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
                         </div>
                     </label>
-                <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
+                <button onClick={videoSendStorage} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
                 <p><span className='cost'>Cost:</span> 100 Tokens</p>
             </div>
             <p>{addedVideo}</p>
