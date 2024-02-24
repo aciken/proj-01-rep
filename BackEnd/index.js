@@ -578,7 +578,7 @@ app.post('/creditSend', async (req, res) => {
 app.post('/api/sendVideoToStorage', async (req, res) => {
   try {
     const inputs = req.body;
-
+    console.log(inputs.videoUrl)
 
     const audioFun = async () => {
       try {
