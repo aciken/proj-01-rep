@@ -340,15 +340,15 @@ const uploadFile = (file, fileType) =>{
  
 const videoSendStorage = async (e) =>{
     e.preventDefault();
-    try{
-        const videoData = form.file
-        await axios.post('https://proj-01-rep-backend1.onrender.com/api/convertVideoToMP3', videoData)
-        .then(res => {
-            console.log(res.data);
-        })
-    } catch(error){
-        console.log(error);
-    }
+    // try{
+    //     const videoData = form.file
+    //     await axios.post('https://proj-01-rep-backend1.onrender.com/api/convertVideoToMP3', videoData)
+    //     .then(res => {
+    //         console.log(res.data);
+    //     })
+    // } catch(error){
+    //     console.log(error);
+    // }
     //        const transcription = await openai.audio.transcriptions.create({
     //     file: form.file,
     //     model: 'whisper-1'
@@ -381,8 +381,7 @@ const videoData = new FormData();
 
 videoData.append("videoFile", form.file);
 
-// axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
-axios.post("https://proj-01-rep-backend1.onrender.com/sendFileToStorage", videoData)
+axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
     .then((res) => { 
         console.log(res.data);
         
@@ -466,7 +465,7 @@ const buyProduct1 = async () =>{
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
                         </div>
                     </label>
-                <button onClick={videoSendStorage} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
+                <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
                 <p><span className='cost'>Cost:</span> 100 Tokens</p>
             </div>
             <p>{addedVideo}</p>
