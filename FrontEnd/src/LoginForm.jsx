@@ -50,7 +50,7 @@ const handleToggle = () => {
         
         try{
 
-            await axios.post("https://proj-01-rep-backend.vercel.app/login", {
+            await axios.post("https://proj-01-rep-backend1.onrender.com/login", {
                 email,password
             })
             .then(res => {
@@ -89,7 +89,7 @@ const handleToggle = () => {
     const sendVerification = async function(e){
         if(verificationCode == number){
                   history("/logedPage",{state: {id: email}});
-                  await axios.put("https://proj-01-rep-backend.vercel.app/verified", {
+                  await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
                     email 
                 })
                 .then(console.log('verified user'))
