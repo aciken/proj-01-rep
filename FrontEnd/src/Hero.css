@@ -261,6 +261,11 @@ cursor: pointer;
         width: 250px;
     }
 
+    .hero{
+        padding: 0 10%;
+        margin: 0;
+    }
+
 }
 }
 
