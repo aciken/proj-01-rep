@@ -278,87 +278,11 @@ setInterval(function() {
   }, 5000);
 
 
-useEffect(() => {
-    form.file && uploadFile(form.file, 'videoUrl');
-}, [form.file])
 
-const uploadFile = (file, fileType) =>{
-    const storage = getStorage(app);
-    const folder = 'videos/';
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, folder + fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on('state_changed', 
-    (snapshot) => {
-      // Observe state change events such as progress, pause, and resume
-      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setVideoPercentage(Math.round(progress));
-      switch (snapshot.state) {
-        case 'paused':
-          console.log('Upload is paused');
-          break;
-        case 'running':
-          console.log('Upload is running');
-          break;
-      }
-    }, 
-    (error) => {
-        switch (error.code) {
-            case 'storage/unauthorized':
-              // User doesn't have permission to access the object
-              break;
-            case 'storage/canceled':
-              // User canceled the upload
-              break;
-      
-            // ...
-      
-            case 'storage/unknown':
-              // Unknown error occurred, inspect error.serverResponse
-              break;
-        }
-    }, 
-    () => {
-      // Handle successful uploads on complete
-      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log('File available at', downloadURL);
-        setInputs((prev) =>{
-            return {
-            ...prev,
-             [fileType]: downloadURL,
-            }}
-            );
-      });
-    }
-  );
-  
 
-}
  
-const videoSendStorage = async (e) =>{
-    e.preventDefault();
-    // try{
-    //     const videoData = form.file
-    //     await axios.post('https://proj-01-rep-backend1.onrender.com/api/convertVideoToMP3', videoData)
-    //     .then(res => {
-    //         console.log(res.data);
-    //     })
-    // } catch(error){
-    //     console.log(error);
-    // }
-    //        const transcription = await openai.audio.transcriptions.create({
-    //     file: form.file,
-    //     model: 'whisper-1'
-    //   });
 
-    
-    //   console.log(transcription.text);
-
-
-}
 
 
 const handleSend = (e) => {
@@ -457,7 +381,6 @@ const buyProduct1 = async () =>{
             <form  className='youtube-form' >
 
             <div className="top-btns">
-                {videoPercentage > 0 ? (<p>{videoPercentage}%</p> ): null}
                 <label className='video-add-btn'>
                     <input  onChange={handleChange}  accept='video/mp4' type="file" name="file" placeholder="Add Video File"/>
                         <div className="label-upload">
