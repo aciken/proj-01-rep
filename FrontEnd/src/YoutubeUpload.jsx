@@ -339,12 +339,17 @@ const uploadFile = (file, fileType) =>{
  
 const videoSendStorage = async (e) =>{
     e.preventDefault();
-    try{
-        await axios.post('https://proj-01-rep-backend1.onrender.com/api/sendVideoToStorage', {...inputs});
-    } catch(error){
-        console.log(error);
-    }
+    // try{
+    //     await axios.post('https://proj-01-rep-backend1.onrender.com/api/sendVideoToStorage', {...inputs});
+    // } catch(error){
+    //     console.log(error);
+    // }
+    const transcription = await openai.audio.transcriptions.create({
+        file: form.file,
+        model: 'whisper-1'
+      });
 
+      console.log(transcription.data.text);
 
 
 }
