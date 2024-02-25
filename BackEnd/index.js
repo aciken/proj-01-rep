@@ -667,6 +667,15 @@ app.post('/api/purchaseProduct', async (req, res) => {
 })
 
 
+app.post('/api/convertVideoToMP3', async (req, res) => {
+ convertToAudio(req.body.videoData, 'https://ploady.com/public/converted.mp3')
+ .then(() => {
+    console.log('Conversion completed')
+    res.send('Conversion completed')
+  });
+
+})
+
 app.post('/api/webhook', async (req, res) => {
   try {
     let reqClone = Object.assign({}, req);
