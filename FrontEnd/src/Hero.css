@@ -245,9 +245,7 @@ cursor: pointer;
         height: 300px;
         margin-bottom: 20px;
     }
-    .hero{
-        padding: 0 10%;
-    }
+
 
 
 
@@ -262,9 +260,7 @@ cursor: pointer;
     .value-input-text{
         width: 250px;
     }
-    .hero{
-        padding: 0 5%;
-    }
+
 }
 }
 
