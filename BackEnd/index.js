@@ -131,7 +131,7 @@ app.use('/convertUrl', async (req, res) => {
   const key = generateRandomKey(7);
   console.log(req.body.url)
   try {
-    await convertToJpg(req.body.url, `${key}`);
+    await convertToJpg(req.body.url, `${key}`); 
     res.json({key: key});
   } catch (error) {
     console.error(error);
