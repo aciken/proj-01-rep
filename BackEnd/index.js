@@ -583,14 +583,20 @@ app.post('/api/sendVideoToStorage', async (req, res) => {
 
     const audioFun = async () => {
       try {
-        const transcription = await openai.audio.transcriptions.create({
-          file: got.stream(inputs.videoUrl), // Use got.stream() to create a stream from the video URL
-          model: 'whisper-1'
+        const filePath = path.join(__dirname, 'temp.mp4');
+        const writeStream = fs.createWriteStream(filePath);
+        got.stream(inputs.videoUrl).pipe(writeStream);
+
+        writeStream.on('finish', async () => {
+          const transcription = await openai.audio.transcriptions.create({
+            file: filePath,
+            model: 'whisper-1'
+          });
+      
+          const newText = limitTextLength(transcription.text);
+          // main1(newText);
+          console.log(newText);
         });
-    
-        const newText = limitTextLength(transcription.text);
-        // main1(newText);
-        console.log(newText);
       } catch (error) {
         console.error(error);
       }
