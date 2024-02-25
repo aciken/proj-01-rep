@@ -36,7 +36,7 @@ export function MainLoged() {
 async function creditSend() {
 
   try {
-    await axios.post('https://proj-01-rep-backend.vercel.app/creditSend', {
+    await axios.post('https://proj-01-rep-backend1.onrender.com/creditSend', {
     id
   })
   .then(res => {

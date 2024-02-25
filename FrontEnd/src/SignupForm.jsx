@@ -62,7 +62,7 @@ export function Signup(){
         if(verificationCode == number){
             
                   history("/logedPage",{state: {id: email}});
-                  await axios.put("https://proj-01-rep-backend.vercel.app/verified", {
+                  await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
                     email 
                 })
                 .then(console.log('verified user'))
@@ -83,7 +83,7 @@ export function Signup(){
         
       try{
 
-          await axios.post("https://proj-01-rep-backend.vercel.app/signup", {
+          await axios.post("https://proj-01-rep-backend1.onrender.com/signup", {
               email,password,firstName
           })
           .then(res => {
@@ -95,7 +95,7 @@ export function Signup(){
                     const code = res.data.verified
                     console.log(code)
 
-                    axios.post("https://proj-01-rep-backend.vercel.app/sendMail", {
+                    axios.post("https://proj-01-rep-backend1.onrender.com/sendMail", {
                         email,code
                     
                 })

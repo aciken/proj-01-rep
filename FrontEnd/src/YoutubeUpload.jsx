@@ -43,7 +43,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
         setCredits(credits - num);
         try{
-            const response = await axios.put('https://proj-01-rep-backend.vercel.app/updateCredits', {
+            const response = await axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
                 id: id,
                 credits: credits - num,
             });
@@ -150,7 +150,7 @@ console.log(url)
       useEffect(() => {
         console.log(url)
         if (url.includes("https://")) {
-          axios.post("https://proj-01-rep-backend.vercel.app/convertUrl", {
+          axios.post("https://proj-01-rep-backend1.onrender.com/convertUrl", {
               url: url
           })
           .then(res => {
@@ -241,7 +241,7 @@ const handleSubmit = (e) => {
     console.log(`${videoData}`)
 
 
-    axios.post("https://proj-01-rep-backend.vercel.app/upload", videoData)
+    axios.post("https://proj-01-rep-backend1.onrender.com/upload", videoData)
     .then(res => { 
         console.log('uploaddeDDD')
         updateCredits(100);
@@ -340,7 +340,7 @@ const uploadFile = (file, fileType) =>{
 const videoSendStorage = async (e) =>{
     e.preventDefault();
     try{
-        await axios.post('https://proj-01-rep-backend.vercel.app/api/sendVideoToStorage', {...inputs});
+        await axios.post('https://proj-01-rep-backend1.onrender.com/api/sendVideoToStorage', {...inputs});
     } catch(error){
         console.log(error);
     }
@@ -371,7 +371,7 @@ const videoData = new FormData();
 videoData.append("videoFile", form.file);
 
 // axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
-axios.post("https://proj-01-rep-backend.vercel.app/sendFileToStorage", videoData)
+axios.post("https://proj-01-rep-backend1.onrender.com/sendFileToStorage", videoData)
     .then((res) => { 
         console.log(res.data);
         
@@ -416,7 +416,7 @@ updateCredits(100);
 
 const buyProduct1 = async () =>{
     try{
-        const response = await axios.post('https://proj-01-rep-backend.vercel.app/api/purchaseProduct', {
+        const response = await axios.post('https://proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
             productId: "249354",
             id: id
         });
