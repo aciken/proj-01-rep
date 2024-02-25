@@ -33,6 +33,7 @@ app.use(cors({
 const axios = require('axios'); 
 const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
+const got = require('got');
 
 
 
@@ -582,14 +583,8 @@ app.post('/api/sendVideoToStorage', async (req, res) => {
 
     const audioFun = async () => {
       try {
-        const response = await axios({
-          method: 'get',
-          url: inputs.videoUrl,
-          responseType: 'stream'
-        });
-    
         const transcription = await openai.audio.transcriptions.create({
-          file: response.data,
+          file: got.stream(inputs.videoUrl), // Use got.stream() to create a stream from the video URL
           model: 'whisper-1'
         });
     
@@ -600,7 +595,7 @@ app.post('/api/sendVideoToStorage', async (req, res) => {
         console.error(error);
       }
     };
-audioFun()
+    audioFun()
 
   } catch (error) {
     console.error(error);
