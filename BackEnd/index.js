@@ -69,7 +69,7 @@ async function convertToJpg(imageUrl, key) {
 
   await sharp(response.data)
     .jpeg()
-    .toFile(`E:/programiranje/repos/proj-01-rep/FrontEnd/public/thumbnails/${key}.jpg`);
+    .toFile(`https://www.ploady.com/public/thumbnails/${key}.jpg`);
 }
 
 
