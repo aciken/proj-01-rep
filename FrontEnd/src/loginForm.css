@@ -9,13 +9,13 @@
     font-size: 1.2rem;
     font-family: 'Roboto-Regular';
     background-color: #171717;
-    /* height: 93.6vh; */
+    height: 93.6vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 30px;
-    height: 100%;
+
 color: white
 }
 
