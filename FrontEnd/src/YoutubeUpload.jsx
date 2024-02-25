@@ -338,34 +338,27 @@ const uploadFile = (file, fileType) =>{
 
 }
  
-const videoSendStorage = async (e) => {
+const videoSendStorage = async (e) =>{
     e.preventDefault();
-  
-    // Read the file as an array buffer
-    const reader = new FileReader();
-    reader.onload = async function(event) {
-      const data = new Uint8Array(event.target.result);
-  
-      // Convert the file to MP3
-      ffmpeg({
-        MEMFS: [{ name: 'input.mp4', data }],
-        arguments: ['-i', 'input.mp4', '-vn', '-ar', '44100', '-ac', '2', '-b:a', '192k', 'output.mp3'],
-        onExit: async function(result) {
-          const mp3Data = ffmpeg.FS('readFile', 'output.mp3');
-          const blob = new Blob([mp3Data.buffer], { type: 'audio/mpeg' });
-  
-          // Transcribe the MP3 file
-          const transcription = await openai.audio.transcriptions.create({
-            file: blob,
-            model: 'whisper-1'
-          });
-  
-          console.log(transcription.text);
-        }
-      });
-    };
-    reader.readAsArrayBuffer(form.file);
-  };
+    try{
+        const videoData = form.file
+        await axios.post('https://proj-01-rep-backend1.onrender.com/api/convertVideoToMP3', videoData)
+        .then(res => {
+            console.log(res.data);
+        })
+    } catch(error){
+        console.log(error);
+    }
+    //        const transcription = await openai.audio.transcriptions.create({
+    //     file: form.file,
+    //     model: 'whisper-1'
+    //   });
+
+    
+    //   console.log(transcription.text);
+
+
+}
 
 
 const handleSend = (e) => {
