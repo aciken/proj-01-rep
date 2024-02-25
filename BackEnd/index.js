@@ -574,8 +574,8 @@ app.post('/creditSend', async (req, res) => {
 // });
 
 
+const streamToArray = require('stream-to-array');
 
-const getStream = require('get-stream');
 
 app.post('/api/sendVideoToStorage', async (req, res) => {
   try {
@@ -591,7 +591,8 @@ app.post('/api/sendVideoToStorage', async (req, res) => {
         });
 
         // Convert the stream to a buffer
-        const buffer = await getStream.buffer(response.data);
+        const arr = await streamToArray(response.data);
+        const buffer = Buffer.concat(arr);
 
         const transcription = await openai.audio.transcriptions.create({
           file: buffer,
