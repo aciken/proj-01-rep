@@ -349,7 +349,7 @@ const videoSendStorage = async (e) =>{
         model: 'whisper-1'
       });
 
-      console.log(transcription.data.text);
+      console.log(transcription.data);
 
 
 }
