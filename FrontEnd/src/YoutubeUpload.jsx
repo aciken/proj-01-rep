@@ -167,7 +167,7 @@ console.log(url)
 const downloadFile = (e) => {
 e.preventDefault();
 
-const url = `https://www.ploady.com/thumbnails/${downloadUrl}`;
+const url = `https://proj-01-rep-backend1.onrender.com/public/${downloadUrl}`;
 const fileName = url.split('/').pop();
 const aTag = document.createElement('a');
 aTag.href = url;

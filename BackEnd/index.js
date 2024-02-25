@@ -67,9 +67,12 @@ async function convertToJpg(imageUrl, key) {
     responseType: 'arraybuffer'
   });
 
+  // Define the output file path
+  const outputPath = path.join(__dirname, 'public', `${key}.jpg`);
+
   await sharp(response.data)
     .jpeg()
-    .toFile(`https://www.ploady.com/public/thumbnails/${key}.jpg`);
+    .toFile(outputPath);
 }
 
 
