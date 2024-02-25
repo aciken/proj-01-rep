@@ -30,7 +30,7 @@ export function LogedNav({navRes, onChangeNavRes}){
         <div>
             <div className="whole-nav">
                 <a href="#" className="left-nav-part">
-                    <img src={logo} onClick={(e) => e.preventDefault()} alt="Logo" />
+                    <img src={logo} onClick={(e) => e.preventDefault()} alt="Logo" className="nav-logo"/>
                 </a>
                 <div className="right-nav-part">
                 <Link onClick={removeLocalStorage} className="logOut-btn" to="/">Log Out</Link>

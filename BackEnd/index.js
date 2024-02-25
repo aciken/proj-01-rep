@@ -127,17 +127,17 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/path-to-your/index.html'));
 });
 
-app.use('/convertUrl', async (req, res) => {
-  const key = generateRandomKey(7);
-  console.log(req.body.url)
-  try {
-    await convertToJpg(req.body.url, `${key}`); 
-    res.json({key: key});
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('An error occurred while converting the URL to JPG.');
-  }
-});
+// app.use('/convertUrl', async (req, res) => {
+//   const key = generateRandomKey(7);
+//   console.log(req.body.url)
+//   try {
+//     await convertToJpg(req.body.url, `${key}`); 
+//     res.json({key: key});
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('An error occurred while converting the URL to JPG.');
+//   }
+// });
 
 app.get('/send', (req, res) => {
   res.send('send message');
