@@ -10,7 +10,7 @@ import app from './firebase';
 import { getStorage, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { ref } from "firebase/storage";
 import { getDownloadURL } from "firebase/storage";
-import ffmpeg from 'ffmpeg.js/ffmpeg-mp4';
+
 
 
 
