@@ -381,7 +381,7 @@ const videoData = new FormData();
 
 videoData.append("videoFile", form.file);
 
-axios.post("https://proj-01-rep-backend.vercel.app/send", videoData)
+axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
     .then((res) => { 
         console.log(res.data);
         
