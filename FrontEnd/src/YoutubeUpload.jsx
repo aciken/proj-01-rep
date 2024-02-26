@@ -288,6 +288,8 @@ setInterval(function() {
 const handleSend = async(e) => {
 e.preventDefault();
 
+updateCredits(100);
+
 console.log(`${localStorage.getItem('credits')} CRedits`);
 if(localStorage.getItem('credits') < credits){
     setCredits(localStorage.getItem('credits'));
@@ -329,7 +331,7 @@ imageGen(res.data);
 console.log(url)
 
 
-updateCredits(100);
+
 
 
 
