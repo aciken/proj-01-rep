@@ -275,7 +275,7 @@ setInterval(function() {
     if(storedCredits < credits){
       setCredits(storedCredits);
     }
-  }, 5000);
+  }, 2000);
 
 
 
