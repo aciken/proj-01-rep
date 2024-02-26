@@ -6,6 +6,7 @@ import { OtherNav} from './OtherNav';
 import {Icon} from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff';
 import {eye} from 'react-icons-kit/feather/eye'
+import loading from './assets/Spinner-1s-257px.svg'
 
 export function Login(){
 
@@ -134,7 +135,7 @@ const handleToggle = () => {
                         <form className='verification-form'  onSubmit={sendVerification}>
                             <p>Check inbox for verification code</p>
                             <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number} placeholder='Verification Code' className='verification-input'/>
-                            <button  className='submit-verification'>Submit</button>
+                            <button  className='submit-verification'>{loading}</button>
                             <p className='wrong-verification'>{wrong}</p>
                         </form>
                     </div>
