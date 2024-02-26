@@ -286,8 +286,9 @@ const handleSend = (e) => {
 e.preventDefault();
 
 creditSend();
-
+console.log(localStorage.getItem('running'))
 if(localStorage.getItem('running') != true){
+
 
 
 localStorage.setItem('running', true)
