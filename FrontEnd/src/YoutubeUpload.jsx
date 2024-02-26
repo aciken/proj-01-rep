@@ -306,7 +306,7 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     if(credits > 0){
 
 
-
+        updateCredits(100);
 
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
@@ -331,7 +331,7 @@ main2(40, res.data);
 imageGen(res.data);
 console.log(url)
 
-updateCredits(100);
+
 
 
 
