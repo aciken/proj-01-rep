@@ -5,8 +5,7 @@ import { useState } from 'react';
 import { OtherNav} from './OtherNav';
 import {Icon} from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff';
-import {eye} from 'react-icons-kit/feather/eye'
-import loading from './assets/Spinner-1s-257px.svg'
+import {eye} from 'react-icons-kit/feather/eye';
 
 export function Login(){
 
@@ -124,7 +123,7 @@ const handleToggle = () => {
             </div>
                                 <p className='wrong-input'>{wrongInput}</p>
                                 {/* <a href='#' className="forgot">Forgot Password?</a> */}
-                                <button className='sign-btn' onClick={submit}>{loading}</button>
+                                <button className='sign-btn' onClick={submit}>Sign In</button>
                             </form>
 
                             <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
