@@ -367,10 +367,6 @@ const UserSchema = new mongoose.Schema({
     verified:{
       type: Number,
       default: 0
-    },
-    running:{
-      type: Boolean,
-      default: false
     }
     });
 
@@ -519,17 +515,19 @@ app.put('/updateCredits', async (req, res) => {
   }
 })
 
+app.post('/checkCredits', async (req, res) => {
+  const {id} = req.body;
 
-// app.post('/checkCredits', async (req, res) => {
-// const {id} = req.body;
-// try{
-//   const user = await collection.findOne({email: id});
-//   if(user){
-//     res.json()
-//   }
-// }
-
-// })
+  try {
+    const user = await collection.findOne({email: id});
+    if(user){
+      res.json({credits: user.credits});
+    }
+}
+catch (error) {
+  console.error(error);
+  res.status(500).json({message: 'Internal server error'});
+}})
 
 
 app.post('/creditSend', async (req, res) => {
@@ -542,49 +540,6 @@ app.post('/creditSend', async (req, res) => {
   } catch (error) {
     
   }
-
-
-})
-
-
-app.put('/updateRunning', async (req, res) => {
-  const {id} = req.body;
-
-  try{
-    const user = await collection.findOne({email: id});
-    if(user){
-      if(user.running == true){
-        res.json(true)
-      } else{
-        user.running = true;
-        res.json(false)
-      } 
-      await user.save();
-    }
-}
-catch(error) {
-  console.error(error);
-  res.status(500).json({message: 'Internal server error'});
-}
-}
-)
-
-app.put('/updateRunningFalse', async (req, res) => {
-  const {id} = req.body;
-
-  try{
-    const user = await collection.findOne({ email: id });
-
-    if(user){
-      user.running = false;
-      await user.save();
-      res.json({message: 'Running updated successfully!'});
-    }
-  }catch(error) {
-    console.error(error);
-    res.status(500).json({message: 'Internal server error'});
-  }
-
 
 
 })

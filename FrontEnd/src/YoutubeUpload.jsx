@@ -285,23 +285,25 @@ setInterval(function() {
 
 
 
- const handleSend  = async(e) => {
+const handleSend = async(e) => {
 e.preventDefault();
-
-await axios.put('https://proj-01-rep-backend1.onrender.com/updateRunning', {
-    id: id
-})
-.then(res => {
-    if(res.data == true){
-        console.log('Running')
-    } else{
-
-
 
 console.log(`${localStorage.getItem('credits')} CRedits`);
 if(localStorage.getItem('credits') < credits){
     setCredits(localStorage.getItem('credits'));
 }
+
+await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
+    id: id
+})
+.then(res =>{
+    if(credits > res.data.credits){
+        setCredits(res.data.credits);
+    }
+
+    if(credits > 0){
+
+
 
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
@@ -328,12 +330,7 @@ console.log(url)
 
 
 updateCredits(100);
-axios.put('https://proj-01-rep-backend1.onrender.com/updateRunningFalse', {
-    id: id
-})
-.then(res => {
-    console.log(res.data)})
-.catch(err => console.log(err));
+
 
 
 
