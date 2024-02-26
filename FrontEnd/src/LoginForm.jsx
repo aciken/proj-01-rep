@@ -50,7 +50,7 @@ const handleToggle = () => {
             setWrongInput("Please fill all the fields")
         } else{
 
-        
+            setIsLoading(true); 
         try{
 
             await axios.post("https://proj-01-rep-backend1.onrender.com/login", {
@@ -60,7 +60,7 @@ const handleToggle = () => {
                 if(res.data !== "not exist"){
                     console.log(res.data)
 
-                    setIsLoading(true);
+
                     if(res.data.verified !== 1 ){
                         setnotVerified(true)
                         setVerificationCode(res.data.verified)
