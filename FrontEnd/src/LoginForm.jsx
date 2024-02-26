@@ -124,7 +124,7 @@ const handleToggle = () => {
             </div>
                                 <p className='wrong-input'>{wrongInput}</p>
                                 {/* <a href='#' className="forgot">Forgot Password?</a> */}
-                                <button className='sign-btn' onClick={submit}>Sign In</button>
+                                <button className='sign-btn' onClick={submit}>{loading}</button>
                             </form>
 
                             <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
@@ -135,7 +135,7 @@ const handleToggle = () => {
                         <form className='verification-form'  onSubmit={sendVerification}>
                             <p>Check inbox for verification code</p>
                             <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number} placeholder='Verification Code' className='verification-input'/>
-                            <button  className='submit-verification'>{loading}</button>
+                            <button  className='submit-verification'>Submit</button>
                             <p className='wrong-verification'>{wrong}</p>
                         </form>
                     </div>
