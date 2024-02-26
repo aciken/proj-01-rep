@@ -285,8 +285,18 @@ setInterval(function() {
 
 
 
-const handleSend = (e) => {
+ const handleSend  = async(e) => {
 e.preventDefault();
+
+await axios.put('https://proj-01-rep-backend1.onrender.com/updateRunning', {
+    id: id
+})
+.then(res => {
+    if(res.data == true){
+        console.log('Running')
+    } else{
+
+
 
 console.log(`${localStorage.getItem('credits')} CRedits`);
 if(localStorage.getItem('credits') < credits){
@@ -318,7 +328,12 @@ console.log(url)
 
 
 updateCredits(100);
-
+app.put('https://proj-01-rep-backend1.onrender.com/updateRunningFalse', {
+    id: id
+})
+.then(res => {
+    console.log(res.data)})
+.catch(err => console.log(err));
 
 
 
@@ -346,6 +361,8 @@ updateCredits(100);
     console.log('Usage Limit Reached')
 
 }
+}
+})
 }
 
 const buyProduct1 = async () =>{
