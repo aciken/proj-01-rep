@@ -85,14 +85,14 @@ export function Signup(){
 
         
       try{
-
+        setIsLoading(true);
           await axios.post("https://proj-01-rep-backend1.onrender.com/signup", {
               email,password,firstName
           })
           .then(res => {
             console.log(res.data)
               if(res.data !== "exist"){
-                setIsLoading(true);
+
                 if(res.data.verified > 1){
                     setVerified(true)
                     setVerificationCode(res.data.verified)
@@ -116,6 +116,7 @@ export function Signup(){
               }
               else if(res.data === "exist"){
                   setWrongInput("Email already exist")
+                    setIsLoading(false);
               }
           })
           .catch(e => {
