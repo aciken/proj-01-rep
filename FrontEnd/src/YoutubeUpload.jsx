@@ -298,8 +298,9 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     id: id
 })
 .then(res =>{
+    console.log(`Credits: ${credits} || Res Credits: ${res.data.credits}`)
     if(credits > res.data.credits){
-        console.log(`Credits: ${credits} || Res Credits: ${res.data.credits}`)
+
         
         setCredits(res.data.credits);
     }
