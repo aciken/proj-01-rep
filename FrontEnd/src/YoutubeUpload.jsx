@@ -270,12 +270,12 @@ const handleSubmit = (e) => {
 }
 
 
-setInterval(function() {
-    var storedCredits = Number(localStorage.getItem('credits'));
-    if(storedCredits < credits){
-      setCredits(storedCredits);
-    }
-  }, 2000);
+// setInterval(function() {
+//     var storedCredits = Number(localStorage.getItem('credits'));
+//     if(storedCredits < credits){
+//       setCredits(storedCredits);
+//     }
+//   }, 2000);
 
 
 
