@@ -80,6 +80,7 @@ const handleToggle = () => {
             .catch(e => {
                 console.log(e);
                 setWrongInput("Wrong Email or Password")
+                setIsLoading(false);
             })
 
             
