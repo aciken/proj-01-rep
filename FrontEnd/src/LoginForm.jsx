@@ -49,8 +49,9 @@ const handleToggle = () => {
         if(email === "" || password === ""){
             setWrongInput("Please fill all the fields")
         } else{
-
             setIsLoading(true); 
+
+
         try{
 
             await axios.post("https://proj-01-rep-backend1.onrender.com/login", {
