@@ -328,7 +328,7 @@ console.log(url)
 
 
 updateCredits(100);
-app.put('https://proj-01-rep-backend1.onrender.com/updateRunningFalse', {
+axios.put('https://proj-01-rep-backend1.onrender.com/updateRunningFalse', {
     id: id
 })
 .then(res => {
