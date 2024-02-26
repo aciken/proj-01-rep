@@ -6,6 +6,7 @@ import { OtherNav} from './OtherNav';
 import {Icon} from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff';
 import {eye} from 'react-icons-kit/feather/eye';
+import loading from './assets/Spinner-1.4s-237px.gif';
 
 export function Login(){
 
@@ -22,6 +23,8 @@ export function Login(){
     const [verificationCode, setVerificationCode] = useState(0);
     const [notverified, setnotVerified] = useState(false);
     const [wrong, setWrong] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const [type, setType] = useState('password');
 const [icon, setIcon] = useState(eyeOff);
@@ -57,6 +60,7 @@ const handleToggle = () => {
                 if(res.data !== "not exist"){
                     console.log(res.data)
 
+                    setIsLoading(true);
                     if(res.data.verified !== 1 ){
                         setnotVerified(true)
                         setVerificationCode(res.data.verified)
@@ -127,6 +131,8 @@ const handleToggle = () => {
                             </form>
 
                             <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
+
+                            {isLoading ? <img src={loading} alt="" className='loading' /> : null}
 
                         </div> 
                 ) : (
