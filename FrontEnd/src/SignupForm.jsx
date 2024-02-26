@@ -6,6 +6,7 @@ import { OtherNav} from './OtherNav';
 import {Icon} from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff';
 import {eye} from 'react-icons-kit/feather/eye'
+import loading from './assets/Spinner-1.4s-237px.gif';
 
 export function Signup(){
 
@@ -21,6 +22,8 @@ export function Signup(){
     const [verificationCode, setVerificationCode] = useState(0);
     const [error, setError] = useState('');
     const [wrongPassword, setWrongPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const [type, setType] = useState('password');
     const [icon, setIcon] = useState(eyeOff);
@@ -89,6 +92,7 @@ export function Signup(){
           .then(res => {
             console.log(res.data)
               if(res.data !== "exist"){
+                setIsLoading(true);
                 if(res.data.verified > 1){
                     setVerified(true)
                     setVerificationCode(res.data.verified)
@@ -156,7 +160,7 @@ export function Signup(){
                                 <p className='wrong-input'>{wrongInput}</p>
                                 <button className='sign-btn' type='submit'>Sign Up</button>
                                 <p className='login-link'>Already have an account? <Link to="/login">Log In</Link></p>
-
+                                {!isLoading ? <img src={loading} alt="" className='loading' /> : null}
                             </form>
                         </div>
                 ) : (
