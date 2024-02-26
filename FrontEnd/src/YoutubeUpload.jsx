@@ -287,10 +287,10 @@ e.preventDefault();
 
 creditSend();
 
-if(credits > 0){
+if(localStorage.getItem('running') != true){
 
 
-
+localStorage.setItem('running', true)
 
 
 
@@ -309,7 +309,7 @@ videoData.append("videoFile", form.file);
 axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
     .then((res) => { 
         console.log(res.data);
-        
+        localStorage.setItem('running', false)   
 
 
 main1(res.data);
