@@ -160,7 +160,7 @@ export function Signup(){
                                 <p className='wrong-input'>{wrongInput}</p>
                                 <button className='sign-btn' type='submit'>Sign Up</button>
                                 <p className='login-link'>Already have an account? <Link to="/login">Log In</Link></p>
-                                {!isLoading ? <img src={loading} alt="" className='loading' /> : null}
+                                {isLoading ? <img src={loading} alt="" className='loading' /> : null}
                             </form>
                         </div>
                 ) : (
