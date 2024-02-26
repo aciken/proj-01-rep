@@ -288,7 +288,6 @@ setInterval(function() {
 const handleSend = async(e) => {
 e.preventDefault();
 
-updateCredits(100);
 
 console.log(`${localStorage.getItem('credits')} CRedits`);
 if(localStorage.getItem('credits') < credits){
@@ -306,6 +305,7 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     if(credits > 0){
 
 
+        updateCredits(100);
 
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
