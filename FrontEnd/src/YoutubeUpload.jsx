@@ -17,9 +17,9 @@ import { getDownloadURL } from "firebase/storage";
 
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
-export function YoutubeUpload({id, credits, setCredits, creditSend}) {
+export function YoutubeUpload({id, credits, setCredits}) {
 
-
+    localStorage.setItem('credits', credits);
 
     const history = useNavigate()
 
@@ -37,11 +37,8 @@ export function YoutubeUpload({id, credits, setCredits, creditSend}) {
     YoutubeUpload.propTypes = {
         id: PropTypes.string.isRequired,
         credits: PropTypes.number.isRequired,
-        setCredits: PropTypes.func.isRequired,
-        creditSend: PropTypes.func.isRequired
+        setCredits: PropTypes.func.isRequired
     };
-
-
 
     async function updateCredits(num){
 
@@ -51,7 +48,8 @@ export function YoutubeUpload({id, credits, setCredits, creditSend}) {
                 id: id,
                 credits: credits - num,
             });
-   
+            localStorage.setItem('credits', credits - num);
+            console.log(localStorage.getItem('credits'));
             console.log(response.data)
         }catch(error){
             console.log(error);
@@ -272,7 +270,12 @@ const handleSubmit = (e) => {
 }
 
 
-
+setInterval(function() {
+    var storedCredits = Number(localStorage.getItem('credits'));
+    if(storedCredits < credits){
+      setCredits(storedCredits);
+    }
+  }, 5000);
 
 
 
@@ -285,15 +288,10 @@ const handleSubmit = (e) => {
 const handleSend = (e) => {
 e.preventDefault();
 
-creditSend();
-console.log(localStorage.getItem('running'))
-if(localStorage.getItem('running') != true){
-
-
-
-localStorage.setItem('running', true)
-
-
+console.log(`${localStorage.getItem('credits')} CRedits`);
+if(localStorage.getItem('credits') < credits){
+    setCredits(localStorage.getItem('credits'));
+}
 
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
@@ -310,7 +308,7 @@ videoData.append("videoFile", form.file);
 axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
     .then((res) => { 
         console.log(res.data);
-        localStorage.setItem('running', false)   
+        
 
 
 main1(res.data);
@@ -347,7 +345,6 @@ updateCredits(100);
 } else {
     console.log('Usage Limit Reached')
 
-}
 }
 }
 
