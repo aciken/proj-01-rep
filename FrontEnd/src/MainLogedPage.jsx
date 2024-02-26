@@ -71,7 +71,7 @@ useEffect(() => {
     return (
         <div className="main-page">
             <LogedNav navRes={navRes} onChangeNavRes={changeNavRes}/>
-            <YoutubeUpload id={id} credits={credits} setCredits={setCredits} />
+            <YoutubeUpload id={id} credits={credits} setCredits={setCredits} creditSend={creditSend}/>
         </div>
     );
 }

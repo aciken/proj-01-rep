@@ -17,7 +17,7 @@ import { getDownloadURL } from "firebase/storage";
 
 const openai = new OpenAI({apiKey: import.meta.env.VITE_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
-export function YoutubeUpload({id, credits, setCredits}) {
+export function YoutubeUpload({id, credits, setCredits, creditSend}) {
 
     localStorage.setItem('credits', credits);
 
@@ -37,8 +37,11 @@ export function YoutubeUpload({id, credits, setCredits}) {
     YoutubeUpload.propTypes = {
         id: PropTypes.string.isRequired,
         credits: PropTypes.number.isRequired,
-        setCredits: PropTypes.func.isRequired
+        setCredits: PropTypes.func.isRequired,
+        creditSend: PropTypes.func.isRequired
     };
+
+
 
     async function updateCredits(num){
 
@@ -288,6 +291,12 @@ setInterval(function() {
 const handleSend = (e) => {
 e.preventDefault();
 
+creditSend();
+
+if(credits > 0){
+
+
+
 console.log(`${localStorage.getItem('credits')} CRedits`);
 if(localStorage.getItem('credits') < credits){
     setCredits(localStorage.getItem('credits'));
@@ -345,6 +354,7 @@ updateCredits(100);
 } else {
     console.log('Usage Limit Reached')
 
+}
 }
 }
 

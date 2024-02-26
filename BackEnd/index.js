@@ -516,6 +516,17 @@ app.put('/updateCredits', async (req, res) => {
 })
 
 
+app.post('/checkCredits', async (req, res) => {
+const {id} = req.body;
+try{
+  const user = await collection.findOne({email: id});
+  if(user){
+    res.json()
+  }
+}
+})
+
+
 app.post('/creditSend', async (req, res) => {
   const {id} = req.body;
 
