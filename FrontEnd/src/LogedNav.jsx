@@ -16,10 +16,8 @@ export function LogedNav({navRes, onChangeNavRes}){
     const changeNavRes = (e) => {
         e.preventDefault();
         if(navValue === 'Profile'){
-            console.log('change to main')
             onChangeNavRes('profile-page');
             setNavValue('Home');
-            console.log(navRes)
         }else{
             onChangeNavRes('main-page');
             setNavValue('Profile');

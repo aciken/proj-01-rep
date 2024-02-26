@@ -68,7 +68,6 @@ export function Signup(){
                   await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
                     email 
                 })
-                .then(console.log('verified user'))
         } else {
             e.preventDefault()
             setWrong("Wrong verification code")
@@ -90,20 +89,17 @@ export function Signup(){
               email,password,firstName
           })
           .then(res => {
-            console.log(res.data)
               if(res.data !== "exist"){
 
                 if(res.data.verified > 1){
                     setVerified(true)
                     setVerificationCode(res.data.verified)
                     const code = res.data.verified
-                    console.log(code)
 
                     axios.post("https://proj-01-rep-backend1.onrender.com/sendMail", {
                         email,code
                     
                 })
-                .then(console.log('mail sent'))
                 .catch(e => {
                     console.log(e);
                 })

@@ -44,13 +44,12 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
         setCredits(credits - num);
         try{
-            const response = await axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
+             await axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
                 id: id,
                 credits: credits - num,
             });
             localStorage.setItem('credits', credits - num);
-            console.log(localStorage.getItem('credits'));
-            console.log(response.data)
+
         }catch(error){
             console.log(error);
         }
@@ -73,11 +72,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
     const isSendDisabled = addedVideo == "No Video Added Yet" || credits === 0;
     const sendClassName = isSendDisabled ? 'send-video-btn disabled' : 'send-video-btn';
 
-    console.log(isSendDisabled)
 
-    console.log(isSendDisabled, sendClassName)
-
-console.log(url)
 
     const isButtonDisabled = !response|| !description || url === '/src/assets/NoThumbnail.png' || credits === 0 || response === "loading..." || description === "loading..." || url === gif;
     const buttonClassName = isButtonDisabled ? 'upload-video-btn disabled' : 'upload-video-btn';
@@ -98,7 +93,7 @@ console.log(url)
         });
 
         const title = completion.choices[0].message.content.split(`"`)
-        console.log(title);
+
         setResponse(title[1]);
 
 
@@ -119,11 +114,7 @@ console.log(url)
             model: "gpt-3.5-turbo",
         });
 
-        if(completion.choices[0].message.content[1] === `"`){
-            console.log('true');
-        } else {
-            console.log('false');
-        }
+
 
         // finalDesc = completion.choices[0].message.content.split(`"`);
         
@@ -131,14 +122,14 @@ console.log(url)
         setDescription(completion.choices[0].message.content);
 
  
-        console.log(completion.choices[0].message.content);
+
 
 
 
     }
     
       async function imageGen(chat){
-        console.log('imageGen called')
+
         const image = await openai.images.generate({ model: "dall-e-3", prompt: "Make eye catching thumbnail from this video description " + chat, n:1,size: "1792x1024", });
         setUrl(image.data[0].url);
 
@@ -185,25 +176,25 @@ aTag.remove();
 
 
     const handleResponseChange = (e) => {
-        console.log(`Change event on ${e.target.name}`);
+
         const inputValue = e.target.value;
-        console.log(`Input value:`, inputValue);
+
         
         setResponse(inputValue);
     }
 
     const handleDescriptionChange = (e) => {
-        console.log(`Change event on ${e.target.name}`);
+
         const inputValue = e.target.value;
-        console.log(`Input value:`, inputValue);
+
         
         setDescription(inputValue);
     }
 
     const handleChange = (e) => {
-        console.log(`Change event on ${e.target.name}`);
+
         const inputValue = e.target.name === "file" ? e.target.files[0] : e.target.value;
-        console.log(`Input value:`, inputValue);
+
         
 if(e.target.name === "file"){
     setAddedVideo(e.target.files[0].name);
@@ -215,9 +206,9 @@ if(e.target.name === "file"){
     }
 
     const handleThumbnailChange = (e) => {
-        console.log(`Change event on thumbnail`);
+
         const thumbnailFile = e.target.files[0];
-        console.log(`Thumbnail file:`, thumbnailFile);
+
         
         setForm({
             ...form,
@@ -232,21 +223,20 @@ const handleSubmit = (e) => {
 
     const videoData = new FormData();
 
-    console.log(`Title: ${response} || Description: ${description} || File: ${form.file} || Thumbnail: ${url}`)
 
     videoData.append("videoFile", form.file);
     videoData.append("title", response);
     videoData.append("description", description);
     videoData.append("thumbnail", url);
 
-    console.log(`${videoData}`)
+
 
 
     axios.post("https://proj-01-rep-backend1.onrender.com/upload", videoData)
     .then(res => { 
-        console.log('uploaddeDDD')
+
         updateCredits(100);
-        console.log(res.data);
+
 
     })
     .catch((err) => {
@@ -289,7 +279,7 @@ const handleSend = async(e) => {
 e.preventDefault();
 
 
-console.log(`${localStorage.getItem('credits')} CRedits`);
+
 if(localStorage.getItem('credits') < credits){
     setCredits(localStorage.getItem('credits'));
 }
@@ -298,7 +288,7 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     id: id
 })
 .then(res =>{
-    console.log(`Credits: ${credits} || Res Credits: ${res.data.credits}`)
+
     let creditDiv = 0;
     if(credits > res.data.credits){
         creditDiv = credits - res.data.credits;
@@ -317,7 +307,7 @@ setResponse("loading...");
 setUrl(gif)
 setDownloadUrl("")
 
-console.log(url);
+
 
 const videoData = new FormData();
 
@@ -325,14 +315,14 @@ videoData.append("videoFile", form.file);
 
 axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
     .then((res) => { 
-        console.log(res.data);
+
         
 
 
 main1(res.data);
 main2(40, res.data);
 imageGen(res.data);
-console.log(url)
+
 
 
 
@@ -375,7 +365,7 @@ const buyProduct1 = async () =>{
             id: id
         });
 
-        console.log(response.data)
+
 
         window.open(response.data.checkoutUrl, '_blank')
     }catch(error){

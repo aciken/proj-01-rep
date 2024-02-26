@@ -59,7 +59,6 @@ const handleToggle = () => {
             })
             .then(res => {
                 if(res.data !== "not exist"){
-                    console.log(res.data)
 
 
                     if(res.data.verified !== 1 ){
@@ -78,7 +77,6 @@ const handleToggle = () => {
                 }
             })
             .catch(e => {
-                console.log(e);
                 setWrongInput("Wrong Email or Password")
                 setIsLoading(false);
             })

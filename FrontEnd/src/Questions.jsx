@@ -9,7 +9,7 @@ export function Questions() {
         const questionList = document.querySelectorAll('.sign')
         const underText = document.querySelectorAll('.under-text')
         e.preventDefault();
-        console.log(e.target.innerText)
+
 
         if(e.target.innerText === '+' || e.target.innerText === '-'){
             if(e.target.innerText === '+'){ 
@@ -21,9 +21,9 @@ export function Questions() {
                 })
                 e.target.parentElement.nextElementSibling.classList = 'under-text clicked';
                 underText.forEach((p) => {
-                    console.log(p.classList)
+   
                 })
-                console.log(e.target.parentElement.nextElementSibling.clasList)
+
             e.target.innerText = '-';
         }else {
             e.target.innerText = '+';
