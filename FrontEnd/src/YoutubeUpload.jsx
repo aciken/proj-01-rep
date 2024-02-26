@@ -299,8 +299,9 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
 })
 .then(res =>{
     console.log(`Credits: ${credits} || Res Credits: ${res.data.credits}`)
+    let creditDiv = 0;
     if(credits > res.data.credits){
-
+        creditDiv = credits - res.data.credits;
         
         setCredits(res.data.credits);
     }
@@ -308,7 +309,7 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     if(credits > 0){
 
 
-        updateCredits(100);
+        updateCredits(100+creditDiv);
 
 if(addedVideo != "No Video Added Yet"){
 setDescription("loading...");
