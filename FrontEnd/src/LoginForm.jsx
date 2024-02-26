@@ -132,7 +132,7 @@ const handleToggle = () => {
 
                             <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
 
-                            {isLoading ? <img src={loading} alt="" className='loading' /> : null}
+                            {!isLoading ? <img src={loading} alt="" className='loading' /> : null}
 
                         </div> 
                 ) : (
