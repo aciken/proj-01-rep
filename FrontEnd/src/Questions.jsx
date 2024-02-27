@@ -88,6 +88,10 @@ return(
                 <p onClick={closingQuestion} className='under-text'>Only supported output language is english. If video you imported is in any other language you will get right output but it will be translated to engilsh. </p>
             </li>
             <li>
+                <a href="#" onClick={handleQuestionClick} >What video formats are supported?<span className='sign'>+</span></a>
+                <p onClick={closingQuestion} className='under-text'>Only supported video format is mp4.</p>
+            </li>
+            <li>
                 <a href="#" onClick={handleQuestionClick} >What is the maximum lenght of imported video?<span className='sign'>+</span></a>
                 <p onClick={closingQuestion} className='under-text'>Imported videos should not be longer than 25 minutes.</p>
             </li>
@@ -97,7 +101,7 @@ return(
             </li>
             <li>
                 <a href="#" onClick={handleQuestionClick} >How long does it take to generate response?<span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>From 10 to 60 secounds.</p>
+                <p onClick={closingQuestion} className='under-text'>It can take from 30 secounds to few minutes.</p>
             </li>
             <li>
                 <a href="#" onClick={handleQuestionClick} >Is there a supscription plan.<span className='sign'>+</span></a>
