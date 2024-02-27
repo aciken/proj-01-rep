@@ -43,8 +43,8 @@ const handleToggle = () => {
         setNumber(event.target.value);
       };
 
-    async function submit(){
-
+    async function submit(e){
+        e.preventDefault();
 
         if(email === "" || password === ""){
             setWrongInput("Please fill all the fields")
@@ -112,7 +112,7 @@ const handleToggle = () => {
                         <div className="form-border" >
                         <p>Log in to your account</p>
                             <form className="login-form">
-                                <input className="login-email" name="email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}} required/>
+                                <input className="login-email"     name="email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}} required/>
                                 <div className='password-combined'>
                 <input className="login-password"
                   type={type}
