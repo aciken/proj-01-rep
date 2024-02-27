@@ -386,7 +386,7 @@ app.post('/sendMail', async (req, res) => {
   try {
     const msg = {
       to: email,
-      from: 'adrianmarton2006@gmail.com',
+      from: 'adrian@ploady.com',
       subject: 'Verification code',
       text: `Your verification code is: ${code}`,
       html: `<strong>Your verification code is: ${code}</strong>`,
