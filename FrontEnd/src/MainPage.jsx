@@ -9,6 +9,7 @@ import { Nav2 } from "./Nav2";
 import { Token } from "./Token";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from 'react-helmet';
 
 export function MainPage(){
 
@@ -36,12 +37,17 @@ export function MainPage(){
 
     return(
         <div className="main-page">
+          <Helmet>
+          <title>Ploady</title>
+          <meta name="description" content="Ploady is an AI tool made to improve your youtube video quality." />
+          <link rel="icon" href="./assets/ploadyLOGO.png" />
             <Nav2/>
             <Hero />
             {/* <Tools /> */}
             <Questions/>
             <Token />
             {/* <Footer /> */}
+            </Helmet>
         </div>
     )
 }
