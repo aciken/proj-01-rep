@@ -131,7 +131,7 @@ const handleToggle = () => {
                                 <button className='sign-btn' onClick={submit}>Sign In</button>
                             </form>
 
-                            <p className="sign-up" >Dont have an account?<Link to="/signup">Sign Up</Link></p>
+                            <p className="sign-up" >Don't have an account?<Link to="/signup">Sign Up</Link></p>
 
                             {isLoading ? <img src={loading} alt="" className='loading' /> : null}
 
