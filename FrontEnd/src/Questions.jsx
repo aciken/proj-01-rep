@@ -75,7 +75,7 @@ return(
     <div className="questions">
         <div className='question-header'>
             <h1>Frequently Asked Questions</h1>
-            <p>Have another question? Contact me on <a onClick={(e) => e.preventDefault()} href="#">Twitter</a> or by <a onClick={(e) => e.preventDefault()} href="#">email</a>.</p>
+            <p>Have another question? Contact me on <a onClick={(e) => e.preventDefault()} href="https://twitter.com/ac1_k3">Twitter</a> or by <a onClick={(e) => e.preventDefault()} href="#">email</a>.</p>
         </div>
         
         <ul className='question-list'>
