@@ -41,13 +41,13 @@ export function MainPage(){
           <title>Ploady</title>
           <meta name="description" content="Ploady is an AI tool made to improve your youtube video quality." />
           <link rel="icon" href="./assets/ploadyLOGO.png" />
+          </Helmet>
             <Nav2/>
             <Hero />
             {/* <Tools /> */}
             <Questions/>
             <Token />
             {/* <Footer /> */}
-            </Helmet>
         </div>
     )
 }
