@@ -81,7 +81,7 @@ return(
         <ul className='question-list'>
             <li>
                 <a href="#" onClick={handleQuestionClick} >What exactly Ploady does?<span className='sign'>+</span></a>
-                <p onClick={closingQuestion} className='under-text'>Ploady is a tool that scans content of your video and than generates best title, description and thumbnail for that video.</p>
+                <p onClick={closingQuestion} className='under-text'>Ploady is a tool that scans content of your video and then generates best title, description and thumbnail for that video.</p>
             </li>
             <li>
                 <a href="#" onClick={handleQuestionClick} >What languages are supported?<span className='sign'>+</span></a>
