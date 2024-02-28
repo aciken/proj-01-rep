@@ -296,7 +296,7 @@ await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
         setCredits(res.data.credits);
     }
 
-    if(res.data.credits > 0){
+    if(res.data.credits > 99){
 
 
         updateCredits(100+creditDiv);
