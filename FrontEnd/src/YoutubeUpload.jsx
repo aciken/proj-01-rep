@@ -361,7 +361,7 @@ imageGen(res.data);
 const buyProduct1 = async () =>{
     try{
         const response = await axios.post('https://proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
-            productId: "269957",
+            productId: "249354",
             id: id
         });
 
