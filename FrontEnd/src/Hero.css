@@ -65,6 +65,11 @@ padding-bottom: 6%;
 color:#171717;
 }
 
+.free-tokens{
+    font-size: .7rem;
+    margin-top: 15px;
+}
+
 
 .boring-part{
     background-color: rgb(255, 255, 255);
