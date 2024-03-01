@@ -362,7 +362,7 @@ const UserSchema = new mongoose.Schema({
     },
     credits:{
       type: Number,
-      default: 0
+      default: 200
     },
     verified:{
       type: Number,

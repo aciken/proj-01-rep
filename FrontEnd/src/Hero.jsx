@@ -95,6 +95,7 @@ const uploadVideo = () => {
                 <h1>Let the AI do the <span className='boring-part'>boring stuff</span></h1>
                 <p>It's never been this easy. Just import your <span className='bold-text'>Youtube Video</span> and in a few secounds you will receve the best title, description and of corse <span className="bold-text">THUMBNAIL</span>.</p>
                 <button  className='get-started-btn'><Link to="/signup">Get Started</Link></button>
+                <p>and get 200 free tokens.</p>
             </div>   
             <h1 className='how-use'>How To Use:</h1>
 
