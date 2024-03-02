@@ -57,7 +57,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
 
     const videoRef = useRef();
-
+    const [videoError, setVideoError] = useState("");
     const [inputs , setInputs] = useState({});
     const [videoPercentage, setVideoPercentage] = useState(0);
     const [response, setResponse] = useState("");
@@ -289,10 +289,10 @@ e.preventDefault();
     };
 
 
-if(localStorage.getItem('credits') < credits){
-    setCredits(localStorage.getItem('credits'));
-}
 
+
+    if(video.duration < 1600){
+        setVideoError("");
 await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     id: id
 })
@@ -363,8 +363,12 @@ imageGen(res.data);
     console.log('Usage Limit Reached')
 
 }
-}
+    }
+
 })
+    } else {
+        setVideoError("Video must be less than 26 minutes long.")
+    }
 }
 
 const buyProduct1 = async () =>{
@@ -411,6 +415,7 @@ const buyProduct1 = async () =>{
                 <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
                 <p><span className='cost'>Cost:</span> 100 Tokens</p>
             </div>
+            <p className='video-error'>{videoError}</p>
             <p>{addedVideo}</p>
                 <div className='response-wrap'>
                     <input onChange={handleResponseChange} className='title-input' type="text" name="title" placeholder="Title" value={response} />

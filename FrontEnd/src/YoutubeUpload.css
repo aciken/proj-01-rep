@@ -211,6 +211,13 @@ background-color: #e0e0e0;
 
 }
 
+.video-error{
+    color: red;
+    font-size: 1rem;
+    font-family: 'Roboto-Regular';
+
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
