@@ -284,15 +284,15 @@ e.preventDefault();
 
     const video = videoRef.current;
     video.src = URL.createObjectURL(form.file);
-    video.onloadedmetadata = () => {
+    video.onloadedmetadata = async() => {
       console.log(video.duration);
-    };
+      if(video.duration < 1600){
 
 
 
 
-    console.log(video.duration)
-    if(video.duration < 1600){
+
+
         setVideoError("");
 await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
     id: id
@@ -370,7 +370,9 @@ imageGen(res.data);
     } else {
         setVideoError("Video must be less than 26 minutes long.")
     }
+};
 }
+
 
 const buyProduct1 = async () =>{
     try{
