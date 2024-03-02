@@ -273,13 +273,7 @@ const handleSubmit = (e) => {
 
 
 
-useEffect(() => {
-    const video = videoRef.current;
-    video.onloadedmetadata = () => {
-      console.log(video.duration);
-    };
-    video.src = URL.createObjectURL(form.file);
-  }, [form.file]);
+
 
 
 
@@ -287,6 +281,12 @@ const handleSend = async(e) => {
 e.preventDefault();
 
 
+
+    const video = videoRef.current;
+    video.src = URL.createObjectURL(form.file);
+    video.onloadedmetadata = () => {
+      console.log(video.duration);
+    };
 
 
 if(localStorage.getItem('credits') < credits){
