@@ -291,6 +291,7 @@ e.preventDefault();
 
 
 
+    console.log(video.duration)
     if(video.duration < 1600){
         setVideoError("");
 await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
