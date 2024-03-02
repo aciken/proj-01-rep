@@ -1,5 +1,5 @@
 import './YoutubeUpload.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import OpenAI from "openai";
@@ -55,6 +55,8 @@ export function YoutubeUpload({id, credits, setCredits}) {
         }
     }
 
+
+    const videoRef = useRef();
 
     const [inputs , setInputs] = useState({});
     const [videoPercentage, setVideoPercentage] = useState(0);
@@ -271,14 +273,20 @@ const handleSubmit = (e) => {
 
 
 
- 
+useEffect(() => {
+    const video = videoRef.current;
+    video.onloadedmetadata = () => {
+      console.log(video.duration);
+    };
+    video.src = URL.createObjectURL(form.file);
+  }, [form.file]);
 
 
 
 const handleSend = async(e) => {
 e.preventDefault();
 
-console.log(form.file.duration)
+
 
 
 if(localStorage.getItem('credits') < credits){
@@ -397,6 +405,7 @@ const buyProduct1 = async () =>{
                         <div className="label-upload">
                             Upload File
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>upload</title><path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" /></svg>
+                            <video ref={videoRef} style={{ display: 'none' }} />
                         </div>
                     </label>
                 <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
