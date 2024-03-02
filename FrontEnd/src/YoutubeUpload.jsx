@@ -278,6 +278,7 @@ const handleSubmit = (e) => {
 const handleSend = async(e) => {
 e.preventDefault();
 
+console.log(form.file.duration)
 
 
 if(localStorage.getItem('credits') < credits){
