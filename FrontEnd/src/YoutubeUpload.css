@@ -1,14 +1,230 @@
-@font-face {
-    font-family: 'Roboto-Regular';
-    src: url(./assets/ProductSansRegular.ttf);
-}
-
-@font-face {
-    font-family: 'Roboto-Bold';
-    src: url(./assets/ProductSansBold.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
 
 .youtube-upload {
+    font-family: 'Gabarito';
+    min-height: 90vh;
+    padding: 0 25%;
+    background-color: #eff6ff;
+    color: #1e3a8a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.youtube-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    background-color: #ffffff;
+    width: 1000px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 20px;
+    margin-top: 48px;
+}
+
+.youtube-form .top-btns{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+}
+
+.youtube-form .top-btns .video-add-btn .label-upload{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: 'Gabarito';
+    margin: 10px;
+    border: none;
+    background-color: #ffffff;
+    color: #1d4ed8;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.youtube-form .top-btns .video-add-btn .label-upload:hover{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px,rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+}
+
+.youtube-form .top-btns .video-add-btn .label-upload svg{
+    height: 20px;
+    width: 20px;
+    fill: #1d4ed8;
+
+}
+
+
+.download-img-wrapper .imageGen{
+    border-radius: 10px;
+    max-width: 300px;
+    max-height: 170px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.youtube-form .top-btns .send-video-btn{
+    font-size: 18px;
+    font-family: 'Gabarito';
+    border: none;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.youtube-form .top-btns .send-video-btn:hover{
+    background-color: #1d4ed8;
+}  
+
+.credits-part{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.credits-part .buy-btn{
+    padding: 6px 12px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.buy-btn:hover{
+    background-color: #1d4ed8;
+}
+
+.youtube-form .response-wrap{
+    display: flex;
+    gap: 10px;
+    width: 40%;
+}
+
+.youtube-form .response-wrap input[type="text"]{
+    display: inline-block;
+    padding: 0 16px 0 12px;
+    width: 100%;
+    line-height: 30px;
+    height: 32px;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background-color: #fff;
+    color: rgb(8, 7, 7);
+    transition: border .1s linear,background-color .1s linear;
+
+}
+
+.youtube-form .response-wrap input[type="text"]:focus{
+    outline: none;
+    border: 1px solid #2563eb;
+}
+
+.youtube-form .response-wrap textarea{
+    display: inline-block;
+    padding: 0 16px 0 12px;
+    width: 100%;
+    line-height: 30px;
+    height: 200px;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background-color: #fff;
+    color: rgb(8, 7, 7);
+    transition: border .1s linear,background-color .1s linear;
+    resize: none;
+    line-height: 1.5;
+}
+
+.youtube-form .response-wrap textarea:focus{
+    outline: none;
+    border: 1px solid #2563eb;
+}
+
+.youtube-form .response-wrap a.copy-btn{
+    color: #ffffff;
+    background-color: #2563eb;
+    height: 32px;
+    width: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.youtube-form .response-wrap a.copy-btn svg{
+    fill: white;
+}
+
+.show-popUp{
+    position: absolute;
+    top: 90px;
+    color: #1d4ed8;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    background-color: #93c5fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    animation: fadeIn .2s ease-in-out;
+}
+
+.show-popUp.false{
+
+display: none;
+
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px){
+    .youtube-upload{
+        padding: 0 5%;
+    }
+    .youtube-form{
+        width: 100%;
+    
+    }
+    .youtube-form .response-wrap{
+        width: 60%;
+    }
+    
+}
+
+/* .youtube-upload {
     font-family: 'Roboto-Regular';
     min-height: 100vh;
     padding: 0 25%;
@@ -240,4 +456,4 @@ background-color: #e0e0e0;
     
 }
 
-
+ */

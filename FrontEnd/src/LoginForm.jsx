@@ -6,7 +6,8 @@ import { OtherNav} from './OtherNav';
 import {Icon} from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff';
 import {eye} from 'react-icons-kit/feather/eye';
-import loading from './assets/Spinner-1.4s-237px.gif';
+import loading from './assets/Spinner@1x-1.5s-200px-200px.gif';
+import logologin from './assets/tubeAI.logopsd.png'
 
 export function Login(){
 
@@ -54,7 +55,7 @@ const handleToggle = () => {
 
         try{
 
-            await axios.post("https://proj-01-rep-backend1.onrender.com/login", {
+            await axios.post("http://localhost:3000/login", {
                 email,password
             })
             .then(res => {
@@ -94,7 +95,7 @@ const handleToggle = () => {
     const sendVerification = async function(e){
         if(verificationCode == number){
                   history("/logedPage",{state: {id: email}});
-                  await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
+                  await axios.put("http://localhost:3000/verified", {
                     email 
                 })
                 .then(console.log('verified user'))
@@ -106,32 +107,39 @@ const handleToggle = () => {
 
     return(
         <div>
-            <OtherNav/>
             <div className="login">
+                <Link to='/'><img className='login-logo' src={logologin} alt="" /></Link>
                 {!notverified ? (
                         <div className="form-border" >
-                        <p>Log in to your account</p>
+                        <h1 className='welcome'>Welcome Back!</h1>
                             <form className="login-form">
-                                <input className="login-email"  name="email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}} required/>
+                                
+                                <div className="email-comb">
+                                    <label htmlFor="email">Email</label>
+                                    <input className="login-email"  name="email" type="email"  onChange={(e) => {setEmail(e.target.value)}} required/>
+                                </div>
                                 <div className='password-combined'>
+                <label htmlFor="password">Password</label>
                 <input className="login-password"
                   type={type}
-                  name="password"
-                  placeholder="Password"
+                  name="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
              />
-             <span className='toggle-btn'  onClick={handleToggle}>
+             {/* <span className='toggle-btn'  onClick={handleToggle}>
                   <Icon class="absolute mr-10" icon={icon} size={25}/>
-              </span>
+              </span> */}
+
             </div>
                                 <p className='wrong-input'>{wrongInput}</p>
                                 {/* <a href='#' className="forgot">Forgot Password?</a> */}
-                                <button className='sign-btn' onClick={submit}>Sign In</button>
+                                <button className='sign-btn' onClick={submit}>Login</button>
+
+                                <p className="go-to-signup" >Don't have an account?<Link to="/signup">Sign Up</Link></p>
                             </form>
 
-                            <p className="sign-up" >Don't have an account?<Link to="/signup">Sign Up</Link></p>
+                            
 
                             {isLoading ? <img src={loading} alt="" className='loading' /> : null}
 
@@ -139,8 +147,13 @@ const handleToggle = () => {
                 ) : (
                     <div>
                         <form className='verification-form'  onSubmit={sendVerification}>
-                            <p>Check inbox for verification code</p>
-                            <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number} placeholder='Verification Code' className='verification-input'/>
+                            <h2>Verify your email</h2>
+                            <div className="change-ver-pos">
+                                <div className="verification-comb">
+                                    <label htmlFor="verication-code">Veriification code</label>
+                                    <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number}  className='verification-input'/>
+                                </div>
+                            </div>
                             <button  className='submit-verification'>Submit</button>
                             <p className='wrong-verification'>{wrong}</p>
                         </form>

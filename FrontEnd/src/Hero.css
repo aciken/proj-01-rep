@@ -1,4 +1,18 @@
-@font-face {
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+/* .hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    font-family:'Gabarito';
+    background-color: #eff6ff;
+    color:rgb(0, 0, 0);
+    padding: 100px 25% 0 25%;
+} */
+
+
+/* @font-face {
     font-family: 'Roboto-Regular';
     src: url(./assets/Roboto-Regular.ttf);
 }
@@ -23,7 +37,7 @@ form{
     gap: 30px;
     font-family:'roboto-regular';
     background-color: #171717;
-    /* height: 120vh; */
+
     color:rgb(255, 255, 255);
     padding: 0 25%;
 width: 100%;
@@ -193,7 +207,7 @@ cursor: pointer;
     border-radius: 15px;
     left: 50%;
     top: 50%; /* Add this line */
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%);
     animation: fadeIn 0.2s ease-in-out;
   }
 
@@ -270,4 +284,4 @@ cursor: pointer;
     .hero{
         padding: 0 5%;
     }
-}
+}  */

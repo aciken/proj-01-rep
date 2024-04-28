@@ -10,6 +10,9 @@ import { Token } from "./Token";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from 'react-helmet';
+import { NewHero } from "./NewHero";
+import {Problem} from './Problem';
+import {FAQ} from './FAQ';
 
 export function MainPage(){
 
@@ -43,10 +46,14 @@ export function MainPage(){
           <link rel="icon" href="./assets/ploadyLOGO.png" />
           </Helmet>
             <Nav2/>
-            <Hero />
+            <NewHero/>
+            <Problem/>
+            <Pricing/>
+            <FAQ/>
+            {/* <Hero /> */}
             {/* <Tools /> */}
-            <Questions/>
-            <Token />
+            {/* <Questions/>
+            <Token /> */}
             {/* <Footer /> */}
         </div>
     )

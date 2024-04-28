@@ -6,7 +6,8 @@ import { OtherNav} from './OtherNav';
 import {Icon} from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff';
 import {eye} from 'react-icons-kit/feather/eye'
-import loading from './assets/Spinner-1.4s-237px.gif';
+import loading from './assets/Spinner@1x-1.5s-200px-200px.gif';
+import logosignup from './assets/tubeAI.logopsd.png';
 
 export function Signup(){
 
@@ -131,28 +132,34 @@ export function Signup(){
 
     return(
         <div>
-            <OtherNav/>
             <div className="signup">
+            <Link to='/'><img className='signup-logo' src={logosignup} alt="" /></Link>
                 {!verified ? (
                         <div className="signForm-border">
-                        <p>Create your account</p>
+                        <h1 className='create-acc'>Create your account</h1>
                             <form className="signup-form" onSubmit={submit}>
-                            <input className="sign-firstName" type="text" placeholder="First Name" onChange={(e) => {setFirstName(e.target.value)}}/>
-                                <input className="sign-email" type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}}/>
-                                <div className='password-combined'>
+                            <div className="all-comb">
+                              <label htmlFor="sign-firstName">First Name</label>
+                              <input className="sign-firstName" type="text"  onChange={(e) => {setFirstName(e.target.value)}}/>
+                            </div>
+                                <div className="all-comb">
+                                  <label htmlFor="sign-email">Email</label>
+                                  <input className="sign-email" type="email"  onChange={(e) => {setEmail(e.target.value)}}/>
+                                </div>
+                                <div className='all-comb'>
+                                  <label htmlFor="password">Password</label>
                 <input className="login-password"
                   type={type}
                   name="password"
-                  placeholder="Password"
                   value={password}
                   onChange={handleChangePassword}
                   autoComplete="current-password"
              />
-             <span className='toggle-btn'  onClick={handleToggle}>
+             {/* <span className='toggle-btn'  onClick={handleToggle}>
                   <Icon icon={icon} size={25}/>
-              </span>
+              </span> */}
             </div>
-            {error && <p className='password-error'>{error}</p>}
+             <p className='password-error'>{error}</p>
 
                                 <p className='wrong-input'>{wrongInput}</p>
                                 <button className='sign-btn' type='submit'>Sign Up</button>

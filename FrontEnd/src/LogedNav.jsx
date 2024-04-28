@@ -1,5 +1,5 @@
 import './nav2.css';
-import logo from './assets/plaodylogowhite1.png';
+import logo from './assets/tubeAI.logopsd.png';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export function LogedNav({navRes, onChangeNavRes}){
       };
 
     return (
-        <div>
+
             <div className="whole-nav">
                 <a href="#" className="left-nav-part">
                     <img src={logo} onClick={(e) => e.preventDefault()} alt="Logo" className="nav-logo"/>
@@ -38,7 +38,7 @@ export function LogedNav({navRes, onChangeNavRes}){
                     {/* <Link to="/">Logout</Link> */}
                 </div>
             </div>
-        </div>
+
     )
 }
 

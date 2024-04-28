@@ -1,22 +1,20 @@
-@font-face {
-    font-family: 'Custom-Font';
-    src: url(./assets/ProductSansRegular.ttf);
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+.all{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
-
-@font-face {
-    font-family: 'Font-Bold';
-    src: url(./assets/ProductSansBold.ttf);
-}
-
-
 
 .whole-nav{
     display: flex;
-    font-family: 'Custom-Font';
+    font-family: 'Gabarito';
     align-items: center;
     justify-content: space-between;
-    background-color: #171717;
+    background-color: white;
     padding: 0 25%;
+    height: 10vh;
+    border-top: 5px solid #2563eb;
+    width: 100%;
+
 }
 
 .nav-logo{
@@ -24,68 +22,27 @@
     width: auto;
 }
 
-.nav-links{
-    display:flex;
-    align-items: center;
-    gap: 20px;
+.right-nav-part a{
     color: white;
+    background-color: #2563eb;
+    padding: 6px 12px;
+    border-radius: 3px;
 }
 
-.nav-links a{
-    color: white;
-}
-
-.sign-up-btn{
-    background-color: white;
-    color: black;
-}
-
-.nav-links a.sign-up-btn{
-    color: black;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.profile-btn{
-    background-color: white;
-    color: black;
-    border-radius: 5px;
-
-}
-
-.profile-btn a{
-    color: black;
-    padding: 5px 10px;
-
-}
-
-.profile-btn a:hover{
-    text-decoration: none;
-
-}
-
-.logOut-btn{
-    color: rgb(39, 39, 39);
-    background-color: #ffffff;
-    padding: 4px 8px;
-    border-radius: 10px;
-    font-size: 1rem;
-}
-
-a.logOut-btn{
-    color: black;
-}
-
-
-
-a.logOut-btn:hover{
-text-decoration: none;
-}
 
 @media screen and (max-width: 768px){
 
     .whole-nav{
         padding: 0 10px;
     }
-    
 }
+
+
+
+
+
+
+
+
+
+

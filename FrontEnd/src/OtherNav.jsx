@@ -1,4 +1,4 @@
-import './nav2.css';
+import './nav-land.css';
 import logo from './assets/plaodylogowhite1.png';
 import { Link } from 'react-router-dom';
 

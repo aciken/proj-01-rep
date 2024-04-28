@@ -1,5 +1,5 @@
-import "./nav2.css";
-import logo from './assets/plaodylogowhite1.png';
+import "./nav-land.css";
+import logo from './assets/tubeAI.logopsd.png';
 import { Link } from 'react-router-dom';
 
 export function Nav2() {
@@ -23,15 +23,17 @@ export function Nav2() {
     }
 
     return (
-<div className='whole-nav'>
-            <div className="nav-logo">
-                <img src={logo} alt="plaody logo" className="nav-logo" />
-            </div>
-            <div className="nav-links">
-            {/* <a href="#" onClick={handleScrollToQuestions} className='demo-nav'>FAQ</a>
-                <a href="#" onClick={handleScrollToPricing}>Pricing</a> */}
-                <Link to="/Login">Login</Link>
-                <Link to="/signup" className="sign-up-btn">Signup</Link>
+<div className='nav-land'>
+            <div className="nav-land-inside">
+                <div className="nav-logo">
+                    <img src={logo} alt="plaody logo" className="nav-logo" />
+                </div>
+                <div className="nav-links">
+                {/* <a href="#" onClick={handleScrollToQuestions} className='demo-nav'>FAQ</a>
+                    <a href="#" onClick={handleScrollToPricing}>Pricing</a> */}
+                    <Link to="/Login">Login</Link>
+                    <Link to="/signup" className="sign-up-btn">Signup</Link>
+                </div>
             </div>
 </div>
     )

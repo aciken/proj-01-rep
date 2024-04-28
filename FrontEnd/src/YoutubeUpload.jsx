@@ -5,7 +5,7 @@ import axios from "axios";
 import OpenAI from "openai";
 import PropTypes from 'prop-types';
 import noThumbnail from './assets/NoThumbnail.png';
-import gif from './assets/Infinity-1.4s-184px (2).gif'
+import gif from './assets/Infinity@1x-2.1s-200px-200px.gif'
 import app from './firebase';
 import { getStorage, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { ref } from "firebase/storage";
@@ -44,7 +44,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
 
         setCredits(credits - num);
         try{
-             await axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
+             await axios.put('http://localhost:3000/updateCredits', {
                 id: id,
                 credits: credits - num,
             });
@@ -160,7 +160,7 @@ export function YoutubeUpload({id, credits, setCredits}) {
 const downloadFile = (e) => {
 e.preventDefault();
 
-const url = `https://proj-01-rep-backend1.onrender.com/public/${downloadUrl}`;
+const url = `http://localhost:3000/public/${downloadUrl}`;
 const fileName = url.split('/').pop();
 const aTag = document.createElement('a');
 aTag.href = url;
@@ -234,7 +234,7 @@ const handleSubmit = (e) => {
 
 
 
-    axios.post("https://proj-01-rep-backend1.onrender.com/upload", videoData)
+    axios.post("http://localhost:3000/upload", videoData)
     .then(res => { 
 
         updateCredits(100);
@@ -294,7 +294,7 @@ e.preventDefault();
 
 
         setVideoError("");
-await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
+await axios.post('http://localhost:3000/checkCredits', {
     id: id
 })
 .then(res =>{
@@ -323,7 +323,7 @@ const videoData = new FormData();
 
 videoData.append("videoFile", form.file);
 
-axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
+axios.post("http://localhost:3000/send", videoData)
     .then((res) => { 
 
         
@@ -376,7 +376,7 @@ imageGen(res.data);
 
 const buyProduct1 = async () =>{
     try{
-        const response = await axios.post('https://proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
+        const response = await axios.post('http://localhost:3000/api/purchaseProduct', {
             productId: "269957",
             id: id
         });
@@ -400,10 +400,8 @@ const buyProduct1 = async () =>{
 
     return(
         <div className="youtube-upload">
-            <h1>Upload Your Video</h1>
 
-               
-
+        
             <form  className='youtube-form' >
 
             <div className="top-btns">
@@ -443,10 +441,12 @@ const buyProduct1 = async () =>{
     {/* <button type="submit" className={buttonClassName} disabled={isButtonDisabled}>Upload Video</button> */}
             </form>
 
-                <button onClick={buyProduct1} className='buy-btn' >Purchase Credits</button>
-                <p>{credits} Tokens</p>
+                <div className="credits-part">
+                    <button onClick={buyProduct1} className='buy-btn' >Purchase Credits</button>
+                    <p>{credits} Credits</p>
+                </div>
 
-                {showPopup ? <p className='show-popUp'>Copied to Clipboard</p> : null}
+                {showPopup ? <p className='show-popUp'>Copied to Clipboard</p> : <p className='show-popUp false'>Copied to Clipboard</p>}
             {/* {usageLimit === 0 ? <p>Usage Limit Reached</p> : <p>Usage Limit: {usageLimit}</p>} */}
         </div>
     )

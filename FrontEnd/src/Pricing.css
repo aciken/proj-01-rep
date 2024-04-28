@@ -1,119 +1,95 @@
-@font-face {
-    font-family: 'Roboto-Regular';
-    src: url(./assets/Roboto-Regular.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
 
 .pricing{
-    height: 100vh;
-    background-color: #171717;
+    font-family: 'Gabarito';
+    width: 100%;
+    padding: 24px;
+
+}
+
+.pricing .pricing-headline{
+    font-weight: 700;
+    font-size: 48px;
+    color: #000000;
+    text-align: center;
+}
+
+.pricing .pricing-desc{
+    margin-top: 24px;
     padding: 0 25%;
+    font-weight: 400;
+    font-size: 20px;
+    color: #6b7280;
+    text-align: center;
+}
+
+.pricing .pricing-desc span{
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+.pricing .pricing-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    font-family: 'Roboto-Regular';
+    gap: 12px;
+    margin-top: 48px;
 }
 
-.price-card{
-    position: relative;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    transition: all 0.3s ease-in-out;
-    height: 70%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-
-    justify-content: space-between;
-}
-
-.price-card-header{
-    font-size: 1.7rem;
-}
-
-.All-in{
-    border: 4px solid #eab308;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(230, 177, 18, 0.6);
-}
-
-
-.top-chosen{
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    background-color: #e6b112;
-    border-radius: 30px;
-    padding: 5px 10px;
-    
-    box-shadow: 0 0 10px rgba(230, 177, 18, 0.8);
-}
-
-.price-content{
-
-    line-height: 2.5rem;
-}
-
-.content-text.no{
-    opacity: 50%;
-}
-
-.price-card-footer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.price-card-footer button{
-    cursor: pointer;
-    padding: 10px 20px;
+.pricing .pricing-container .purchase-btn{
+    padding: 6px 12px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-weight: 500;
     border: none;
-    background: #353535;
-    border-radius: 5px;
-    color: white;
-    font-size: 1.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 20px;
 }
 
-.price-card-footer button:hover{
-    background: #292929;
+.pricing .pricing-container .purchase-btn:hover{
+    background-color: #1d4ed8;
+}
+
+.pricing .pricing-container .credits-show{
+    font-size: 20px;
+}
+
+.pricing .pricing-container .credits-show span{
+    font-weight: 800;
+    color: #000000;
 
 }
 
-
-@media screen and (max-width: 1672px) {
-    .price-content{
-        line-height: 2rem;
-    } 
+.credit-add{
+    font-size: 20px;
+    font-weight: 700;
+    color: #3b82f6;
+    position: absolute;
+    transform: translate(100px, 30px);
+    animation: fade 0.5s ease;
 }
 
-@media screen and (max-width: 1380px){
 
-    .pricing{
-        flex-direction: column;
-        height: fit-content;
-        padding: 5% 15%;
-    }  
-    
-}
 
-@media screen and (max-width: 675px){
 
-    .pricing{
-        padding: 5% 0;
-    }  
-    .price-card{
-        width: 70%;
+@media screen and (max-width: 768px){
+    .pricing .pricing-desc{
+        padding: 0 10%;
     }
     
 }
 
 
-
-
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: translate(100px, 100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(100px, 30px);
+    }
+}
 

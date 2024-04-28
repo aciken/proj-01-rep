@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+.nav-land{
+display: flex;
+width: 100%;
+font-family: 'Gabarito';
+background-color: white;
+justify-content: center;
+align-items: center;
+font-size: 16px;
+height: 60px;
+
+}
+
+.nav-land .nav-land-inside{
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-land .nav-land-inside .nav-links{
+display: flex;
+gap: 16px;
+justify-content: center;
+align-items: center;
+margin: 0 12px;
+}
+
+.nav-land .nav-land-inside .nav-links a{
+   color: #1d4ed8;
+}
+
+.nav-land .nav-land-inside a.sign-up-btn{
+    background-color: #1d4ed8;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+
+}
+
+
+@media screen and (max-width: 820px){
+
+
+    .nav-land .nav-land-inside{
+        width: 100%;
+    }
+
+}
+
+
+
+
+

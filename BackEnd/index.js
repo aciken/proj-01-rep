@@ -26,9 +26,11 @@ const OpenAI = require('openai');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(cors({
-  origin: 'https://www.ploady.com'
-}));
+app.use(cors())
+
+// app.use(cors({
+//   origin: 'https://www.ploady.com'
+// }));
 
 const axios = require('axios'); 
 const sharp = require('sharp');
@@ -362,7 +364,7 @@ const UserSchema = new mongoose.Schema({
     },
     credits:{
       type: Number,
-      default: 200
+      default: 100
     },
     verified:{
       type: Number,
