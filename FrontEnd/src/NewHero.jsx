@@ -2,7 +2,7 @@ import './newHero.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import showCaseIMG from './assets/showcase5.png';
+const showCaseIMG = '/showcase5.PNG';
 
 
 export function NewHero() {
