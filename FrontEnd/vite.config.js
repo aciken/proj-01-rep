@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     assetsInlineLimit: 0,
-    assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.gif'],
+    assetsInclude: ['**/*.PNG', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.gif'],
   },
 })
