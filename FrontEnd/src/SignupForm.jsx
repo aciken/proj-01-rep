@@ -168,14 +168,19 @@ export function Signup(){
                             </form>
                         </div>
                 ) : (
-                    <div>
-                        <form className='verification-form'  onSubmit={sendVerification}>
-                            <p>Check inbox for verification code</p>
-                            <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number} placeholder='Verification Code' className='verification-input'/>
-                            <button  className='submit-verification'>Submit</button>
-                            <p className='wrong-verification'>{wrong}</p>
-                        </form>
-                    </div>
+                  <div>
+                  <form className='verification-form'  onSubmit={sendVerification}>
+                      <h2>Verify your email</h2>
+                      <div className="change-ver-pos">
+                          <div className="verification-comb">
+                              <label htmlFor="verication-code">Veriification code</label>
+                              <input type="numbers" name="verification-code" id="verification-code" required onChange={handleChange} value={number}  className='verification-input'/>
+                          </div>
+                      </div>
+                      <button  className='submit-verification'>Submit</button>
+                      <p className='wrong-verification'>{wrong}</p>
+                  </form>
+              </div>
                 )}
              </div>
         </div>

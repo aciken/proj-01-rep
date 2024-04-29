@@ -135,7 +135,7 @@ form.login-form .password-combined .login-password:focus{
 
 .login .verification-form{
     display: flex;
-    flex-direction: space;
+    flex-direction: column;
     gap: 10px;
     justify-content: space-around;
     align-items: center;
