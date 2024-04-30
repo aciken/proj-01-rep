@@ -414,7 +414,7 @@ const buyProduct1 = async () =>{
                         </div>
                     </label>
                 <button onClick={handleSend} className={sendClassName} disabled={isSendDisabled} >Send Video</button>
-                <p><span className='cost'>Cost:</span> 100 Tokens</p>
+                <p><span className='cost'>Cost:</span> 100 Credits</p>
             </div>
             <p className='video-error'>{videoError}</p>
             <p>{addedVideo}</p>
