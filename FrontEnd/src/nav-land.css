@@ -29,6 +29,7 @@ margin: 0 12px;
 
 .nav-land .nav-land-inside .nav-links a{
    color: #1d4ed8;
+   text-decoration: none;
 }
 
 .nav-land .nav-land-inside a.sign-up-btn{

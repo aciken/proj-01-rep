@@ -55,7 +55,7 @@ const handleToggle = () => {
 
         try{
 
-            await axios.post("https://proj-01-rep-backend1.onrender.com/login", {
+            await axios.post("http://localhost:3000/login", {
                 email,password
             })
             .then(res => {
@@ -95,7 +95,7 @@ const handleToggle = () => {
     const sendVerification = async function(e){
         if(verificationCode == number){
                   history("/logedPage",{state: {id: email}});
-                  await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
+                  await axios.put("http://localhost:3000/verified", {
                     email 
                 })
                 .then(console.log('verified user'))

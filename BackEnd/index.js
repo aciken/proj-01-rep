@@ -26,7 +26,7 @@ const OpenAI = require('openai');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-
+// app.use(cors());
 
 app.use(cors({
   origin: 'https://www.ploady.com'
@@ -388,17 +388,46 @@ app.post('/sendMail', async (req, res) => {
   try {
     const msg = {
       to: email,
-      from: 'adrian@ploady.com',
+      from: { name: 'Ploady', email: 'adrian@ploady.com' },
       subject: 'Verification code',
       text: `Your verification code is: ${code}`,
-      html: `<strong>Your verification code is: ${code}</strong>`,
-  };
-  await sgMail.send(msg);
+      html: `
+      <style>
+      @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+      </style>
+      <div style="
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      color: blue;
+      font-family: 'Gabarito';
+    ">
+      <div style="
+        padding: 20px;
+        border: 2px solid #93c5fd;
+        background-color: #bfdbfe;
+        color: blue;
+        text-align: center;
+        border-radius: 10px;
+        margin: auto;
+        width: 300px;
+        font-family: 'Gabarito';
+      ">
+        <p style="font-size: 24px; font-weight: 500; color: #172554; ">Your verification code is:</p>
+        <p style="font-size: 28px; font-weight: 900; color: #1e40af;  font-family: 'Roboto';">${code}</p>
+      </div>
+    </div>
+      `,
+    };
+    await sgMail.send(msg);
   } catch (e) {
     console.error(e);
   }
-
-})
+});
 
 
 

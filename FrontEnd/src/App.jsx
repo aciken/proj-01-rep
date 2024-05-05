@@ -9,6 +9,7 @@ import { ProfilePage } from "./ProfilePage";
 import { Success } from "./Succes";
 import { Helmet } from 'react-helmet';
 
+
 import './app.css';
 
 
@@ -26,14 +27,9 @@ export function App() {
 
   return (
     <div>
-            <Helmet>
-          <title>Ploady</title>
-          <meta name="description" content="Ploady is an AI tool made to improve your youtube video quality." />
-          <link rel="icon" href="./assets/ploadyLOGO.png" />
-          </Helmet>
+
 <Router>
 <Routes>
-  
    <Route exact path="/" element={<MainPage/>} />
    <Route exact path="/login" element={<Login />} />
    <Route exact path="/signup" element={<Signup/>} />

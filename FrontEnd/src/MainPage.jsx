@@ -1,18 +1,19 @@
-
-import { Hero } from "./Hero";
 import { Pricing } from "./Pricing";
-import { Questions } from "./Questions";
-import { Tools } from "./Tools";
-import { Footer } from "./Footer";
-import { AiChat } from "./AiChat";
 import { Nav2 } from "./Nav2";
-import { Token } from "./Token";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from 'react-helmet';
 import { NewHero } from "./NewHero";
 import {Problem} from './Problem';
 import {FAQ} from './FAQ';
+
+const structuredData = {
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "Ploady - AI YouTube Companion",
+  "url": "https://www.ploady.com/",
+  "description": "Effortlessly create awesome looking AI-generated thumbnails, titles, and descriptions for your YouTube videos."
+};
 
 export function MainPage(){
 
@@ -40,21 +41,18 @@ export function MainPage(){
 
     return(
         <div className="main-page">
-          <Helmet>
+            <Helmet>
           <title>Ploady</title>
-          <meta name="description" content="Ploady is an AI tool made to improve your youtube video quality." />
-          <link rel="icon" href="./assets/ploadyLOGO.png" />
+          <meta name="description" content="Effortlessly create awesome looking AI-generated thumbnails, titles, and descriptions for your YouTube videos." />
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData)}
+          </script>
           </Helmet>
             <Nav2/>
             <NewHero/>
             <Problem/>
             <Pricing/>
             <FAQ/>
-            {/* <Hero /> */}
-            {/* <Tools /> */}
-            {/* <Questions/>
-            <Token /> */}
-            {/* <Footer /> */}
         </div>
     )
 }
