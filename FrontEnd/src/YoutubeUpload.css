@@ -88,6 +88,30 @@ input[type="file"] {
     background-color: #1d4ed8;
 }  
 
+.youtube-form .top-btns .send-video-btn.disabled{
+    cursor:default;
+    font-size: 18px;
+    font-family: 'Gabarito';
+    border: none;
+    background-color: #6b7280;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;  
+}
+
+.youtube-form .top-btns .send-video-btn.disabled:hover{
+    cursor:default;
+    font-size: 18px;
+    font-family: 'Gabarito';
+    border: none;
+    background-color: #6b7280;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; 
+}
+
 .credits-part{
     display: flex;
     gap: 10px;

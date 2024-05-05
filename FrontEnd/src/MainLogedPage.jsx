@@ -35,7 +35,7 @@ export function MainLoged() {
 async function creditSend() {
 
   try {
-    await axios.post('https://proj-01-rep-backend1.onrender.com/creditSend', {
+    await axios.post('http://localhost:3000/creditSend', {
     id
   })
   .then(res => {
