@@ -8,6 +8,7 @@ import { MainLoged } from "./MainLogedPage";
 import { ProfilePage } from "./ProfilePage";
 import { Success } from "./Succes";
 import { Helmet } from 'react-helmet';
+import { Analytics } from "@vercel/analytics/react"
 
 
 import './app.css';
@@ -27,7 +28,7 @@ export function App() {
 
   return (
     <div>
-
+<Analytics/>
 <Router>
 <Routes>
    <Route exact path="/" element={<MainPage/>} />
