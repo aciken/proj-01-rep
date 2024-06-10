@@ -22,6 +22,7 @@ const SebdRestartMail = async (req, res) => {
 
 
         if(user){
+          console.log(email, verificationCode)
 
             const verificationCode = generateRandomString();
             user.restartCode = verificationCode;
