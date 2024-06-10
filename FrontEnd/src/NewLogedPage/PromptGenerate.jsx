@@ -31,6 +31,8 @@ export function PromptGenerate() {
     useEffect(() => {
         if (!id) {
             navigate('/login');
+        } else {
+            localStorage.setItem('id', id);
         }
     }, [id, navigate]);
 

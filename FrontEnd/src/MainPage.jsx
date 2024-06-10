@@ -24,12 +24,6 @@ export function MainPage(){
           navigate('/logedPage');
         } else{
             return () => {
-                if (!localStorage.getItem('usage')) {
-                  localStorage.removeItem('usage');
-                }
-                if (!localStorage.getItem('tier')) {
-                  localStorage.removeItem('tier');
-                }
                 if (!localStorage.getItem('id')) {
                   localStorage.removeItem('id');
                 }
