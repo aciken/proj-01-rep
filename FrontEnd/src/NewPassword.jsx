@@ -16,7 +16,7 @@ export function NewPassword(){
 
     useEffect(() => {
         
-                axios.post('proj-01-rep-backend1.onrender.com/linkExist', { changablePart })
+                axios.post('https://proj-01-rep-backend1.onrender.com/linkExist', { changablePart })
                 .then((response) => {
                     console.log(response.data)
                 setExist(response.data);
@@ -45,7 +45,7 @@ if(password.length < 8){
 
 
 
-        await axios.put('proj-01-rep-backend1.onrender.com/restartPassword', {
+        await axios.put('https://proj-01-rep-backend1.onrender.com/restartPassword', {
             changablePart, password
         })
         .then((res) => {

@@ -15,7 +15,7 @@ export function RestartPassword(){
 
     const sendMail = async (e) => {
         e.preventDefault();
-        await axios.put('proj-01-rep-backend1.onrender.com/restartPasswordMail', {
+        await axios.put('https://proj-01-rep-backend1.onrender.com/restartPasswordMail', {
             email
         })
         .then((res) => {
