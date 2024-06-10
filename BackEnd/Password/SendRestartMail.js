@@ -12,7 +12,7 @@ function generateRandomString() {
     return result;
 }
 
-const SebdRestartMail = async (req, res) => {
+const SendRestartMail = async (req, res) => {
     try {
         const { email } = req.body;
         const user = await collection.findOne({email: email});
@@ -81,4 +81,4 @@ const SebdRestartMail = async (req, res) => {
     }
 }
 
-module.exports = SebdRestartMail
+module.exports = SendRestartMail
