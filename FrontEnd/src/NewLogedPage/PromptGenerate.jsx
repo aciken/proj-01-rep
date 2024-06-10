@@ -831,7 +831,7 @@ const handleChangeStyle = (event) => {
 
   {showPopup && (
     <div className='logout'>
-        <a href="/">Log Out</a>
+        <a href="/" onClick={() => {localStorage.removeItem("id")}}>Log Out</a>
     </div>
   )}
 </div>
