@@ -70,7 +70,7 @@ const SendRestartMail = async (req, res) => {
             res.json({message: 'Email sent'});
 
         } else{
-            res.status(404).json({message: 'User not found'});
+            res.json({message: 'Email not found'});
         }
 
     }
