@@ -18,6 +18,7 @@ const SebdRestartMail = async (req, res) => {
         const user = await collection.findOne({email: email});
 
         console.log(email)
+        console.log(user);
 
 
 
