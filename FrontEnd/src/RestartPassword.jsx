@@ -28,7 +28,6 @@ export function RestartPassword(){
         })
         .catch((error) => {
             console.log(error);
-            setError(error);
         });
         
 

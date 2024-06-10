@@ -17,13 +17,11 @@ const SendRestartMail = async (req, res) => {
         const { email } = req.body;
         const user = await collection.findOne({email: email});
 
-        console.log(email)
-        console.log(user);
+
 
 
 
         if(user){
-          console.log(email, verificationCode)
 
             const verificationCode = generateRandomString();
             user.restartCode = verificationCode;
