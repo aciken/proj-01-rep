@@ -38,7 +38,7 @@ export function PromptGenerate() {
 
 
     useEffect(() => {
-        axios.post('proj-01-rep-backend1.onrender.com/getData',{
+        axios.post('https://proj-01-rep-backend1.onrender.com/getData',{
             id: id    
         })
           .then(res => {
@@ -201,7 +201,7 @@ export function PromptGenerate() {
 
         console.log(currentIndex, user.history.length)
         if(currentIndex != user.history.length || user.history.length != 0){
-        await axios.put('proj-01-rep-backend1.onrender.com/updateHistory/title', {
+        await axios.put('https://proj-01-rep-backend1.onrender.com/updateHistory/title', {
             id: id,
             title: title[1],
             titleProcess: 'drop',
@@ -245,7 +245,7 @@ export function PromptGenerate() {
 
         console.log(currentIndex, user.history.length)
         if(currentIndex != user.history.length || user.history.length != 0){
-            await axios.put('proj-01-rep-backend1.onrender.com/updateHistory/description', {
+            await axios.put('https://proj-01-rep-backend1.onrender.com/updateHistory/description', {
                 id: id,
                 description: completion.choices[0].message.content,
                 descriptionProcess: 'drop',
@@ -282,7 +282,7 @@ export function PromptGenerate() {
       const updateCredits = async (credits, remove) => {
 
         setCredits(credits - remove);
-        axios.put('proj-01-rep-backend1.onrender.com/updateCredits', {
+        axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
             id: id,
             credits: credits - remove
     })
@@ -320,7 +320,7 @@ if(check3 == true){
 
 updateCredits(credits, priceCounter);
 
-axios.post("proj-01-rep-backend1.onrender.com/send", videoData)
+axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
     .then((res) => { 
         setFinalPrompt(res.data);
         console.log(res.data)
@@ -418,7 +418,7 @@ axios.post("proj-01-rep-backend1.onrender.com/send", videoData)
             } 
 
                 try{
-                    const response = await axios.post('proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
+                    const response = await axios.post('https://proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
                         productId: whatBuy,
                         id: id,
                         amount: amount
@@ -462,7 +462,7 @@ const sendThumbnail = (blobb) => {
             getDownloadURL(snapshot.ref).then((sUrl) => {
                 console.log(currentIndex, user.history.length)
                 if(currentIndex != user.history.length || user.history.length != 0){
-                    axios.put('proj-01-rep-backend1.onrender.com/updateHistory/thumbnail', {
+                    axios.put('https://proj-01-rep-backend1.onrender.com/updateHistory/thumbnail', {
                         id: id,
                         thumbnail: sUrl,
                         thumbnailProcess: 'drop',
@@ -494,7 +494,7 @@ const sendThumbnail = (blobb) => {
                 console.log(currentIndex, user.history.length - 1)
                 setCurrentIndex(user.history.length);
                 if(currentIndex > user.history.length - 1 || user.history.length == 0){       
-                    await axios.put('proj-01-rep-backend1.onrender.com/addHistory', {
+                    await axios.put('https://proj-01-rep-backend1.onrender.com/addHistory', {
                         id: id,
                         history: {title: title, description: description, thumbnail: url, prompt: finalPrompt, thumbnailProcess, titleProcess, descriptionProcess, transcriptionProcess}
         
@@ -535,7 +535,7 @@ const sendThumbnail = (blobb) => {
 
             const deleteHistory = async(index) => {
 
-                await axios.put('proj-01-rep-backend1.onrender.com/deleteHistory', {
+                await axios.put('https://proj-01-rep-backend1.onrender.com/deleteHistory', {
                     id: id,
                     index: index
                 })
@@ -578,7 +578,7 @@ const sendThumbnail = (blobb) => {
             }
 
             const addHistory = async() => {
-                await axios.put('proj-01-rep-backend1.onrender.com/addHistory', {
+                await axios.put('https://proj-01-rep-backend1.onrender.com/addHistory', {
                     id: id,
                     history: {title: title, description: description, thumbnail: url, prompt: finalPrompt, thumbnailProcess, titleProcess, descriptionProcess, transcriptionProcess}
     
