@@ -86,7 +86,7 @@
 
     .loged-nav{
         z-index: 4100;
-        position: fixed;
+        position: absolute;
         height: 93vh;
         width: 240px;
         background-color: #ffffff;
