@@ -24,7 +24,8 @@ export function PromptGenerate() {
 
     const location = useLocation();
     const navigate = useNavigate();
-    const id = location.state?.id;
+    const id = location.state?.id || localStorage.getItem('id');
+
 
     console.log(id)
 
@@ -34,6 +35,7 @@ export function PromptGenerate() {
         } else {
             localStorage.setItem('id', id);
         }
+
     }, [id, navigate]);
 
     const [user, setUser] = useState('');
