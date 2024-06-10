@@ -15,6 +15,7 @@ export function RestartPassword(){
 
     const sendMail = async (e) => {
         e.preventDefault();
+
         await axios.put('https://proj-01-rep-backend1.onrender.com/restartPasswordMail', {
             email
         })
@@ -24,8 +25,12 @@ export function RestartPassword(){
             } else {
                 setError(res.data.message)
             }
-        }
-        )
+        })
+        .catch((error) => {
+            console.log(error);
+            setError(error);
+        });
+        
 
     }
 
