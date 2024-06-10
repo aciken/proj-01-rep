@@ -5,11 +5,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: fixed;
+    z-index: 1000;
 }
 
 .logo-nav .ploady-logo{
     display: block;
+    position: relative;
 }
 
 .logo-nav .credits-wrap{
@@ -83,7 +85,7 @@
     }
 
     .loged-nav{
-        z-index: 1000;
+        z-index: 4100;
         position: fixed;
         height: 93vh;
         width: 240px;

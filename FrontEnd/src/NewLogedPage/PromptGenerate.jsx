@@ -38,7 +38,7 @@ export function PromptGenerate() {
 
 
     useEffect(() => {
-        axios.post('https://proj-01-rep-backend1.onrender.com/getData',{
+        axios.post('http://localhost:3000/getData',{
             id: id    
         })
           .then(res => {
@@ -201,7 +201,7 @@ export function PromptGenerate() {
 
         console.log(currentIndex, user.history.length)
         if(currentIndex != user.history.length || user.history.length != 0){
-        await axios.put('https://proj-01-rep-backend1.onrender.com/updateHistory/title', {
+        await axios.put('http://localhost:3000/updateHistory/title', {
             id: id,
             title: title[1],
             titleProcess: 'drop',
@@ -245,7 +245,7 @@ export function PromptGenerate() {
 
         console.log(currentIndex, user.history.length)
         if(currentIndex != user.history.length || user.history.length != 0){
-            await axios.put('https://proj-01-rep-backend1.onrender.com/updateHistory/description', {
+            await axios.put('http://localhost:3000/updateHistory/description', {
                 id: id,
                 description: completion.choices[0].message.content,
                 descriptionProcess: 'drop',
@@ -282,7 +282,7 @@ export function PromptGenerate() {
       const updateCredits = async (credits, remove) => {
 
         setCredits(credits - remove);
-        axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
+        axios.put('http://localhost:3000/updateCredits', {
             id: id,
             credits: credits - remove
     })
@@ -320,7 +320,7 @@ if(check3 == true){
 
 updateCredits(credits, priceCounter);
 
-axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
+axios.post("http://localhost:3000/send", videoData)
     .then((res) => { 
         setFinalPrompt(res.data);
         console.log(res.data)
@@ -418,7 +418,7 @@ axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
             } 
 
                 try{
-                    const response = await axios.post('https://proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
+                    const response = await axios.post('http://localhost:3000/api/purchaseProduct', {
                         productId: whatBuy,
                         id: id,
                         amount: amount
@@ -462,7 +462,7 @@ const sendThumbnail = (blobb) => {
             getDownloadURL(snapshot.ref).then((sUrl) => {
                 console.log(currentIndex, user.history.length)
                 if(currentIndex != user.history.length || user.history.length != 0){
-                    axios.put('https://proj-01-rep-backend1.onrender.com/updateHistory/thumbnail', {
+                    axios.put('http://localhost:3000/updateHistory/thumbnail', {
                         id: id,
                         thumbnail: sUrl,
                         thumbnailProcess: 'drop',
@@ -494,7 +494,7 @@ const sendThumbnail = (blobb) => {
                 console.log(currentIndex, user.history.length - 1)
                 setCurrentIndex(user.history.length);
                 if(currentIndex > user.history.length - 1 || user.history.length == 0){       
-                    await axios.put('https://proj-01-rep-backend1.onrender.com/addHistory', {
+                    await axios.put('http://localhost:3000/addHistory', {
                         id: id,
                         history: {title: title, description: description, thumbnail: url, prompt: finalPrompt, thumbnailProcess, titleProcess, descriptionProcess, transcriptionProcess}
         
@@ -535,7 +535,7 @@ const sendThumbnail = (blobb) => {
 
             const deleteHistory = async(index) => {
 
-                await axios.put('https://proj-01-rep-backend1.onrender.com/deleteHistory', {
+                await axios.put('http://localhost:3000/deleteHistory', {
                     id: id,
                     index: index
                 })
@@ -578,7 +578,7 @@ const sendThumbnail = (blobb) => {
             }
 
             const addHistory = async() => {
-                await axios.put('https://proj-01-rep-backend1.onrender.com/addHistory', {
+                await axios.put('http://localhost:3000/addHistory', {
                     id: id,
                     history: {title: title, description: description, thumbnail: url, prompt: finalPrompt, thumbnailProcess, titleProcess, descriptionProcess, transcriptionProcess}
     
@@ -748,7 +748,7 @@ const handleChangeStyle = (event) => {
 
 
     return(
-        <div className="Prompt-Generate">
+        <div className="Prompt-Generate" onClick={() => {setHistoryClass('history-wrap'); setSettingClass('settings-wrap'); setLogedNavClass('loged-nav closed')}}>
             {copyPopup && <div className="copy-popup">Copied</div>}
 
 
@@ -757,8 +757,8 @@ const handleChangeStyle = (event) => {
 
             {buyCreditsState && 
             <>
-                <div className="overlay">
-                <div className="purchase-pop">
+                <div className="overlay" onClick={() => setBuyCreditsState(false)}>
+                <div className="purchase-pop" onClick={(e) => e.stopPropagation()}>
         
                     <div className='head-text'>
                         <h2>Credits</h2>
@@ -802,7 +802,7 @@ const handleChangeStyle = (event) => {
                 </div>
             </>
             }
-            <div className='logo-nav'>
+            <div className='logo-nav' onClick={(e) => e.stopPropagation()}>
             <img src={ploadyLogo} alt="ploadyLogo" className="ploady-logo"/>
             <svg xmlns="http://www.w3.org/2000/svg" onClick={() => {if(logedNavClass == 'loged-nav' || logedNavClass == 'loged-nav closed'){setLogedNavClass('loged-nav clicked')}else if(logedNavClass == 'loged-nav clicked'){setLogedNavClass('loged-nav closed')}}} className='menu-svg' viewBox="0 0 24 24"><title>menu</title><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
             <div className="credits-wrap">
@@ -813,7 +813,7 @@ const handleChangeStyle = (event) => {
                 <button className='credit-buy' onClick={() => setBuyCreditsState(true)}>Buy <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>star-four-points</title><path d="M12,1L9,9L1,12L9,15L12,23L15,15L23,12L15,9L12,1Z" /></svg></button>
             </div>
                 </div>
-                <div className={logedNavClass}>
+                <div className={logedNavClass} onClick={(e) => e.stopPropagation()}>
                 <div className="chose-all-links">
             <a href="" onClick={ (e) => e.preventDefault()} className='chose-nav selected'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>panorama-variant-outline</title><path d="M21 4C20.4 4 17.4 5.5 12 5.5C6.7 5.5 3.5 4 3 4C2.5 4 2 4.4 2 5V19C2 19.6 2.5 20 3 20C3.6 20 6.5 18.5 12 18.5C17.4 18.5 20.4 20 21 20C21.5 20 22 19.6 22 19V5C22 4.4 21.5 4 21 4M20 17.6C18 17 15.4 16.5 12 16.5C8.6 16.5 6 17 4 17.6V6.4C6.6 7.1 9.3 7.5 12 7.5C15.4 7.5 18 7 20 6.4V17.6M9.2 11L5.5 15.4C7.5 15.1 9.7 15 12 15C14.3 15 16.5 15.1 18.5 15.4L14 10L11.2 13.4L9.2 11Z" /></svg> Thumbnails</a>
             <Link href="#" onClick={(e) => e.preventDefault()} className='chose-nav soon'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-video-outline</title><path d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M16,18L13.5,16.3V18H8V13H13.5V14.7L16,13V18Z" /></svg> Shorts (Soon)</Link>
@@ -833,7 +833,7 @@ const handleChangeStyle = (event) => {
 </div>
                 </div>
                 <div className='prompt-main'>
-                 <div className='right-slide'>
+<div onClick={(e) => e.stopPropagation()} className={`right-slide ${settingClass.includes('open') || historyClass.includes('open') ? 'open' : ''}`}>
                     <div className="right-slide-col">
                         <div className={settingClass} onClick={() => {if(settingClass == 'settings-wrap'){setSettingClass('settings-wrap open first'); setHistoryClass('history-wrap no first')}else if(settingClass == 'settings-wrap no first'){setSettingClass('settings-wrap open'); setHistoryClass('history-wrap no')}else if(settingClass == 'settings-wrap open'){setSettingClass('settings-wrap'); setHistoryClass('history-wrap')}else if(settingClass == 'settings-wrap no'){setSettingClass('settings-wrap open');setHistoryClass('history-wrap no')}else if(settingClass == 'settings-wrap open first'){setSettingClass('settings-wrap'); setHistoryClass('history-wrap')}}}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cog</title><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" /></svg>

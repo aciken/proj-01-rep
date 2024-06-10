@@ -59,7 +59,7 @@ const SebdRestartMail = async (req, res) => {
                   width: 300px;
                   font-family: 'Gabarito';
                 ">
-                  <a href="http://localhost:5173/restartPassword/restart/${verificationCode}" style="font-size: 28px; font-weight: 900; color: #1e40af;  font-family: 'Roboto';">Restart Password</a>
+                  <a href="https://www.ploady.com/restartPassword/restart/${verificationCode}" style="font-size: 28px; font-weight: 900; color: #1e40af;  font-family: 'Roboto';">Restart Password</a>
                 </div>
               </div>
                 `,
