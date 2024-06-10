@@ -66,7 +66,7 @@ export function Signup(){
         if(verificationCode == number){
             
                   history("/logedPage",{state: {id: email}});
-                  await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
+                  await axios.put("proj-01-rep-backend1.onrender.com/verified", {
                     email 
                 })
         } else {
@@ -86,7 +86,7 @@ export function Signup(){
         
       try{
         setIsLoading(true);
-          await axios.post("https://proj-01-rep-backend1.onrender.com/signup", {
+          await axios.post("proj-01-rep-backend1.onrender.com/signup", {
               email,password,firstName
           })
           .then(res => {
@@ -97,7 +97,7 @@ export function Signup(){
                     setVerificationCode(res.data.verified)
                     const code = res.data.verified
 
-                    axios.post("https://proj-01-rep-backend1.onrender.com/sendMail", {
+                    axios.post("proj-01-rep-backend1.onrender.com/sendMail", {
                         email,code
                     
                 })

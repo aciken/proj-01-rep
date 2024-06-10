@@ -9,6 +9,10 @@ import { ProfilePage } from "./ProfilePage";
 import { Success } from "./Succes";
 import { Helmet } from 'react-helmet';
 import { Analytics } from "@vercel/analytics/react"
+import { NewLogedPageAll } from "./NewLogedPage/NewLogedPageAll";
+import { PromptGenerate } from "./NewLogedPage/PromptGenerate";
+import { RestartPassword } from "./RestartPassword";
+import { NewPassword } from "./NewPassword";
 
 
 import './app.css';
@@ -34,8 +38,12 @@ export function App() {
    <Route exact path="/" element={<MainPage/>} />
    <Route exact path="/login" element={<Login />} />
    <Route exact path="/signup" element={<Signup/>} />
-   <Route exact path="/logedPage" element={<MainLoged/>} />
+    <Route exact path="/restartPassword" element={<RestartPassword/>} />
+    <Route path="/restartPassword/restart/:changablePart" element={<NewPassword />} />
+   {/* <Route exact path="/logedPage/shorts" element={<NewLogedPageAll/>} /> */}
+   <Route exact path="/logedPage" element={<PromptGenerate/>} />
    <Route exact path="/success" element={<Success/>} />
+   
 </Routes>
 </Router>
 </div>

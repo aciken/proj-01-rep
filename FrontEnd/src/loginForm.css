@@ -199,10 +199,27 @@ form.login-form .password-combined .login-password:focus{
     width: 50%;
 }
 
+.login .login-form .go-to-signup{
+    color: #4b5563;
+}
+
 .login .login-form .go-to-signup a{
     color: #2563eb;
     text-decoration: underline;
 
+}
+
+.restart-password-text{
+    width: 100%;
+    text-align: right;
+    padding-top: 4px;
+    color: #4b5563;
+
+}
+
+.restart-password-text a{
+    color: #2563eb;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 500px){

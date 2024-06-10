@@ -55,7 +55,7 @@ const handleToggle = () => {
 
         try{
 
-            await axios.post("https://proj-01-rep-backend1.onrender.com/login", {
+            await axios.post("proj-01-rep-backend1.onrender.com/login", {
                 email,password
             })
             .then(res => {
@@ -95,7 +95,7 @@ const handleToggle = () => {
     const sendVerification = async function(e){
         if(verificationCode == number){
                   history("/logedPage",{state: {id: email}});
-                  await axios.put("https://proj-01-rep-backend1.onrender.com/verified", {
+                  await axios.put("proj-01-rep-backend1.onrender.com/verified", {
                     email 
                 })
                 .then(console.log('verified user'))
@@ -127,11 +127,14 @@ const handleToggle = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
              />
+                         <p className='restart-password-text'>Can't remeber password? <Link to="/restartPassword">Restart</Link></p>
+
              {/* <span className='toggle-btn'  onClick={handleToggle}>
                   <Icon class="absolute mr-10" icon={icon} size={25}/>
               </span> */}
 
             </div>
+
                                 <p className='wrong-input'>{wrongInput}</p>
                                 {/* <a href='#' className="forgot">Forgot Password?</a> */}
                                 <button className='sign-btn' onClick={submit}>Login</button>

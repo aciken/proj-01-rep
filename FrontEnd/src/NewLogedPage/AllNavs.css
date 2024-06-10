@@ -1,0 +1,313 @@
+.logo-nav{
+    width: 100%;
+    height: 7vh;
+    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo-nav .ploady-logo{
+    display: block;
+}
+
+.logo-nav .credits-wrap{
+    display: flex;
+    gap: 8px;
+    margin-right: 24px;
+}
+
+.logo-nav .menu-svg{
+    display: none;
+    width: 40px;
+    height: 40px;
+    fill: #3b82f6;
+    cursor: pointer;
+    margin-left: 12px;
+}
+
+.logo-nav .credits-wrap .credit-buy{
+    border: none;
+    cursor: pointer;
+    color:white;
+    background-color: #3b82f6;
+    padding: 0 4px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    transition: .1s ease-in-out;
+}
+
+.logo-nav .credits-wrap .credit-buy:hover{
+    background-color: #2563eb;
+}
+
+
+.logo-nav .credits-wrap .credit-buy svg{
+    width: 16px;
+    height: 16px;
+    fill: white;
+    margin-right: 4px;
+}
+
+.logo-nav .nav-credits{
+    display: flex;
+    color: #64748b;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    height: 38px;
+    gap: 4px;
+    padding: 0 0 0 12px;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.logo-nav .nav-credits:hover{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px,rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.logo-nav .nav-credits svg{
+    width: 16px;
+    height: 16px;
+    fill: #64748b;
+    margin-right: 8px;
+}
+
+.logo-nav img{
+    width: 150px;
+    margin-left: 24px;
+    }
+
+    .loged-nav{
+        z-index: 1000;
+        position: fixed;
+        height: 93vh;
+        width: 240px;
+        background-color: #ffffff;
+        border-right: 2px solid #f1f5f9;
+        padding-left: 24px;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+    }
+    
+    
+    .loged-nav .chose-all-links{
+        width: 100%;
+    }
+    
+    .loged-nav .chose-all-links a.chose-nav{
+        text-decoration: none;
+        color: #64748b;
+        font-weight: 500;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        height: 48px;
+        width: 90%;
+        border-radius: 4px;
+        transition: .1s ease-in-out;
+    }
+
+    .loged-nav .chose-all-links a.chose-nav.soon{
+        cursor: default;
+        color: #94a3b8;
+    }
+
+
+    
+    
+    .loged-nav .chose-all-links a.chose-nav svg{
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        fill: #94a3b8;
+    }
+
+
+    
+    .loged-nav .chose-all-links a.chose-nav.selected{
+        color: #3b82f6;
+    }
+    
+    .loged-nav .chose-all-links a.chose-nav.selected svg{
+        fill: #3b82f6;
+    }
+
+
+    .loged-nav .wrapper{
+            position: relative;  
+            width: 100%;
+    }
+    
+    .loged-nav .profile-down{
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 90%;
+        height: 48px;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1200;
+        color: #64748b;
+        padding: 0 24px;
+    }
+
+    .loged-nav  svg{
+        width: 24px;
+        height: 24px;
+        fill: #64748b;
+    }
+
+    .loged-nav .profile-down .chevron-down.up {
+        animation: rotate .2s ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    .loged-nav .profile-down .chevron-down.down {
+        animation: rotateBack .2s ease-in-out;
+        animation-fill-mode: forwards;
+    }
+    
+    .loged-nav .profile-down:hover{
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px,rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    .loged-nav .wrapper .logout {
+        z-index: 1100;
+        position: absolute;
+        bottom: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        animation: scale .2s ;
+        border-radius: 4px;
+      }
+
+        .loged-nav .wrapper .logout a{
+            text-decoration: none;
+            color: #dc2626;
+            height: 36px;
+            width: 100%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding-left: 24px;
+        }
+
+
+        .loged-nav .wrapper .logout a:hover{
+            color: #b91c1c;
+            background-color: #fef2f2;
+        }
+
+
+
+
+        /* make a keyframe animation that will change rotation of svg element for 180 degrees */
+        /* make animation that with animate posiotion on x axis  */
+
+
+
+
+        @keyframes rotate{
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(-180deg);
+            }
+        }
+
+        @keyframes rotateBack{
+            0%{
+                transform: rotate(-180deg);
+            }
+            100%{
+                transform: rotate(0deg);
+            }
+        }
+
+
+
+
+        @keyframes scale{
+
+            0%{
+                scale: 0%;
+            }
+            100%{
+                scale: 100%;
+            }
+
+
+        }
+
+        @keyframes swipe-in{
+
+            0%{
+                transform: translateX(-100px);
+            }
+            100%{
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes swipe-out {
+            0% {
+              transform: translateX(0);
+              visibility: visible; /* Make the element visible at the start of the animation */
+              opacity: 1;
+            }
+            100% {
+              transform: translateX(-100%);
+              opacity: 0;
+            }
+          }
+
+
+        @media screen and (max-width: 768px) {
+            .loged-nav {
+                display: none;
+              }
+
+              .loged-nav.closed{
+                display: flex;
+                animation: swipe-out 0.5s forwards;
+                visibility: hidden;
+              }
+              
+
+
+            .logo-nav .menu-svg{
+                display: block;
+            }
+
+            .logo-nav .ploady-logo{
+                display: none;
+            }
+
+            .loged-nav.clicked{
+                display: flex;
+                animation: swipe-in .2s ease-in-out;
+            }
+
+
+
+
+            
+        }

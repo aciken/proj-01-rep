@@ -1,12 +1,22 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const collection = require('./DataBase/MongoDB')
+
+const getDataFromID = require('./getData/getDataFromID')
+const updateCredits = require('./UpdateData/updateCredits')
+const purchaseProduct = require('./Purchase/purchaseProduct')
+const downloadImg = require('./image/downloadImg')
+const addHistory = require('./History/addHistory')
+const deleteHistory = require('./History/deleteHistory')
+const sendRestartMail = require('./Password/SendRestartMail')
+const RestartPassword = require('./Password/RestartPassword')
+const linkExist = require('./Password/linkExist')
+const { updateTitle, updateDescription, updateThumbnail } = require('./History/updateHistory')
+
+
 const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
-const {lemonSqueeztApiInstance} = require("./utils/axios.js");
 
 const crypto = require('crypto');
-
-
 let open;
 
 import('open').then((module) => {
@@ -25,6 +35,10 @@ const dotenv = require('dotenv').config();
 const OpenAI = require('openai');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+
+
+
 
 // app.use(cors());
 
@@ -57,6 +71,8 @@ function generateRandomKey(length) {
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
 
 
 
@@ -140,6 +156,17 @@ app.get('*', (req, res) => {
 //     res.status(500).send('An error occurred while converting the URL to JPG.');
 //   }
 // });
+
+app.post('/getData', getDataFromID)
+app.put('/updateCredits', updateCredits)
+app.put('/addHistory', addHistory);
+app.put('/deleteHistory', deleteHistory);
+app.put('/updateHistory/title', updateTitle);
+app.put('/updateHistory/description', updateDescription);
+app.put('/updateHistory/thumbnail', updateThumbnail);
+app.put('/restartPasswordMail', sendRestartMail);
+app.put('/restartPassword', RestartPassword);
+app.post('/linkExist', linkExist);
 
 app.get('/send', (req, res) => {
   res.send('send message');
@@ -337,44 +364,10 @@ const imageKey = generateRandomKey(7)
 
 
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("Connected to MongoDB"))
-.catch(err => console.log(err));
-
-
-const UserSchema = new mongoose.Schema({
-  firstName:{
-    type: String,
-    required: true,
-  },
-    email:{
-        type: String,
-        required: true,
-    },
-    password:{
-        type: String,
-        required: true,
-    },
-    tier:{
-      type: String
-    },
-    usage:{
-      type: Number,
-      default: 0
-    },
-    credits:{
-      type: Number,
-      default: 100
-    },
-    verified:{
-      type: Number,
-      default: 0
-    }
-    });
 
 
 
-    const collection = mongoose.model('collection', UserSchema);
+
 
 
 
@@ -662,57 +655,7 @@ app.post('/api/sendVideoToStorage', async (req, res) => {
   }
 });
 
-app.post('/api/purchaseProduct', async (req, res) => {
-  try {
-    const reqData = req.body;
-    const email = req.body.id;
-
-    console.log(reqData, email)
-
-    console.log(req.body)
-
-    if(!reqData.productId) 
-      return res.status(400).json({message: "productId is required"});
-
-      console.log('asd')
-    const response = await lemonSqueeztApiInstance.post('/checkouts', {
-      data: {
-        type: "checkouts",
-        attributes:{
-          checkout_data:{
-          custom:{
-            user_id: email,
-          },
-        },
-        },
-        relationships: {
-          store: {
-            data: {
-              type: "stores",
-              id: process.env.LEMON_SQUEZZY_STORE_ID,
-            },
-          },
-          variant: {
-            data: {
-              type: "variants",
-              id: reqData.productId.toString(),
-            },
-          },
-        },
-      },
-    });
-
-    const checkoutUrl = response.data.data.attributes.url;
-
-    console.log(response.data);
-    console.log('yea')
-
-    return res.json({checkoutUrl})
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Internal Server Error");
-  }
-})
+app.post('/api/purchaseProduct', purchaseProduct);
 
 
 
@@ -728,8 +671,6 @@ const body = req.body;
       console.error('The secret is undefined!');
       return res.status(500).json({message: "Server Error"});
     }
-
-
 
     const hmac      = crypto.createHmac('sha256', secret);
     const digest    = Buffer.from(hmac.update(JSON.stringify(req.body)).digest('hex'), 'utf8');
@@ -751,10 +692,11 @@ const body = req.body;
     }
 
     const userID = body.meta.custom_data.user_id
-    const tokenValue = body.data.attributes.total_usd
+    const tokenValue = Number(body.meta.custom_data.amount);
 
     const user = await collection.findOne({ email: userID });
     if (user) {
+      console.log(tokenValue)
       user.credits += tokenValue;
       await user.save();
       console.log("added credits")
@@ -768,6 +710,12 @@ const body = req.body;
     return res.status(500).json({message: "Server Error"});
   }
 });
+
+
+
+
+
+
 
 
 

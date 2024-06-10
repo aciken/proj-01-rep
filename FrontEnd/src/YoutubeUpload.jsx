@@ -61,7 +61,7 @@ useEffect(() => {
 
         setCredits(credits - num);
         try{
-             await axios.put('https://proj-01-rep-backend1.onrender.com/updateCredits', {
+             await axios.put('http://localhost:3000/updateCredits', {
                 id: id,
                 credits: credits - num,
             });
@@ -177,7 +177,7 @@ useEffect(() => {
 const downloadFile = (e) => {
 e.preventDefault();
 
-const url = `https://proj-01-rep-backend1.onrender.com/public/${downloadUrl}`;
+const url = `http://localhost:3000/public/${downloadUrl}`;
 const fileName = url.split('/').pop();
 const aTag = document.createElement('a');
 aTag.href = url;
@@ -251,7 +251,7 @@ const handleSubmit = (e) => {
 
 
 
-    axios.post("https://proj-01-rep-backend1.onrender.com/upload", videoData)
+    axios.post("http://localhost:3000/upload", videoData)
     .then(res => { 
 
         updateCredits(100);
@@ -311,7 +311,7 @@ e.preventDefault();
 
 
         setVideoError("");
-await axios.post('https://proj-01-rep-backend1.onrender.com/checkCredits', {
+await axios.post('http://localhost:3000/checkCredits', {
     id: id
 })
 .then(res =>{
@@ -341,7 +341,7 @@ const videoData = new FormData();
 
 videoData.append("videoFile", form.file);
 
-axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
+axios.post("http://localhost:3000/send", videoData)
     .then((res) => { 
 
         
@@ -396,7 +396,7 @@ setVideoSending(false);
 
 const buyProduct1 = async () =>{
     try{
-        const response = await axios.post('https://proj-01-rep-backend1.onrender.com/api/purchaseProduct', {
+        const response = await axios.post('http://localhost:3000/api/purchaseProduct', {
             productId: "269957",
             id: id
         });
