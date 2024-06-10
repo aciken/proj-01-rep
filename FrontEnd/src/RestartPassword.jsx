@@ -46,8 +46,9 @@ export function RestartPassword(){
                         <label htmlFor="">Enter Email</label>
                         <input type="email" onChange={(e) => setEmail(e.target.value)} required/>
                     </div>
+                    <p className='error-message'>{error}</p>
                     <button type='submit' className='send-mail'>Send Email</button>
-                    <p>{error}</p>
+
                 </form>
                 </div>
                 ) : 
