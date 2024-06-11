@@ -11,6 +11,14 @@ import testosteron from './assets/testosteron.png'
 import arrow from './assets/arrow.png'
 import loadingGIF from './assets/spinner3.gif'
 
+const showCaseIMG = '/ploadyVideo.mp4'
+const ploadyThumbnailClosed = '/thumbnailclosed.png'
+const ploadyThumbnailOpen = '/thumbnailopen.png'
+const ploadyTitleClosed = '/titleclosed.png'
+const ploadyTitleOpen = '/titleopen.png'
+const ploadyDescriptionClosed = '/descriptionclosed.png'
+const ploadyDescriptionOpen = '/descriptionopen.png'
+
 export function Problem() {
 
   const [tryYourself, setTryYourself] = useState(0);
@@ -28,11 +36,17 @@ export function Problem() {
 
 
 
+
+  
+  
+  const [ploadyThumbnail, setPloadyThumbnail] = useState(ploadyThumbnailOpen);
+  const [ploadyTitle, setPloadyTitle] = useState(ploadyTitleClosed);
+  const [ploadyDescription, setPloadyDescription] = useState(ploadyDescriptionClosed);
+
       
 
 
   const uploads = [
-      ['No video added yet'],
       ['videoGame.mp4', 'Breaking Free: Conquer Video Game Addiction!', 'In this YouTube video, we delve into the dark side of video games, highlighting the harmful effects they can have on our lives. Additionally, we offer valuable insights on how to overcome video game addiction. Tune in now for must-know tips!', `${gaming}`],
       ['Fasting.mp4', 'Unlock Optimal Health with Time-Restricted Feeding', 'In this informative video, we delve into the advantages and practical application of Time-Restricted Feeding and Fasting. Learn how this method can optimize your health and lifestyle. Join us to uncover the secrets to improved well-being!', `${fasting}`],
       ['monkMode.mp4', 'Master Productivity with Monk Mode!', "Learn how to stay focused and productive with the Monk Mode protocol in this informative YouTube video. Discover practical tips and strategies to enhance your productivity and achieve your goals. Whether you're a student, professional, or entrepreneur, this video is a must-watch for anyone looking to optimize their work ethic and achieve success.", `${monkModePNG}`],
@@ -42,7 +56,7 @@ export function Problem() {
 
   const changeIndex = () => {
 
-const randomNumber = Math.floor(Math.random() * 5) + 1;
+const randomNumber = Math.floor(Math.random() * 4) + 1;
 setVideoIndex(randomNumber)
 
   }
@@ -128,39 +142,13 @@ const again = () =>{
 
       </div>
 
-                      <div className='try'>
-                    { tryYourself == 1 ?
-                    <div className='step'>
-                        <div className="btns">
-                            <button className='upload-file' onClick={() => changeIndex()}>Upload File</button>
-                            <button className='send-video' onClick={() => sendVideo()}>Send Video</button>
-                        </div>
-                        <p className={`added-video ${addedVideoClass}`}>{uploads[videoIndex][0]}</p>
-                    </div> : 
-                    tryYourself == 2 ? 
-                        <div className='try-flex'>
-                            <div className='left-inputs' >
-                                <input type="text" value={inputValue} disabled />
-                                <textarea cols="30" rows="10" value={textareaValue} disabled></textarea>
-                            </div>
-                            {loading != loadingGIF ? <img className='thumbnail-show' src={uploads[videoIndex][3]} alt="Thumbnail" /> :
-                            <div className="loading-wrap">
-                                <img className='thumbnail-loading' src={loading} alt="Loading" />
-                                </div>
-                                }
-                                     {showBtn ? 
-                        <button className='try-again' onClick={() => again()}>Again?</button> 
-                        : null
-                        }
-                        </div>
-                     :
-                    <div className='try-first'>
-                    <button className='try-yourself' onClick={() => setTryYourself(tryYourself+1)}>Try yourself</button>
-                    <img className='arrow' src={arrow} alt="Arrow" />
-                    </div>
-                    }
-                    
-                </div> 
+      <div className="try">
+                    <img onClick={() => {if(ploadyThumbnail == ploadyThumbnailClosed){setPloadyThumbnail(ploadyThumbnailOpen); setPloadyDescription(ploadyDescriptionClosed); setPloadyTitle(ploadyTitleClosed)}else{setPloadyThumbnail(ploadyThumbnailClosed)}}} className='showcase-img' src={ploadyThumbnail} alt="" />
+                    <img onClick={() => {if(ploadyTitle == ploadyTitleClosed){setPloadyTitle(ploadyTitleOpen); setPloadyThumbnail(ploadyThumbnailClosed);setPloadyDescription(ploadyDescriptionClosed)}else{setPloadyTitle(ploadyTitleClosed)}}} className='showcase-img' src={ploadyTitle} alt="" />
+                    <img onClick={() => {if(ploadyDescription == ploadyDescriptionClosed){setPloadyDescription(ploadyDescriptionOpen);setPloadyThumbnail(ploadyThumbnailClosed); setPloadyTitle(ploadyTitleClosed)}else{setPloadyDescription(ploadyDescriptionClosed)}}} className='showcase-img' src={ploadyDescription} alt="" />
+
+      </div>
+
 
     </div>
   );

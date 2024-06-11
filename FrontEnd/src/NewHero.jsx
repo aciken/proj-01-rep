@@ -2,7 +2,10 @@ import './newHero.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const showCaseIMG = '/showcase5.PNG';
+
+const showCaseIMG = '/ploadyVideo.mp4'
+
+// const showCaseIMG = '/showcase5.PNG';
 
 
 export function NewHero() {
@@ -25,7 +28,7 @@ export function NewHero() {
                 </div>
 
 
-                <img className='showcase-img' src={showCaseIMG} alt="" />
+                <video className='showcase-img' src={showCaseIMG} autoPlay loop muted />
             </div>
         </div>
     )

@@ -45,7 +45,7 @@ export function MainPage(){
             <Nav2/>
             <NewHero/>
             <Problem/>
-            <Pricing/>
+            {/* <Pricing/> */}
             <FAQ/>
         </div>
     )
