@@ -872,7 +872,7 @@ const handleChangeStyle = (event) => {
                                                                                         {deleteConfirmIndex === reversedIndex && (
                                                         <div className={confirmDeleteClass}>
                                                             <button className='cancle-sure' onClick={(e) => {e.stopPropagation(); setConfirmDeleteClass('confirm-delete closed'); setdeleteConfirmIndex(null);setDeletingIndex(null)}}>Cancle</button>
-                                                            <button className='delete-sure' onClick={(e) => {e.stopPropagation(); deleteHistory(currentIndex)}}>Delete</button>
+                                                            <button className='delete-sure' onClick={(e) => {e.stopPropagation(); deleteHistory(deleteConfirmIndex)}}>Delete</button>
                                                         </div>
                                                     )
                                                         }
