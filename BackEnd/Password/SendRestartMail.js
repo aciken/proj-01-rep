@@ -31,41 +31,20 @@ const SendRestartMail = async (req, res) => {
 
 
             const msg = {
-                to: email,
-                from: { name: 'Ploady', email: 'adrian@ploady.com' },
-                subject: 'Verification code',
-                text: `Your restart link`,
-                html: `
-                <style>
-                @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
-                @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-                </style>
-                <div style="
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: white;
-                color: blue;
-                font-family: 'Gabarito';
-              ">
-                <div style="
-                  padding: 20px;
-                  border: 2px solid #93c5fd;
-                  background-color: #bfdbfe;
-                  color: blue;
-                  text-align: center;
-                  border-radius: 10px;
-                  margin: auto;
-                  width: 300px;
-                  font-family: 'Gabarito';
-                ">
-                  <a href="https://www.ploady.com/restartPassword/restart/${verificationCode}" style="font-size: 28px; font-weight: 900; color: #1e40af;  font-family: 'Roboto';">Restart Password</a>
+              to: email,
+              from: { name: 'Ploady', email: 'adrian@ploady.com' },
+              subject: 'Password Reset',
+              text: `Click the button below to reset your password.`,
+              html: `
+                <div style="font-family: Arial, sans-serif; width: 100%; background-color: #f5f5f5; padding: 50px 0;">
+                  <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 20px; text-align: center; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                    <h2 style="color: #333; font-size: 24px; margin-bottom: 20px;">Password Reset</h2>
+                    <p style="font-size: 16px; color: #555; margin-bottom: 20px;">Click the button below to reset your password:</p>
+                    <a href="https://www.ploady.com/restartPassword/restart/${verificationCode}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007BFF; border-radius: 5px; text-decoration: none;">Reset Password</a>
+                  </div>
                 </div>
-              </div>
-                `,
-              };
+              `,
+            };
               await sgMail.send(msg);
             res.json({message: 'Email sent'});
 

@@ -11,7 +11,7 @@ export function RestartPassword(){
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
 
-    
+        
 
     const sendMail = async (e) => {
         e.preventDefault();

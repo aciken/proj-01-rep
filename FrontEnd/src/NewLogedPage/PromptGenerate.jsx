@@ -2,7 +2,7 @@ import './AllNavs.css';
 import './PromptGenerate.css';
 import ploadyLogo from '../assets/tubeAI.logopsd.png'
 import { useLocation, useNavigate,Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import OpenAI from "openai";
 import loadingGen from '../assets/Dual Ring@1x-3.0s-200px-200px.gif'
 import pako from 'pako';
@@ -56,10 +56,15 @@ export function PromptGenerate() {
       const [credits, setCredits] = useState(0);
 
 
+      const videoRef = useRef(null);
 
       const [copyPopup, setCopyPopup] = useState(false);
       const [showPopup, setShowPopup] = useState(false);
       const [againReminder, setAgainReminder] = useState(false);
+
+      const [durationPopup, setDurationPopup] = useState(false);
+
+
 
    
 
@@ -136,6 +141,14 @@ export function PromptGenerate() {
     const [buyCreditsState, setBuyCreditsState] = useState(false);
 
     const [logedNavClass, setLogedNavClass] = useState('loged-nav');
+
+    const showDuration = () => {
+        setDurationPopup(true);
+      
+        setTimeout(() => {
+          setDurationPopup(false);
+        }, 3000); // 2000 milliseconds = 2 seconds
+      };
 
 
 
@@ -298,6 +311,13 @@ export function PromptGenerate() {
             e.preventDefault();
             if(priceCounter != 0 && credits >= priceCounter && promptValue.length > 0){
                 if(importedVideo !== ''){
+                    const video = videoRef.current;
+                    video.src = URL.createObjectURL(importedVideo);
+                    video.onloadedmetadata = async() => {
+                        if(video.duration < 1501){
+
+
+
                     
 const videoData = new FormData();
 videoData.append("videoFile", importedVideo);
@@ -353,6 +373,10 @@ axios.post("https://proj-01-rep-backend1.onrender.com/send", videoData)
 
 
     })
+}else {
+    showDuration();
+}
+} 
 
                 } else {
                     setFinalPrompt(promptValue);
@@ -754,6 +778,7 @@ const handleChangeStyle = (event) => {
     return(
         <div className="Prompt-Generate" onClick={() => {setHistoryClass('history-wrap'); setSettingClass('settings-wrap'); setLogedNavClass('loged-nav closed')}}>
             {copyPopup && <div className="copy-popup">Copied</div>}
+            {durationPopup && <div className="duration-popup">Video must be less than 25 minutes</div>}
 
 
 
@@ -1206,7 +1231,7 @@ const handleChangeStyle = (event) => {
 
                     </form>
 
-  
+  <video style={{ display: 'none' }} ref={videoRef} src={importedVideo} />
         </div>
         </div>
     )
